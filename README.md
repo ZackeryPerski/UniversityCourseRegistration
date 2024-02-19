@@ -1,24 +1,15 @@
-# README
+## Initial Setup
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Clone the repo: `git clone git@github.com:ZackeryPerski/UniversityCourseRegistration.git`
 
-Things you may want to cover:
+Cd into the project: `cd UniversityCourseRegistration`
 
-* Ruby version
+Install dependencies: `bundle install`
 
-* System dependencies
+Migrate database: `rails db:migrate`
 
-* Configuration
+Start the server: `rails s`
 
-* Database creation
+## Whenever you pull from main
 
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+Just install dependencies: `bundle install`
