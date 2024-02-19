@@ -1,0 +1,166 @@
+DEPRECATION WARNING: `Rails.application.secrets` is deprecated in favor of `Rails.application.credentials` and will be removed in Rails 7.2. (called from <main> at /Users/apple/repos/UniversityCourseRegistration/config/environment.rb:5)
+DEPRECATION WARNING: `Rails.application.secrets` is deprecated in favor of `Rails.application.credentials` and will be removed in Rails 7.2. (called from <main> at /Users/apple/repos/UniversityCourseRegistration/config/environment.rb:5)
+DEPRECATION WARNING: `Rails.application.secrets` is deprecated in favor of `Rails.application.credentials` and will be removed in Rails 7.2. (called from <main> at /Users/apple/repos/UniversityCourseRegistration/config/environment.rb:5)
+DEPRECATION WARNING: `Rails.application.secrets` is deprecated in favor of `Rails.application.credentials` and will be removed in Rails 7.2. (called from <main> at /Users/apple/repos/UniversityCourseRegistration/config/environment.rb:5)
+  [1m[35m (15.8ms)[0m  [1m[34mSELECT pg_try_advisory_lock(2252476139199026370)[0m
+  [1m[36mActiveRecord::SchemaMigration Load (16.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (16.6ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+Migrating to DeviseCreateUsers (20240219211210)
+  [1m[36mTRANSACTION (16.6ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (26.3ms)[0m  [1m[35mCREATE TABLE "users" ("id" bigserial primary key, "email" character varying DEFAULT '' NOT NULL, "encrypted_password" character varying DEFAULT '' NOT NULL, "reset_password_token" character varying, "reset_password_sent_at" timestamp(6), "remember_created_at" timestamp(6), "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (18.2ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_users_on_email" ON "users" ("email")[0m
+  [1m[35m (17.3ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_users_on_reset_password_token" ON "users" ("reset_password_token")[0m
+  [1m[36mActiveRecord::SchemaMigration Create (16.5ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20240219211210') RETURNING "version"[0m
+  [1m[36mTRANSACTION (18.9ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (16.1ms)[0m  [1m[34mSELECT pg_advisory_unlock(2252476139199026370)[0m
+  [1m[36mActiveRecord::SchemaMigration Load (16.8ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+DEPRECATION WARNING: `Rails.application.secrets` is deprecated in favor of `Rails.application.credentials` and will be removed in Rails 7.2. (called from <main> at /Users/apple/repos/UniversityCourseRegistration/config/environment.rb:5)
+DEPRECATION WARNING: `Rails.application.secrets` is deprecated in favor of `Rails.application.credentials` and will be removed in Rails 7.2. (called from <main> at /Users/apple/repos/UniversityCourseRegistration/config/environment.rb:5)
+Started GET "/" for ::1 at 2024-02-19 16:13:50 -0500
+  [1m[36mActiveRecord::SchemaMigration Load (16.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by Rails::WelcomeController#index as HTML
+  Rendering /Users/apple/.rbenv/versions/3.1.2/lib/ruby/gems/3.1.0/gems/railties-7.1.3/lib/rails/templates/rails/welcome/index.html.erb
+  Rendered /Users/apple/.rbenv/versions/3.1.2/lib/ruby/gems/3.1.0/gems/railties-7.1.3/lib/rails/templates/rails/welcome/index.html.erb (Duration: 6.4ms | Allocations: 381)
+Completed 200 OK in 137ms (Views: 43.9ms | ActiveRecord: 0.0ms | Allocations: 8540)
+
+
+Started GET "/" for ::1 at 2024-02-19 16:13:54 -0500
+Processing by Rails::WelcomeController#index as HTML
+  Rendering /Users/apple/.rbenv/versions/3.1.2/lib/ruby/gems/3.1.0/gems/railties-7.1.3/lib/rails/templates/rails/welcome/index.html.erb
+  Rendered /Users/apple/.rbenv/versions/3.1.2/lib/ruby/gems/3.1.0/gems/railties-7.1.3/lib/rails/templates/rails/welcome/index.html.erb (Duration: 6.4ms | Allocations: 24)
+Completed 200 OK in 8ms (Views: 7.2ms | ActiveRecord: 0.0ms | Allocations: 287)
+
+
+Started GET "/sign_in" for ::1 at 2024-02-19 16:14:00 -0500
+  
+ActionController::RoutingError (No route matches [GET] "/sign_in"):
+  
+Started GET "/sign_up" for ::1 at 2024-02-19 16:14:06 -0500
+  
+ActionController::RoutingError (No route matches [GET] "/sign_up"):
+  
+Started GET "/support" for ::1 at 2024-02-19 16:14:17 -0500
+  
+ActionController::RoutingError (No route matches [GET] "/support"):
+  
+Started GET "/" for ::1 at 2024-02-19 16:14:17 -0500
+Processing by Rails::WelcomeController#index as HTML
+  Rendering /Users/apple/.rbenv/versions/3.1.2/lib/ruby/gems/3.1.0/gems/railties-7.1.3/lib/rails/templates/rails/welcome/index.html.erb
+  Rendered /Users/apple/.rbenv/versions/3.1.2/lib/ruby/gems/3.1.0/gems/railties-7.1.3/lib/rails/templates/rails/welcome/index.html.erb (Duration: 0.1ms | Allocations: 19)
+Completed 200 OK in 1ms (Views: 0.9ms | ActiveRecord: 0.0ms | Allocations: 250)
+
+
+Started GET "/users/sign_in" for ::1 at 2024-02-19 16:14:20 -0500
+Processing by Devise::SessionsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering devise/sessions/new.html.erb within layouts/application
+  Rendered devise/shared/_links.html.erb (Duration: 2.8ms | Allocations: 612)
+  Rendered devise/sessions/new.html.erb within layouts/application (Duration: 34.0ms | Allocations: 4218)
+  Rendered layout layouts/application.html.erb (Duration: 948.9ms | Allocations: 72265)
+Completed 200 OK in 1495ms (Views: 955.8ms | ActiveRecord: 230.7ms | Allocations: 90237)
+
+
+Started GET "/users/sign_in" for ::1 at 2024-02-19 16:14:23 -0500
+Processing by Devise::SessionsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering devise/sessions/new.html.erb within layouts/application
+  Rendered devise/shared/_links.html.erb (Duration: 0.2ms | Allocations: 119)
+  Rendered devise/sessions/new.html.erb within layouts/application (Duration: 1.8ms | Allocations: 925)
+  Rendered layout layouts/application.html.erb (Duration: 6.1ms | Allocations: 1855)
+Completed 200 OK in 8ms (Views: 7.0ms | ActiveRecord: 0.0ms | Allocations: 2453)
+
+
+Started GET "/users/sign_in" for ::1 at 2024-02-19 16:20:26 -0500
+Processing by Devise::SessionsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering devise/sessions/new.html.erb within layouts/application
+  Rendered devise/sessions/new.html.erb within layouts/application (Duration: 4.9ms | Allocations: 1282)
+  Rendered layout layouts/application.html.erb (Duration: 10.2ms | Allocations: 2533)
+Completed 200 OK in 457ms (Views: 17.2ms | ActiveRecord: 138.0ms | Allocations: 12451)
+
+
+Started GET "/users/sign_in" for ::1 at 2024-02-19 16:20:37 -0500
+Processing by Devise::SessionsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering devise/sessions/new.html.erb within layouts/application
+  Rendered devise/sessions/new.html.erb within layouts/application (Duration: 3.4ms | Allocations: 1275)
+  Rendered layout layouts/application.html.erb (Duration: 7.0ms | Allocations: 2532)
+Completed 200 OK in 118ms (Views: 13.5ms | ActiveRecord: 72.3ms | Allocations: 8028)
+
+
+Started GET "/users/sign_in" for ::1 at 2024-02-19 16:23:15 -0500
+Processing by Devise::SessionsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering devise/sessions/new.html.erb within layouts/application
+  Rendered devise/shared/_links.html.erb (Duration: 2.8ms | Allocations: 539)
+  Rendered devise/sessions/new.html.erb within layouts/application (Duration: 30.0ms | Allocations: 6902)
+  Rendered layout layouts/application.html.erb (Duration: 42.9ms | Allocations: 6989)
+Completed 500 Internal Server Error in 143ms (ActiveRecord: 63.6ms | Allocations: 12355)
+
+
+  
+ActionView::Template::Error (undefined method `user_signe_in?' for #<ActionView::Base:0x00000000018858>
+
+'.freeze; if user_signe_in? 
+             ^^^^^^^^^^^^^^
+Did you mean?  user_signed_in?):
+    26: <%= render "devise/shared/links" %>
+    27: 
+    28: 
+    29: <% if user_signe_in? %>
+    30:   <div>Green</div>
+    31: <% else %>
+    32:   <div>Red</div>
+  
+app/views/devise/sessions/new.html.erb:29
+Started GET "/users/sign_in" for ::1 at 2024-02-19 16:23:24 -0500
+Processing by Devise::SessionsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering devise/sessions/new.html.erb within layouts/application
+  Rendered devise/shared/_links.html.erb (Duration: 1.0ms | Allocations: 539)
+  Rendered devise/sessions/new.html.erb within layouts/application (Duration: 4.9ms | Allocations: 2084)
+  Rendered layout layouts/application.html.erb (Duration: 9.3ms | Allocations: 3339)
+Completed 200 OK in 97ms (Views: 15.1ms | ActiveRecord: 53.7ms | Allocations: 8786)
+
+
+Started GET "/users/sign_in" for ::1 at 2024-02-19 16:26:16 -0500
+Processing by Devise::SessionsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering devise/sessions/new.html.erb within layouts/application
+  Rendered devise/sessions/new.html.erb within layouts/application (Duration: 33.8ms | Allocations: 7206)
+  Rendered layout layouts/application.html.erb (Duration: 34.7ms | Allocations: 7295)
+Completed 500 Internal Server Error in 126ms (ActiveRecord: 53.7ms | Allocations: 12647)
+
+
+  
+ActionView::Template::Error (undefined method `first_name' for #<User id: nil, email: "", created_at: nil, updated_at: nil>):
+    3: <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+    4:   <div class="field">
+    5:     <%= f.label :first_name %><br />
+    6:     <%= f.text_field :first_name, autofocus: true, autocomplete: "email" %>
+    7:   </div>
+    8:   
+    9:   <div class="field">
+  
+app/views/devise/sessions/new.html.erb:6
+app/views/devise/sessions/new.html.erb:3
+Started GET "/users/sign_in" for ::1 at 2024-02-19 16:26:49 -0500
+Processing by Devise::SessionsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering devise/sessions/new.html.erb within layouts/application
+  Rendered devise/shared/_links.html.erb (Duration: 3.5ms | Allocations: 539)
+  Rendered devise/sessions/new.html.erb within layouts/application (Duration: 12.0ms | Allocations: 2172)
+  Rendered layout layouts/application.html.erb (Duration: 30.1ms | Allocations: 3427)
+Completed 200 OK in 123ms (Views: 37.7ms | ActiveRecord: 55.4ms | Allocations: 8866)
+
+
+Started GET "/users/sign_in" for ::1 at 2024-02-19 16:26:59 -0500
+Processing by Devise::SessionsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering devise/sessions/new.html.erb within layouts/application
+  Rendered devise/shared/_links.html.erb (Duration: 2.0ms | Allocations: 539)
+  Rendered devise/sessions/new.html.erb within layouts/application (Duration: 6.6ms | Allocations: 1945)
+  Rendered layout layouts/application.html.erb (Duration: 11.8ms | Allocations: 3200)
+Completed 200 OK in 104ms (Views: 16.0ms | ActiveRecord: 55.7ms | Allocations: 8607)
+
+
