@@ -351,3 +351,92 @@ Processing by CoursesController#index as HTML
 Completed 200 OK in 45ms (Views: 12.5ms | ActiveRecord: 32.0ms | Allocations: 2345)
 
 
+DEPRECATION WARNING: `Rails.application.secrets` is deprecated in favor of `Rails.application.credentials` and will be removed in Rails 7.2. (called from <main> at /Users/apple/repos/UniversityCourseRegistration/config/environment.rb:5)
+DEPRECATION WARNING: `Rails.application.secrets` is deprecated in favor of `Rails.application.credentials` and will be removed in Rails 7.2. (called from <main> at /Users/apple/repos/UniversityCourseRegistration/config/environment.rb:5)
+  [1m[35m (16.1ms)[0m  [1m[34mSELECT pg_try_advisory_lock(2252476139199026370)[0m
+  [1m[36mActiveRecord::SchemaMigration Load (17.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (17.0ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+Migrating to CreatePrerequisites (20240305213425)
+  [1m[36mTRANSACTION (15.9ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (24.3ms)[0m  [1m[35mCREATE TABLE "prerequisites" ("id" bigserial primary key, "course_id" bigint NOT NULL, "prerequisite_course_id" bigint NOT NULL, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL, CONSTRAINT "fk_rails_3df93a6718"
+FOREIGN KEY ("course_id")
+  REFERENCES "courses" ("id")
+, CONSTRAINT "fk_rails_8275315861"
+FOREIGN KEY ("prerequisite_course_id")
+  REFERENCES "prerequisite_courses" ("id")
+)[0m
+  [1m[36mTRANSACTION (16.8ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (16.9ms)[0m  [1m[34mSELECT pg_advisory_unlock(2252476139199026370)[0m
+DEPRECATION WARNING: `Rails.application.secrets` is deprecated in favor of `Rails.application.credentials` and will be removed in Rails 7.2. (called from <main> at /Users/apple/repos/UniversityCourseRegistration/config/environment.rb:5)
+  [1m[35m (16.9ms)[0m  [1m[34mSELECT pg_try_advisory_lock(2252476139199026370)[0m
+  [1m[36mActiveRecord::SchemaMigration Load (17.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (17.7ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+Migrating to CreatePrerequisites (20240305213425)
+  [1m[36mTRANSACTION (17.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (19.6ms)[0m  [1m[35mCREATE TABLE "prerequisites" ("id" bigserial primary key, "course_id" bigint NOT NULL, "prerequisite_course_id" bigint NOT NULL, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL, CONSTRAINT "fk_rails_3df93a6718"
+FOREIGN KEY ("course_id")
+  REFERENCES "courses" ("id")
+, CONSTRAINT "fk_rails_8275315861"
+FOREIGN KEY ("prerequisite_course_id")
+  REFERENCES "courses" ("id")
+)[0m
+  [1m[35m (17.3ms)[0m  [1m[35mCREATE INDEX "index_prerequisites_on_course_id" ON "prerequisites" ("course_id")[0m
+  [1m[35m (17.1ms)[0m  [1m[35mCREATE INDEX "index_prerequisites_on_prerequisite_course_id" ON "prerequisites" ("prerequisite_course_id")[0m
+  [1m[36mActiveRecord::SchemaMigration Create (17.0ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20240305213425') RETURNING "version"[0m
+  [1m[36mTRANSACTION (19.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (16.8ms)[0m  [1m[34mSELECT pg_advisory_unlock(2252476139199026370)[0m
+  [1m[36mActiveRecord::SchemaMigration Load (17.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+DEPRECATION WARNING: `Rails.application.secrets` is deprecated in favor of `Rails.application.credentials` and will be removed in Rails 7.2. (called from <main> at /Users/apple/repos/UniversityCourseRegistration/config/environment.rb:5)
+Started GET "/courses/new" for ::1 at 2024-03-05 16:39:48 -0500
+  [1m[36mActiveRecord::SchemaMigration Load (21.9ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by CoursesController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering courses/new.html.erb within layouts/application
+  Rendered courses/_form.html.erb (Duration: 3.8ms | Allocations: 2001)
+  Rendered courses/new.html.erb within layouts/application (Duration: 6.7ms | Allocations: 2306)
+  Rendered layout layouts/application.html.erb (Duration: 11.4ms | Allocations: 3565)
+Completed 200 OK in 350ms (Views: 15.6ms | ActiveRecord: 149.2ms | Allocations: 13782)
+
+
+Started POST "/courses" for ::1 at 2024-03-05 16:41:16 -0500
+Processing by CoursesController#create as HTML
+  Parameters: {"authenticity_token"=>"[FILTERED]", "course"=>{"title"=>"Data Structures & Algorithms", "description"=>"Cover data structures like arrays, stacks, queues, linked lists, hashmaps, trees, graphs. Cover algorithms like greedy, dynamic programming.", "department_id"=>"1", "code"=>"201", "credits"=>"4"}, "commit"=>"Create Course"}
+  [1m[36mTRANSACTION (18.9ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/courses_controller.rb:27:in `block in create'
+  [1m[36mDepartment Load (16.4ms)[0m  [1m[34mSELECT "departments".* FROM "departments" WHERE "departments"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/courses_controller.rb:27:in `block in create'
+  [1m[36mCourse Create (16.9ms)[0m  [1m[32mINSERT INTO "courses" ("title", "description", "department_id", "code", "credits", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["title", "Data Structures & Algorithms"], ["description", "Cover data structures like arrays, stacks, queues, linked lists, hashmaps, trees, graphs. Cover algorithms like greedy, dynamic programming."], ["department_id", 1], ["code", "201"], ["credits", 4], ["created_at", "2024-03-05 21:41:16.554367"], ["updated_at", "2024-03-05 21:41:16.554367"]]
+  ↳ app/controllers/courses_controller.rb:27:in `block in create'
+  [1m[36mTRANSACTION (17.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/courses_controller.rb:27:in `block in create'
+Redirected to http://localhost:3000/courses/2
+Completed 302 Found in 152ms (ActiveRecord: 85.7ms | Allocations: 11391)
+
+
+Started GET "/courses/2" for ::1 at 2024-03-05 16:41:16 -0500
+Processing by CoursesController#show as HTML
+  Parameters: {"id"=>"2"}
+  [1m[36mCourse Load (16.2ms)[0m  [1m[34mSELECT "courses".* FROM "courses" WHERE "courses"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/courses_controller.rb:63:in `set_course'
+  Rendering layout layouts/application.html.erb
+  Rendering courses/show.html.erb within layouts/application
+  Rendered courses/_course.html.erb (Duration: 0.9ms | Allocations: 235)
+  Rendered courses/show.html.erb within layouts/application (Duration: 5.5ms | Allocations: 1132)
+  Rendered layout layouts/application.html.erb (Duration: 9.5ms | Allocations: 2156)
+Completed 200 OK in 65ms (Views: 10.5ms | ActiveRecord: 16.1ms | Allocations: 3845)
+
+
+  [1m[36mTRANSACTION (17.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCourse Load (17.2ms)[0m  [1m[34mSELECT "courses".* FROM "courses" WHERE "courses"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mCourse Load (17.1ms)[0m  [1m[34mSELECT "courses".* FROM "courses" WHERE "courses"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mPrerequisite Create (18.6ms)[0m  [1m[32mINSERT INTO "prerequisites" ("course_id", "prerequisite_course_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["course_id", 2], ["prerequisite_course_id", 1], ["created_at", "2024-03-05 21:41:57.479800"], ["updated_at", "2024-03-05 21:41:57.479800"]]
+  [1m[36mTRANSACTION (17.9ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mCourse Load (16.9ms)[0m  [1m[34mSELECT "courses".* FROM "courses" ORDER BY "courses"."id" DESC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[36mPrerequisite Pluck (17.5ms)[0m  [1m[34mSELECT "prerequisites"."id" FROM "prerequisites" WHERE "prerequisites"."course_id" = $1[0m  [["course_id", 2]]
+  [1m[36mPrerequisite Load (17.0ms)[0m  [1m[34mSELECT "prerequisites".* FROM "prerequisites" WHERE "prerequisites"."course_id" = $1 /* loading for pp */ LIMIT $2[0m  [["course_id", 2], ["LIMIT", 11]]
+  [1m[36mPrerequisite Load (17.0ms)[0m  [1m[34mSELECT "prerequisites".* FROM "prerequisites" WHERE "prerequisites"."prerequisite_course_id" = $1 /* loading for pp */ LIMIT $2[0m  [["prerequisite_course_id", 2], ["LIMIT", 11]]
+  [1m[36mCourse Load (17.1ms)[0m  [1m[34mSELECT "courses".* FROM "courses" ORDER BY "courses"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[36mPrerequisite Load (17.4ms)[0m  [1m[34mSELECT "prerequisites".* FROM "prerequisites" WHERE "prerequisites"."course_id" = $1 /* loading for pp */ LIMIT $2[0m  [["course_id", 1], ["LIMIT", 11]]
+  [1m[36mPrerequisite Load (17.0ms)[0m  [1m[34mSELECT "prerequisites".* FROM "prerequisites" WHERE "prerequisites"."prerequisite_course_id" = $1 /* loading for pp */ LIMIT $2[0m  [["prerequisite_course_id", 1], ["LIMIT", 11]]
+  [1m[36mPrerequisite Load (16.9ms)[0m  [1m[34mSELECT "prerequisites".* FROM "prerequisites" WHERE "prerequisites"."course_id" = $1 /* loading for pp */ LIMIT $2[0m  [["course_id", 2], ["LIMIT", 11]]
+  [1m[36mPrerequisite Load (18.0ms)[0m  [1m[34mSELECT "prerequisites".* FROM "prerequisites" WHERE "prerequisites"."course_id" = $1 /* loading for pp */ LIMIT $2[0m  [["course_id", 2], ["LIMIT", 11]]
