@@ -440,3 +440,128 @@ Completed 200 OK in 65ms (Views: 10.5ms | ActiveRecord: 16.1ms | Allocations: 38
   [1m[36mPrerequisite Load (17.0ms)[0m  [1m[34mSELECT "prerequisites".* FROM "prerequisites" WHERE "prerequisites"."prerequisite_course_id" = $1 /* loading for pp */ LIMIT $2[0m  [["prerequisite_course_id", 1], ["LIMIT", 11]]
   [1m[36mPrerequisite Load (16.9ms)[0m  [1m[34mSELECT "prerequisites".* FROM "prerequisites" WHERE "prerequisites"."course_id" = $1 /* loading for pp */ LIMIT $2[0m  [["course_id", 2], ["LIMIT", 11]]
   [1m[36mPrerequisite Load (18.0ms)[0m  [1m[34mSELECT "prerequisites".* FROM "prerequisites" WHERE "prerequisites"."course_id" = $1 /* loading for pp */ LIMIT $2[0m  [["course_id", 2], ["LIMIT", 11]]
+DEPRECATION WARNING: `Rails.application.secrets` is deprecated in favor of `Rails.application.credentials` and will be removed in Rails 7.2. (called from <main> at /Users/apple/repos/UniversityCourseRegistration/config/environment.rb:5)
+DEPRECATION WARNING: `Rails.application.secrets` is deprecated in favor of `Rails.application.credentials` and will be removed in Rails 7.2. (called from <main> at /Users/apple/repos/UniversityCourseRegistration/config/environment.rb:5)
+  [1m[35m (16.8ms)[0m  [1m[34mSELECT pg_try_advisory_lock(2252476139199026370)[0m
+  [1m[36mActiveRecord::SchemaMigration Load (17.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (17.5ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+Migrating to CreateJoinTableSectionStudent (20240305214629)
+  [1m[36mTRANSACTION (17.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (21.2ms)[0m  [1m[35mCREATE TABLE "sections_students" ("section_id" bigint NOT NULL, "student_id" bigint NOT NULL, "grade" character varying)[0m
+  [1m[35m (18.9ms)[0m  [1m[35mCREATE INDEX "index_sections_students_on_section_id_and_student_id" ON "sections_students" ("section_id", "student_id")[0m
+  [1m[35m (19.6ms)[0m  [1m[35mCREATE INDEX "index_sections_students_on_student_id_and_section_id" ON "sections_students" ("student_id", "section_id")[0m
+  [1m[36mActiveRecord::SchemaMigration Create (17.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20240305214629') RETURNING "version"[0m
+  [1m[36mTRANSACTION (18.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (16.7ms)[0m  [1m[34mSELECT pg_advisory_unlock(2252476139199026370)[0m
+  [1m[36mActiveRecord::SchemaMigration Load (16.9ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+DEPRECATION WARNING: `Rails.application.secrets` is deprecated in favor of `Rails.application.credentials` and will be removed in Rails 7.2. (called from <main> at /Users/apple/repos/UniversityCourseRegistration/config/environment.rb:5)
+DEPRECATION WARNING: `Rails.application.secrets` is deprecated in favor of `Rails.application.credentials` and will be removed in Rails 7.2. (called from <main> at /Users/apple/repos/UniversityCourseRegistration/config/environment.rb:5)
+  [1m[35m (16.5ms)[0m  [1m[34mSELECT pg_try_advisory_lock(2252476139199026370)[0m
+  [1m[36mActiveRecord::SchemaMigration Load (38.9ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (16.8ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+Migrating to CreateSectionsStudents (20240305214950)
+  [1m[36mTRANSACTION (16.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (23.2ms)[0m  [1m[35mCREATE TABLE "sections_students" ("id" bigserial primary key, "section_id" bigint NOT NULL, "student_id" bigint NOT NULL, "grade" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL, CONSTRAINT "fk_rails_c5cbf7b206"
+FOREIGN KEY ("section_id")
+  REFERENCES "sections" ("id")
+, CONSTRAINT "fk_rails_5572d5c438"
+FOREIGN KEY ("student_id")
+  REFERENCES "students" ("id")
+)[0m
+  [1m[36mTRANSACTION (16.0ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (16.3ms)[0m  [1m[34mSELECT pg_advisory_unlock(2252476139199026370)[0m
+DEPRECATION WARNING: `Rails.application.secrets` is deprecated in favor of `Rails.application.credentials` and will be removed in Rails 7.2. (called from <main> at /Users/apple/repos/UniversityCourseRegistration/config/environment.rb:5)
+  [1m[35m (21.7ms)[0m  [1m[34mSELECT pg_try_advisory_lock(2252476139199026370)[0m
+  [1m[36mActiveRecord::SchemaMigration Load (21.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (22.0ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+  [1m[35m (21.5ms)[0m  [1m[34mSELECT pg_advisory_unlock(2252476139199026370)[0m
+  [1m[36mActiveRecord::SchemaMigration Load (21.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+DEPRECATION WARNING: `Rails.application.secrets` is deprecated in favor of `Rails.application.credentials` and will be removed in Rails 7.2. (called from <main> at /Users/apple/repos/UniversityCourseRegistration/config/environment.rb:5)
+  [1m[36mSectionsStudent Load (16.5ms)[0m  [1m[34mSELECT "sections_students".* FROM "sections_students" /* loading for pp */ LIMIT $1[0m  [["LIMIT", 11]]
+  [1m[36mStudent Load (16.6ms)[0m  [1m[34mSELECT "students".* FROM "students" ORDER BY "students"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+DEPRECATION WARNING: `Rails.application.secrets` is deprecated in favor of `Rails.application.credentials` and will be removed in Rails 7.2. (called from <main> at /Users/apple/repos/UniversityCourseRegistration/config/environment.rb:5)
+  [1m[36mStudent Load (21.5ms)[0m  [1m[34mSELECT "students".* FROM "students" ORDER BY "students"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[36mSection Load (22.0ms)[0m  [1m[34mSELECT "sections".* FROM "sections" INNER JOIN "sections_students" ON "sections"."id" = "sections_students"."section_id" WHERE "sections_students"."student_id" = $1 /* loading for pp */ LIMIT $2[0m  [["student_id", 1], ["LIMIT", 11]]
+  [1m[36mSection Load (21.1ms)[0m  [1m[34mSELECT "sections".* FROM "sections" ORDER BY "sections"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[36mTRANSACTION (21.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mSection Load (21.3ms)[0m  [1m[34mSELECT "sections".* FROM "sections" WHERE "sections"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mStudent Load (21.5ms)[0m  [1m[34mSELECT "students".* FROM "students" WHERE "students"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (21.4ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mSectionsStudent Count (22.6ms)[0m  [1m[34mSELECT COUNT(*) FROM "sections_students"[0m
+  [1m[36mTRANSACTION (21.8ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCourse Load (22.0ms)[0m  [1m[34mSELECT "courses".* FROM "courses" WHERE "courses"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mInstructor Load (21.7ms)[0m  [1m[34mSELECT "instructors".* FROM "instructors" WHERE "instructors"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mSection Create (23.2ms)[0m  [1m[32mINSERT INTO "sections" ("course_id", "instructor_id", "capacity", "semester", "year", "days", "start_time", "end_time", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING "id"[0m  [["course_id", 1], ["instructor_id", 1], ["capacity", 30], ["semester", "Fall"], ["year", 2024], ["days", "MW"], ["start_time", "14:00:00"], ["end_time", "15:50:00"], ["created_at", "2024-03-05 22:01:53.824536"], ["updated_at", "2024-03-05 22:01:53.824536"]]
+  [1m[36mTRANSACTION (22.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mStudent Load (22.2ms)[0m  [1m[34mSELECT "students".* FROM "students" ORDER BY "students"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[36mSection Load (21.7ms)[0m  [1m[34mSELECT "sections".* FROM "sections" INNER JOIN "sections_students" ON "sections"."id" = "sections_students"."section_id" WHERE "sections_students"."student_id" = $1 /* loading for pp */ LIMIT $2[0m  [["student_id", 1], ["LIMIT", 11]]
+  [1m[36mSection Load (23.0ms)[0m  [1m[34mSELECT "sections".* FROM "sections" INNER JOIN "sections_students" ON "sections"."id" = "sections_students"."section_id" WHERE "sections_students"."student_id" = $1 /* loading for pp */ LIMIT $2[0m  [["student_id", 1], ["LIMIT", 11]]
+DEPRECATION WARNING: `Rails.application.secrets` is deprecated in favor of `Rails.application.credentials` and will be removed in Rails 7.2. (called from <main> at /Users/apple/repos/UniversityCourseRegistration/config/environment.rb:5)
+DEPRECATION WARNING: `Rails.application.secrets` is deprecated in favor of `Rails.application.credentials` and will be removed in Rails 7.2. (called from <main> at /Users/apple/repos/UniversityCourseRegistration/config/environment.rb:5)
+  [1m[35m (21.8ms)[0m  [1m[34mSELECT pg_try_advisory_lock(2252476139199026370)[0m
+  [1m[36mActiveRecord::SchemaMigration Load (21.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (22.4ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+Migrating to AddDepartmentHeadToDepartments (20240305220758)
+  [1m[36mTRANSACTION (35.9ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (63.3ms)[0m  [1m[35mALTER TABLE "departments" ADD "department_head_id" bigint NOT NULL[0m
+  [1m[36mTRANSACTION (21.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (21.2ms)[0m  [1m[34mSELECT pg_advisory_unlock(2252476139199026370)[0m
+DEPRECATION WARNING: `Rails.application.secrets` is deprecated in favor of `Rails.application.credentials` and will be removed in Rails 7.2. (called from <main> at /Users/apple/repos/UniversityCourseRegistration/config/environment.rb:5)
+  [1m[35m (16.7ms)[0m  [1m[34mSELECT pg_try_advisory_lock(2252476139199026370)[0m
+  [1m[36mActiveRecord::SchemaMigration Load (17.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (17.4ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+Migrating to AddDepartmentHeadToDepartments (20240305220758)
+  [1m[36mTRANSACTION (16.5ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (36.1ms)[0m  [1m[35mALTER TABLE "departments" ADD "department_head_id" bigint[0m
+  [1m[35m (17.9ms)[0m  [1m[35mCREATE INDEX "index_departments_on_department_head_id" ON "departments" ("department_head_id")[0m
+  [1m[35m (18.6ms)[0m  [1m[35mALTER TABLE "departments" ADD CONSTRAINT "fk_rails_6289818807"
+FOREIGN KEY ("department_head_id")
+  REFERENCES "instructors" ("id")
+[0m
+  [1m[36mActiveRecord::SchemaMigration Create (16.6ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20240305220758') RETURNING "version"[0m
+  [1m[36mTRANSACTION (18.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (16.8ms)[0m  [1m[34mSELECT pg_advisory_unlock(2252476139199026370)[0m
+  [1m[36mActiveRecord::SchemaMigration Load (16.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+DEPRECATION WARNING: `Rails.application.secrets` is deprecated in favor of `Rails.application.credentials` and will be removed in Rails 7.2. (called from <main> at /Users/apple/repos/UniversityCourseRegistration/config/environment.rb:5)
+  [1m[36mInstructor Load (16.3ms)[0m  [1m[34mSELECT "instructors".* FROM "instructors" ORDER BY "instructors"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[36mDepartment Load (16.3ms)[0m  [1m[34mSELECT "departments".* FROM "departments" WHERE "departments"."department_head_id" = $1 LIMIT $2[0m  [["department_head_id", 1], ["LIMIT", 1]]
+  [1m[36mDepartment Load (16.1ms)[0m  [1m[34mSELECT "departments".* FROM "departments" ORDER BY "departments"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[36mInstructor Load (16.2ms)[0m  [1m[34mSELECT "instructors".* FROM "instructors" WHERE "instructors"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+DEPRECATION WARNING: `Rails.application.secrets` is deprecated in favor of `Rails.application.credentials` and will be removed in Rails 7.2. (called from <main> at /Users/apple/repos/UniversityCourseRegistration/config/environment.rb:5)
+DEPRECATION WARNING: `Rails.application.secrets` is deprecated in favor of `Rails.application.credentials` and will be removed in Rails 7.2. (called from <main> at /Users/apple/repos/UniversityCourseRegistration/config/environment.rb:5)
+  [1m[35m (21.3ms)[0m  [1m[34mSELECT pg_try_advisory_lock(2252476139199026370)[0m
+  [1m[36mActiveRecord::SchemaMigration Load (22.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (22.0ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+Migrating to AddDetailsToUsers (20240305221550)
+  [1m[36mTRANSACTION (21.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (45.7ms)[0m  [1m[35mALTER TABLE "users" ADD "first_name" character varying[0m
+  [1m[35m (21.3ms)[0m  [1m[35mALTER TABLE "users" ADD "last_name" character varying[0m
+  [1m[35m (23.1ms)[0m  [1m[35mALTER TABLE "users" ADD "university_id" character varying NOT NULL[0m
+  [1m[36mTRANSACTION (21.0ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (21.1ms)[0m  [1m[34mSELECT pg_advisory_unlock(2252476139199026370)[0m
+DEPRECATION WARNING: `Rails.application.secrets` is deprecated in favor of `Rails.application.credentials` and will be removed in Rails 7.2. (called from <main> at /Users/apple/repos/UniversityCourseRegistration/config/environment.rb:5)
+  [1m[35m (16.0ms)[0m  [1m[34mSELECT pg_try_advisory_lock(2252476139199026370)[0m
+  [1m[36mActiveRecord::SchemaMigration Load (16.8ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (17.0ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+Migrating to AddDetailsToUsers (20240305221550)
+  [1m[36mTRANSACTION (15.9ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (34.8ms)[0m  [1m[35mALTER TABLE "users" ADD "first_name" character varying[0m
+  [1m[35m (16.6ms)[0m  [1m[35mALTER TABLE "users" ADD "last_name" character varying[0m
+  [1m[35m (16.6ms)[0m  [1m[35mALTER TABLE "users" ADD "university_id" character varying[0m
+  [1m[36mActiveRecord::SchemaMigration Create (20.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20240305221550') RETURNING "version"[0m
+  [1m[36mTRANSACTION (16.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (15.9ms)[0m  [1m[34mSELECT pg_advisory_unlock(2252476139199026370)[0m
+  [1m[36mActiveRecord::SchemaMigration Load (15.9ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+DEPRECATION WARNING: `Rails.application.secrets` is deprecated in favor of `Rails.application.credentials` and will be removed in Rails 7.2. (called from <main> at /Users/apple/repos/UniversityCourseRegistration/config/environment.rb:5)
+DEPRECATION WARNING: `Rails.application.secrets` is deprecated in favor of `Rails.application.credentials` and will be removed in Rails 7.2. (called from <main> at /Users/apple/repos/UniversityCourseRegistration/config/environment.rb:5)
+  [1m[35m (16.2ms)[0m  [1m[34mSELECT pg_try_advisory_lock(2252476139199026370)[0m
+  [1m[36mActiveRecord::SchemaMigration Load (17.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (17.4ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+Migrating to AddModeDetailsToUsers (20240305221922)
+  [1m[36mTRANSACTION (32.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (21.9ms)[0m  [1m[35mCREATE INDEX "index_users_on_university_id" ON "users" ("university_id")[0m
+  [1m[35m (26.2ms)[0m  [1m[35mALTER TABLE "users" ALTER COLUMN "university_id" SET NOT NULL[0m
+  [1m[36mActiveRecord::SchemaMigration Create (22.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20240305221922') RETURNING "version"[0m
+  [1m[36mTRANSACTION (21.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (16.0ms)[0m  [1m[34mSELECT pg_advisory_unlock(2252476139199026370)[0m
+  [1m[36mActiveRecord::SchemaMigration Load (15.9ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m

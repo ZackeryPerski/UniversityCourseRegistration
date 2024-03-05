@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_03_05_213425) do
+ActiveRecord::Schema[7.1].define(version: 2024_03_05_221922) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -30,6 +30,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_05_213425) do
     t.string "code"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "department_head_id"
+    t.index ["department_head_id"], name: "index_departments_on_department_head_id"
   end
 
   create_table "instructors", force: :cascade do |t|
@@ -67,6 +69,14 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_05_213425) do
     t.index ["instructor_id"], name: "index_sections_on_instructor_id"
   end
 
+  create_table "sections_students", id: false, force: :cascade do |t|
+    t.bigint "section_id", null: false
+    t.bigint "student_id", null: false
+    t.string "grade"
+    t.index ["section_id", "student_id"], name: "index_sections_students_on_section_id_and_student_id"
+    t.index ["student_id", "section_id"], name: "index_sections_students_on_student_id_and_section_id"
+  end
+
   create_table "students", force: :cascade do |t|
     t.string "major"
     t.boolean "is_undergraduate"
@@ -84,11 +94,16 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_05_213425) do
     t.datetime "remember_created_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "first_name"
+    t.string "last_name"
+    t.string "university_id", null: false
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+    t.index ["university_id"], name: "index_users_on_university_id"
   end
 
   add_foreign_key "courses", "departments"
+  add_foreign_key "departments", "instructors", column: "department_head_id"
   add_foreign_key "instructors", "departments"
   add_foreign_key "instructors", "users"
   add_foreign_key "prerequisites", "courses"
