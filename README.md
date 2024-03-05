@@ -13,3 +13,5 @@ Start the server: `rails s`
 ## Whenever you pull from main
 
 Just install dependencies: `bundle install`
+
+Migrate database: `rails db:migrate`
