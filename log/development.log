@@ -3053,3 +3053,19 @@ Processing by Users::RegistrationsController#edit as HTML
 Completed 200 OK in 108ms (Views: 22.3ms | ActiveRecord: 54.2ms | Allocations: 5638)
 
 
+  [1m[36mUser Load (27.7ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" DESC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[36mStudent Load (31.4ms)[0m  [1m[34mSELECT "students".* FROM "students" WHERE "students"."user_id" = $1 LIMIT $2[0m  [["user_id", 7], ["LIMIT", 1]]
+  [1m[36mInstructor Load (27.5ms)[0m  [1m[34mSELECT "instructors".* FROM "instructors" WHERE "instructors"."user_id" = $1 LIMIT $2[0m  [["user_id", 7], ["LIMIT", 1]]
+Started GET "/users/edit" for ::1 at 2024-03-17 07:41:05 -0400
+Processing by Users::RegistrationsController#edit as HTML
+  [1m[36mUser Load (27.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 7], ["LIMIT", 1]]
+  Rendering layout layouts/application.html.erb
+  Rendering devise/registrations/edit.html.erb within layouts/application
+  Rendered devise/shared/_error_messages.html.erb (Duration: 2.3ms | Allocations: 199)
+  [1m[36mStudent Load (28.9ms)[0m  [1m[34mSELECT "students".* FROM "students" WHERE "students"."user_id" = $1 LIMIT $2[0m  [["user_id", 7], ["LIMIT", 1]]
+  ↳ app/models/user.rb:13:in `student?'
+  Rendered devise/registrations/edit.html.erb within layouts/application (Duration: 82.2ms | Allocations: 9890)
+  Rendered layout layouts/application.html.erb (Duration: 87.4ms | Allocations: 11184)
+Completed 200 OK in 887ms (Views: 66.4ms | ActiveRecord: 329.6ms | Allocations: 21854)
+
+

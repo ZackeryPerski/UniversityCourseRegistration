@@ -12,17 +12,36 @@
     <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
   <% end %>
 
-  <%= f.fields_for :student do |student_form| %>
-    <div class="field">
-      <%= student_form.label :major %><br />
-      <%= student_form.text_field :major %>
-    </div>
+  <% if current_user.student? %>
+    <%= f.fields_for :student do |student_form| %>
+      <div class="field">
+        <%= student_form.label :major %><br />
+        <%= student_form.text_field :major %>
+      </div>
 
-    <div class="field">
-      <%= student_form.label :is_undergraduate %><br />
-      <%= student_form.check_box :is_undergraduate %>
-    </div>
-  <% end %> 
+      <div class="field">
+        <%= student_form.label :is_undergraduate %><br />
+        <%= student_form.check_box :is_undergraduate %>
+      </div>
+    <% end %> 
+  <% elsif current_user.instructor? %>
+    <%= f.fields_for :instructor do |instructor_form| %>
+      <div class="field">
+        <%= instructor_form.label :ssn %><br />
+        <%= instructor_form.text_field :ssn %>
+      </div>
+
+      <div class="field">
+        <%= instructor_form.label :phone_number %><br />
+        <%= instructor_form.text_field :phone_number %>
+      </div>
+
+      <div class="field">
+        <%= instructor_form.label :department_id %><br />
+        <%= instructor_form.text_field :department_id %>
+      </div>
+    <% end %> 
+  <% end %>
 
 
   <div class="field">
