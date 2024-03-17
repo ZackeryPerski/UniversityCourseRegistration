@@ -1,5 +1,9 @@
 <h2>Sign up</h2>
 
+<% if user_signed_in? %>
+  Youre not supposed to see this
+<% end %>
+
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
   <%= render "devise/shared/error_messages", resource: resource %>
 
@@ -20,6 +24,33 @@
     <%= f.label :password_confirmation %><br />
     <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
   </div>
+
+  <div class="field">
+    <%= f.label :first_name %><br />
+    <%= f.text_field :first_name %>
+  </div>
+
+  <div class="field">
+    <%= f.label :last_name %><br />
+    <%= f.text_field :last_name %>
+  </div>
+
+  <div class="field">
+    <%= f.label :university_id %><br />
+    <%= f.text_field :university_id %>
+  </div>
+
+  <%= f.fields_for :student_attributes do |student_form| %>
+    <div class="field">
+      <%= student_form.label :major %><br />
+      <%= student_form.text_field :major %>
+    </div>
+
+    <div class="field">
+      <%= student_form.label :is_undergraduate %><br />
+      <%= student_form.check_box :is_undergraduate, checked: true %>
+    </div>
+  <% end %> 
 
   <div class="actions">
     <%= f.submit "Sign up" %>

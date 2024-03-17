@@ -4,6 +4,29 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-  has_one :student
+  has_one :student, dependent: :destroy
   has_one :instructor
+
+  accepts_nested_attributes_for :student
+
+  def student?
+    student.present?
+  end
+
+  def instructor?
+    instructor.present?
+  end
+
+  def person
+    return student if is_student?
+    return instructor if is_instructor?
+
+    nil
+  end
+
+  private
+
+  def create_student_record
+    Student.create(user: self)
+  end
 end

@@ -12,6 +12,19 @@
     <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
   <% end %>
 
+  <%= f.fields_for :student do |student_form| %>
+    <div class="field">
+      <%= student_form.label :major %><br />
+      <%= student_form.text_field :major %>
+    </div>
+
+    <div class="field">
+      <%= student_form.label :is_undergraduate %><br />
+      <%= student_form.check_box :is_undergraduate %>
+    </div>
+  <% end %> 
+
+
   <div class="field">
     <%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
     <%= f.password_field :password, autocomplete: "new-password" %>
