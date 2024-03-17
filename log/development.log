@@ -565,3 +565,2507 @@ Migrating to AddModeDetailsToUsers (20240305221922)
   [1m[36mTRANSACTION (21.3ms)[0m  [1m[35mCOMMIT[0m
   [1m[35m (16.0ms)[0m  [1m[34mSELECT pg_advisory_unlock(2252476139199026370)[0m
   [1m[36mActiveRecord::SchemaMigration Load (15.9ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+DEPRECATION WARNING: `Rails.application.secrets` is deprecated in favor of `Rails.application.credentials` and will be removed in Rails 7.2. (called from <main> at /Users/apple/repos/UniversityCourseRegistration/config/environment.rb:5)
+DEPRECATION WARNING: `Rails.application.secrets` is deprecated in favor of `Rails.application.credentials` and will be removed in Rails 7.2. (called from <main> at /Users/apple/repos/UniversityCourseRegistration/config/environment.rb:5)
+  [1m[35m (140.6ms)[0m  [1m[35mCREATE DATABASE "university_registration" ENCODING = 'unicode'[0m
+  [1m[35m (128.2ms)[0m  [1m[35mCREATE DATABASE "university_registration_test" ENCODING = 'unicode'[0m
+DEPRECATION WARNING: `Rails.application.secrets` is deprecated in favor of `Rails.application.credentials` and will be removed in Rails 7.2. (called from <main> at /Users/apple/repos/UniversityCourseRegistration/config/environment.rb:5)
+  [1m[35m (26.3ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL PRIMARY KEY)[0m
+  [1m[35m (23.7ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying NOT NULL PRIMARY KEY, "value" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (21.4ms)[0m  [1m[34mSELECT pg_try_advisory_lock(2252476139199026370)[0m
+  [1m[36mActiveRecord::SchemaMigration Load (22.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (22.0ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+  [1m[36mActiveRecord::InternalMetadata Create (22.7ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ('environment', 'development', '2024-03-11 18:31:12.713911', '2024-03-11 18:31:12.713918') RETURNING "key"[0m
+Migrating to DeviseCreateUsers (20240219211210)
+  [1m[36mTRANSACTION (21.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (24.7ms)[0m  [1m[35mCREATE TABLE "users" ("id" bigserial primary key, "email" character varying DEFAULT '' NOT NULL, "encrypted_password" character varying DEFAULT '' NOT NULL, "reset_password_token" character varying, "reset_password_sent_at" timestamp(6), "remember_created_at" timestamp(6), "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (22.4ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_users_on_email" ON "users" ("email")[0m
+  [1m[35m (25.5ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_users_on_reset_password_token" ON "users" ("reset_password_token")[0m
+  [1m[36mActiveRecord::SchemaMigration Create (21.8ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20240219211210') RETURNING "version"[0m
+  [1m[36mTRANSACTION (22.7ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateDepartments (20240305205113)
+  [1m[36mTRANSACTION (21.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (46.5ms)[0m  [1m[35mCREATE TABLE "departments" ("id" bigserial primary key, "name" character varying, "code" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[36mActiveRecord::SchemaMigration Create (21.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20240305205113') RETURNING "version"[0m
+  [1m[36mTRANSACTION (24.5ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateStudents (20240305205622)
+  [1m[36mTRANSACTION (22.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (47.9ms)[0m  [1m[35mCREATE TABLE "students" ("id" bigserial primary key, "major" character varying, "is_undergraduate" boolean, "user_id" bigint NOT NULL, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL, CONSTRAINT "fk_rails_148c9e88f4"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+)[0m
+  [1m[35m (21.4ms)[0m  [1m[35mCREATE INDEX "index_students_on_user_id" ON "students" ("user_id")[0m
+  [1m[36mActiveRecord::SchemaMigration Create (21.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20240305205622') RETURNING "version"[0m
+  [1m[36mTRANSACTION (22.6ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateInstructors (20240305205716)
+  [1m[36mTRANSACTION (21.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (46.4ms)[0m  [1m[35mCREATE TABLE "instructors" ("id" bigserial primary key, "ssn" character varying, "phone_number" character varying, "department_id" bigint NOT NULL, "user_id" bigint NOT NULL, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL, CONSTRAINT "fk_rails_0a2e729137"
+FOREIGN KEY ("department_id")
+  REFERENCES "departments" ("id")
+, CONSTRAINT "fk_rails_4858d01595"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+)[0m
+  [1m[35m (21.4ms)[0m  [1m[35mCREATE INDEX "index_instructors_on_department_id" ON "instructors" ("department_id")[0m
+  [1m[35m (21.4ms)[0m  [1m[35mCREATE INDEX "index_instructors_on_user_id" ON "instructors" ("user_id")[0m
+  [1m[36mActiveRecord::SchemaMigration Create (21.5ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20240305205716') RETURNING "version"[0m
+  [1m[36mTRANSACTION (22.9ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateCourses (20240305211846)
+  [1m[36mTRANSACTION (25.7ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (51.4ms)[0m  [1m[35mCREATE TABLE "courses" ("id" bigserial primary key, "title" character varying, "description" text, "department_id" bigint NOT NULL, "code" character varying, "credits" integer, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL, CONSTRAINT "fk_rails_4e7d7b190d"
+FOREIGN KEY ("department_id")
+  REFERENCES "departments" ("id")
+)[0m
+  [1m[35m (41.0ms)[0m  [1m[35mCREATE INDEX "index_courses_on_department_id" ON "courses" ("department_id")[0m
+  [1m[36mActiveRecord::SchemaMigration Create (21.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20240305211846') RETURNING "version"[0m
+  [1m[36mTRANSACTION (22.4ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateSections (20240305211926)
+  [1m[36mTRANSACTION (21.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (46.5ms)[0m  [1m[35mCREATE TABLE "sections" ("id" bigserial primary key, "course_id" bigint NOT NULL, "instructor_id" bigint NOT NULL, "capacity" integer, "semester" character varying, "year" integer, "days" character varying, "start_time" time, "end_time" time, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL, CONSTRAINT "fk_rails_20b1e5de46"
+FOREIGN KEY ("course_id")
+  REFERENCES "courses" ("id")
+, CONSTRAINT "fk_rails_099c045db9"
+FOREIGN KEY ("instructor_id")
+  REFERENCES "instructors" ("id")
+)[0m
+  [1m[35m (21.4ms)[0m  [1m[35mCREATE INDEX "index_sections_on_course_id" ON "sections" ("course_id")[0m
+  [1m[35m (21.4ms)[0m  [1m[35mCREATE INDEX "index_sections_on_instructor_id" ON "sections" ("instructor_id")[0m
+  [1m[36mActiveRecord::SchemaMigration Create (21.4ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20240305211926') RETURNING "version"[0m
+  [1m[36mTRANSACTION (22.6ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreatePrerequisites (20240305213425)
+  [1m[36mTRANSACTION (21.5ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (46.0ms)[0m  [1m[35mCREATE TABLE "prerequisites" ("id" bigserial primary key, "course_id" bigint NOT NULL, "prerequisite_course_id" bigint NOT NULL, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL, CONSTRAINT "fk_rails_3df93a6718"
+FOREIGN KEY ("course_id")
+  REFERENCES "courses" ("id")
+, CONSTRAINT "fk_rails_8275315861"
+FOREIGN KEY ("prerequisite_course_id")
+  REFERENCES "courses" ("id")
+)[0m
+  [1m[35m (21.8ms)[0m  [1m[35mCREATE INDEX "index_prerequisites_on_course_id" ON "prerequisites" ("course_id")[0m
+  [1m[35m (21.7ms)[0m  [1m[35mCREATE INDEX "index_prerequisites_on_prerequisite_course_id" ON "prerequisites" ("prerequisite_course_id")[0m
+  [1m[36mActiveRecord::SchemaMigration Create (21.5ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20240305213425') RETURNING "version"[0m
+  [1m[36mTRANSACTION (22.6ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateJoinTableSectionStudent (20240305214629)
+  [1m[36mTRANSACTION (21.9ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (45.1ms)[0m  [1m[35mCREATE TABLE "sections_students" ("section_id" bigint NOT NULL, "student_id" bigint NOT NULL, "grade" character varying)[0m
+  [1m[35m (21.3ms)[0m  [1m[35mCREATE INDEX "index_sections_students_on_section_id_and_student_id" ON "sections_students" ("section_id", "student_id")[0m
+  [1m[35m (23.2ms)[0m  [1m[35mCREATE INDEX "index_sections_students_on_student_id_and_section_id" ON "sections_students" ("student_id", "section_id")[0m
+  [1m[36mActiveRecord::SchemaMigration Create (22.4ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20240305214629') RETURNING "version"[0m
+  [1m[36mTRANSACTION (22.5ms)[0m  [1m[35mCOMMIT[0m
+Migrating to AddDepartmentHeadToDepartments (20240305220758)
+  [1m[36mTRANSACTION (21.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (43.9ms)[0m  [1m[35mALTER TABLE "departments" ADD "department_head_id" bigint[0m
+  [1m[35m (21.7ms)[0m  [1m[35mCREATE INDEX "index_departments_on_department_head_id" ON "departments" ("department_head_id")[0m
+  [1m[35m (23.1ms)[0m  [1m[35mALTER TABLE "departments" ADD CONSTRAINT "fk_rails_6289818807"
+FOREIGN KEY ("department_head_id")
+  REFERENCES "instructors" ("id")
+[0m
+  [1m[36mActiveRecord::SchemaMigration Create (21.5ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20240305220758') RETURNING "version"[0m
+  [1m[36mTRANSACTION (22.7ms)[0m  [1m[35mCOMMIT[0m
+Migrating to AddDetailsToUsers (20240305221550)
+  [1m[36mTRANSACTION (21.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (45.5ms)[0m  [1m[35mALTER TABLE "users" ADD "first_name" character varying[0m
+  [1m[35m (21.7ms)[0m  [1m[35mALTER TABLE "users" ADD "last_name" character varying[0m
+  [1m[35m (21.3ms)[0m  [1m[35mALTER TABLE "users" ADD "university_id" character varying[0m
+  [1m[36mActiveRecord::SchemaMigration Create (21.4ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20240305221550') RETURNING "version"[0m
+  [1m[36mTRANSACTION (22.0ms)[0m  [1m[35mCOMMIT[0m
+Migrating to AddModeDetailsToUsers (20240305221922)
+  [1m[36mTRANSACTION (21.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (46.7ms)[0m  [1m[35mCREATE INDEX "index_users_on_university_id" ON "users" ("university_id")[0m
+  [1m[35m (26.0ms)[0m  [1m[35mALTER TABLE "users" ALTER COLUMN "university_id" SET NOT NULL[0m
+  [1m[36mActiveRecord::SchemaMigration Create (22.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20240305221922') RETURNING "version"[0m
+  [1m[36mTRANSACTION (23.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (21.6ms)[0m  [1m[34mSELECT pg_advisory_unlock(2252476139199026370)[0m
+  [1m[36mActiveRecord::SchemaMigration Load (21.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+DEPRECATION WARNING: `Rails.application.secrets` is deprecated in favor of `Rails.application.credentials` and will be removed in Rails 7.2. (called from <main> at /Users/apple/repos/UniversityCourseRegistration/config/environment.rb:5)
+Started GET "/" for ::1 at 2024-03-11 16:39:26 -0400
+  [1m[36mActiveRecord::SchemaMigration Load (21.9ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by Rails::WelcomeController#index as HTML
+  Rendering /Users/apple/.rbenv/versions/3.1.2/lib/ruby/gems/3.1.0/gems/railties-7.1.3/lib/rails/templates/rails/welcome/index.html.erb
+  Rendered /Users/apple/.rbenv/versions/3.1.2/lib/ruby/gems/3.1.0/gems/railties-7.1.3/lib/rails/templates/rails/welcome/index.html.erb (Duration: 1.3ms | Allocations: 381)
+Completed 200 OK in 53ms (Views: 12.8ms | ActiveRecord: 0.0ms | Allocations: 4747)
+
+
+Started GET "/" for ::1 at 2024-03-11 16:39:53 -0400
+Processing by Rails::WelcomeController#index as HTML
+  Rendering /Users/apple/.rbenv/versions/3.1.2/lib/ruby/gems/3.1.0/gems/railties-7.1.3/lib/rails/templates/rails/welcome/index.html.erb
+  Rendered /Users/apple/.rbenv/versions/3.1.2/lib/ruby/gems/3.1.0/gems/railties-7.1.3/lib/rails/templates/rails/welcome/index.html.erb (Duration: 0.2ms | Allocations: 24)
+Completed 200 OK in 4ms (Views: 2.5ms | ActiveRecord: 0.0ms | Allocations: 288)
+
+
+Started GET "/" for ::1 at 2024-03-11 16:39:54 -0400
+Processing by Rails::WelcomeController#index as HTML
+  Rendering /Users/apple/.rbenv/versions/3.1.2/lib/ruby/gems/3.1.0/gems/railties-7.1.3/lib/rails/templates/rails/welcome/index.html.erb
+  Rendered /Users/apple/.rbenv/versions/3.1.2/lib/ruby/gems/3.1.0/gems/railties-7.1.3/lib/rails/templates/rails/welcome/index.html.erb (Duration: 0.8ms | Allocations: 15)
+Completed 200 OK in 3ms (Views: 1.8ms | ActiveRecord: 0.0ms | Allocations: 213)
+
+
+Started GET "/courses/new" for ::1 at 2024-03-11 16:39:58 -0400
+Processing by CoursesController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering courses/new.html.erb within layouts/application
+  Rendered courses/_form.html.erb (Duration: 36.9ms | Allocations: 3354)
+  Rendered courses/new.html.erb within layouts/application (Duration: 40.0ms | Allocations: 3716)
+  Rendered layout layouts/application.html.erb (Duration: 123.6ms | Allocations: 21882)
+Completed 200 OK in 722ms (Views: 127.6ms | ActiveRecord: 241.1ms | Allocations: 41137)
+
+
+Started GET "/courses/new" for ::1 at 2024-03-11 16:40:00 -0400
+Processing by CoursesController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering courses/new.html.erb within layouts/application
+  Rendered courses/_form.html.erb (Duration: 25.0ms | Allocations: 2290)
+  Rendered courses/new.html.erb within layouts/application (Duration: 25.5ms | Allocations: 2393)
+  Rendered layout layouts/application.html.erb (Duration: 30.6ms | Allocations: 3452)
+Completed 200 OK in 33ms (Views: 32.8ms | ActiveRecord: 0.0ms | Allocations: 3792)
+
+
+Started GET "/courses/new" for ::1 at 2024-03-11 16:40:39 -0400
+Processing by CoursesController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering courses/new.html.erb within layouts/application
+  Rendered courses/_form.html.erb (Duration: 7.4ms | Allocations: 2008)
+  Rendered courses/new.html.erb within layouts/application (Duration: 19.1ms | Allocations: 2314)
+  Rendered layout layouts/application.html.erb (Duration: 25.4ms | Allocations: 3575)
+Completed 200 OK in 128ms (Views: 31.2ms | ActiveRecord: 52.6ms | Allocations: 10634)
+
+
+Started GET "/courses/new" for ::1 at 2024-03-11 16:40:59 -0400
+Processing by CoursesController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering courses/new.html.erb within layouts/application
+  Rendered courses/_form.html.erb (Duration: 8.3ms | Allocations: 1999)
+  Rendered courses/new.html.erb within layouts/application (Duration: 12.6ms | Allocations: 2304)
+  Rendered layout layouts/application.html.erb (Duration: 18.0ms | Allocations: 3565)
+Completed 200 OK in 253ms (Views: 41.7ms | ActiveRecord: 152.1ms | Allocations: 10613)
+
+
+Started GET "/courses/new" for ::1 at 2024-03-11 16:44:01 -0400
+Processing by CoursesController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering courses/new.html.erb within layouts/application
+  Rendered courses/_form.html.erb (Duration: 186.5ms | Allocations: 1875)
+  Rendered courses/new.html.erb within layouts/application (Duration: 189.3ms | Allocations: 2182)
+  Rendered layout layouts/application.html.erb (Duration: 190.5ms | Allocations: 2277)
+Completed 500 Internal Server Error in 306ms (ActiveRecord: 54.2ms | Allocations: 9459)
+
+
+  
+ActionView::SyntaxErrorInTemplate (Encountered a syntax error while rendering template: check <%= form_with(model: course) do |form| %>
+  <% if course.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(course.errors.count, "error") %> prohibited this course from being saved:</h2>
+
+      <ul>
+        <% course.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :title, style: "display: block" %>
+    <%= form.text_field :title %>
+  </div>
+
+  <div>
+    <%= form.label :description, style: "display: block" %>
+    <%= form.text_area :description %>
+  </div>
+
+  <div>
+    <%= form.label :department_id, style: "display: block" %>
+    <%= form.text_field :department_id %>
+  </div>
+
+  <div>
+    <%= form.label :code, style: "display: block" %>
+    <%= form.text_field :code %>
+  </div>
+
+  <div>
+    <%= form.label :credits, style: "display: block" %>
+    <%= form.number_field :credits %>
+  </div>
+
+  <div>
+    <%= form.submit, class: "btn btn-primary" %>
+  </div>
+<% end %>
+
+):
+1:    <%= form_with(model: course) do |form| %>
+2:      <% if course.errors.any? %>
+3:        <div style="color: red">
+4:          <h2><%= pluralize(course.errors.count, "error") %> prohibited this course from being saved:</h2>
+5:    
+6:          <ul>
+7:            <% course.errors.each do |error| %>
+8:              <li><%= error.full_message %></li>
+9:            <% end %>
+10:          </ul>
+11:        </div>
+12:      <% end %>
+13:    
+14:      <div>
+15:        <%= form.label :title, style: "display: block" %>
+16:        <%= form.text_field :title %>
+17:      </div>
+18:    
+19:      <div>
+20:        <%= form.label :description, style: "display: block" %>
+21:        <%= form.text_area :description %>
+22:      </div>
+23:    
+24:      <div>
+25:        <%= form.label :department_id, style: "display: block" %>
+26:        <%= form.text_field :department_id %>
+27:      </div>
+28:    
+29:      <div>
+30:        <%= form.label :code, style: "display: block" %>
+31:        <%= form.text_field :code %>
+32:      </div>
+33:    
+34:      <div>
+35:        <%= form.label :credits, style: "display: block" %>
+36:        <%= form.number_field :credits %>
+37:      </div>
+38:    
+39:      <div>
+40:        <%= form.submit, class: "btn btn-primary" %>
+41:      </div>
+42:    <% end %>
+  
+app/views/courses/_form.html.erb:40: syntax error, unexpected label, expecting '='
+app/views/courses/new.html.erb:3
+Started GET "/courses/new" for ::1 at 2024-03-11 16:44:13 -0400
+Processing by CoursesController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering courses/new.html.erb within layouts/application
+  Rendered courses/_form.html.erb (Duration: 1.2ms | Allocations: 1571)
+  Rendered courses/new.html.erb within layouts/application (Duration: 2.5ms | Allocations: 1867)
+  Rendered layout layouts/application.html.erb (Duration: 3.3ms | Allocations: 1962)
+Completed 500 Internal Server Error in 108ms (ActiveRecord: 60.0ms | Allocations: 9128)
+
+
+  
+ActionView::SyntaxErrorInTemplate (Encountered a syntax error while rendering template: check <%= form_with(model: course) do |form| %>
+  <% if course.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(course.errors.count, "error") %> prohibited this course from being saved:</h2>
+
+      <ul>
+        <% course.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :title, style: "display: block" %>
+    <%= form.text_field :title %>
+  </div>
+
+  <div>
+    <%= form.label :description, style: "display: block" %>
+    <%= form.text_area :description %>
+  </div>
+
+  <div>
+    <%= form.label :department_id, style: "display: block" %>
+    <%= form.text_field :department_id %>
+  </div>
+
+  <div>
+    <%= form.label :code, style: "display: block" %>
+    <%= form.text_field :code %>
+  </div>
+
+  <div>
+    <%= form.label :credits, style: "display: block" %>
+    <%= form.number_field :credits %>
+  </div>
+
+  <div>
+    <%= form.submit, 'a', class: "btn btn-primary" %>
+  </div>
+<% end %>
+
+):
+1:    <%= form_with(model: course) do |form| %>
+2:      <% if course.errors.any? %>
+3:        <div style="color: red">
+4:          <h2><%= pluralize(course.errors.count, "error") %> prohibited this course from being saved:</h2>
+5:    
+6:          <ul>
+7:            <% course.errors.each do |error| %>
+8:              <li><%= error.full_message %></li>
+9:            <% end %>
+10:          </ul>
+11:        </div>
+12:      <% end %>
+13:    
+14:      <div>
+15:        <%= form.label :title, style: "display: block" %>
+16:        <%= form.text_field :title %>
+17:      </div>
+18:    
+19:      <div>
+20:        <%= form.label :description, style: "display: block" %>
+21:        <%= form.text_area :description %>
+22:      </div>
+23:    
+24:      <div>
+25:        <%= form.label :department_id, style: "display: block" %>
+26:        <%= form.text_field :department_id %>
+27:      </div>
+28:    
+29:      <div>
+30:        <%= form.label :code, style: "display: block" %>
+31:        <%= form.text_field :code %>
+32:      </div>
+33:    
+34:      <div>
+35:        <%= form.label :credits, style: "display: block" %>
+36:        <%= form.number_field :credits %>
+37:      </div>
+38:    
+39:      <div>
+40:        <%= form.submit, 'a', class: "btn btn-primary" %>
+41:      </div>
+42:    <% end %>
+  
+app/views/courses/_form.html.erb:40: syntax error, unexpected ',', expecting '.' or &. or :: or '['
+app/views/courses/new.html.erb:3
+Started GET "/courses/new" for ::1 at 2024-03-11 16:44:24 -0400
+Processing by CoursesController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering courses/new.html.erb within layouts/application
+  Rendered courses/_form.html.erb (Duration: 2.3ms | Allocations: 1551)
+  Rendered courses/new.html.erb within layouts/application (Duration: 2.7ms | Allocations: 1626)
+  Rendered layout layouts/application.html.erb (Duration: 3.6ms | Allocations: 1717)
+Completed 500 Internal Server Error in 6ms (ActiveRecord: 0.0ms | Allocations: 2013)
+
+
+  
+ActionView::SyntaxErrorInTemplate (Encountered a syntax error while rendering template: check <%= form_with(model: course) do |form| %>
+  <% if course.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(course.errors.count, "error") %> prohibited this course from being saved:</h2>
+
+      <ul>
+        <% course.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :title, style: "display: block" %>
+    <%= form.text_field :title %>
+  </div>
+
+  <div>
+    <%= form.label :description, style: "display: block" %>
+    <%= form.text_area :description %>
+  </div>
+
+  <div>
+    <%= form.label :department_id, style: "display: block" %>
+    <%= form.text_field :department_id %>
+  </div>
+
+  <div>
+    <%= form.label :code, style: "display: block" %>
+    <%= form.text_field :code %>
+  </div>
+
+  <div>
+    <%= form.label :credits, style: "display: block" %>
+    <%= form.number_field :credits %>
+  </div>
+
+  <div>
+    <%= form.submit, 'a', class: "btn btn-primary" %>
+  </div>
+<% end %>
+
+):
+1:    <%= form_with(model: course) do |form| %>
+2:      <% if course.errors.any? %>
+3:        <div style="color: red">
+4:          <h2><%= pluralize(course.errors.count, "error") %> prohibited this course from being saved:</h2>
+5:    
+6:          <ul>
+7:            <% course.errors.each do |error| %>
+8:              <li><%= error.full_message %></li>
+9:            <% end %>
+10:          </ul>
+11:        </div>
+12:      <% end %>
+13:    
+14:      <div>
+15:        <%= form.label :title, style: "display: block" %>
+16:        <%= form.text_field :title %>
+17:      </div>
+18:    
+19:      <div>
+20:        <%= form.label :description, style: "display: block" %>
+21:        <%= form.text_area :description %>
+22:      </div>
+23:    
+24:      <div>
+25:        <%= form.label :department_id, style: "display: block" %>
+26:        <%= form.text_field :department_id %>
+27:      </div>
+28:    
+29:      <div>
+30:        <%= form.label :code, style: "display: block" %>
+31:        <%= form.text_field :code %>
+32:      </div>
+33:    
+34:      <div>
+35:        <%= form.label :credits, style: "display: block" %>
+36:        <%= form.number_field :credits %>
+37:      </div>
+38:    
+39:      <div>
+40:        <%= form.submit, 'a', class: "btn btn-primary" %>
+41:      </div>
+42:    <% end %>
+  
+app/views/courses/_form.html.erb:40: syntax error, unexpected ',', expecting '.' or &. or :: or '['
+app/views/courses/new.html.erb:3
+Started GET "/courses/new" for ::1 at 2024-03-11 16:46:01 -0400
+Processing by CoursesController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering courses/new.html.erb within layouts/application
+  Rendered courses/_form.html.erb (Duration: 4.3ms | Allocations: 1531)
+  Rendered courses/new.html.erb within layouts/application (Duration: 11.7ms | Allocations: 1827)
+  Rendered layout layouts/application.html.erb (Duration: 12.4ms | Allocations: 1922)
+Completed 500 Internal Server Error in 105ms (ActiveRecord: 52.9ms | Allocations: 9086)
+
+
+  
+ActionView::SyntaxErrorInTemplate (Encountered a syntax error while rendering template: check <%= form_with(model: course) do |form| %>
+  <% if course.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(course.errors.count, "error") %> prohibited this course from being saved:</h2>
+
+      <ul>
+        <% course.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :title, style: "display: block" %>
+    <%= form.text_field :title %>
+  </div>
+
+  <div>
+    <%= form.label :description, style: "display: block" %>
+    <%= form.text_area :description %>
+  </div>
+
+  <div>
+    <%= form.label :department_id, style: "display: block" %>
+    <%= form.text_field :department_id %>
+  </div>
+
+  <div>
+    <%= form.label :code, style: "display: block" %>
+    <%= form.text_field :code %>
+  </div>
+
+  <div>
+    <%= form.label :credits, style: "display: block" %>
+    <%= form.number_field :credits %>
+  </div>
+
+  <div>
+    <%= form.submit, class: "btn btn-primary" %>
+  </div>
+<% end %>
+
+):
+1:    <%= form_with(model: course) do |form| %>
+2:      <% if course.errors.any? %>
+3:        <div style="color: red">
+4:          <h2><%= pluralize(course.errors.count, "error") %> prohibited this course from being saved:</h2>
+5:    
+6:          <ul>
+7:            <% course.errors.each do |error| %>
+8:              <li><%= error.full_message %></li>
+9:            <% end %>
+10:          </ul>
+11:        </div>
+12:      <% end %>
+13:    
+14:      <div>
+15:        <%= form.label :title, style: "display: block" %>
+16:        <%= form.text_field :title %>
+17:      </div>
+18:    
+19:      <div>
+20:        <%= form.label :description, style: "display: block" %>
+21:        <%= form.text_area :description %>
+22:      </div>
+23:    
+24:      <div>
+25:        <%= form.label :department_id, style: "display: block" %>
+26:        <%= form.text_field :department_id %>
+27:      </div>
+28:    
+29:      <div>
+30:        <%= form.label :code, style: "display: block" %>
+31:        <%= form.text_field :code %>
+32:      </div>
+33:    
+34:      <div>
+35:        <%= form.label :credits, style: "display: block" %>
+36:        <%= form.number_field :credits %>
+37:      </div>
+38:    
+39:      <div>
+40:        <%= form.submit, class: "btn btn-primary" %>
+41:      </div>
+42:    <% end %>
+  
+app/views/courses/_form.html.erb:40: syntax error, unexpected label, expecting '='
+app/views/courses/new.html.erb:3
+Started GET "/courses/new" for ::1 at 2024-03-11 16:46:12 -0400
+Processing by CoursesController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering courses/new.html.erb within layouts/application
+  Rendered courses/_form.html.erb (Duration: 4.2ms | Allocations: 2006)
+  Rendered courses/new.html.erb within layouts/application (Duration: 5.5ms | Allocations: 2311)
+  Rendered layout layouts/application.html.erb (Duration: 17.8ms | Allocations: 3579)
+Completed 200 OK in 124ms (Views: 22.2ms | ActiveRecord: 54.8ms | Allocations: 10744)
+
+
+Started GET "/courses/new" for ::1 at 2024-03-11 16:46:59 -0400
+Processing by CoursesController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering courses/new.html.erb within layouts/application
+  Rendered courses/_form.html.erb (Duration: 8.4ms | Allocations: 2013)
+  Rendered courses/new.html.erb within layouts/application (Duration: 16.7ms | Allocations: 2322)
+  Rendered layout layouts/application.html.erb (Duration: 45.9ms | Allocations: 3584)
+Completed 200 OK in 196ms (Views: 49.7ms | ActiveRecord: 53.0ms | Allocations: 10676)
+
+
+Started GET "/courses/new" for ::1 at 2024-03-11 16:48:54 -0400
+Processing by CoursesController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering courses/new.html.erb within layouts/application
+  Rendered courses/_form.html.erb (Duration: 7.1ms | Allocations: 1904)
+  Rendered courses/new.html.erb within layouts/application (Duration: 8.9ms | Allocations: 2211)
+  Rendered layout layouts/application.html.erb (Duration: 13.4ms | Allocations: 3479)
+Completed 200 OK in 130ms (Views: 39.9ms | ActiveRecord: 52.4ms | Allocations: 10528)
+
+
+Started GET "/courses/new" for ::1 at 2024-03-11 16:49:07 -0400
+Processing by CoursesController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering courses/new.html.erb within layouts/application
+  Rendered courses/_form.html.erb (Duration: 16.2ms | Allocations: 2086)
+  Rendered courses/new.html.erb within layouts/application (Duration: 18.1ms | Allocations: 2391)
+  Rendered layout layouts/application.html.erb (Duration: 28.0ms | Allocations: 3653)
+Completed 200 OK in 150ms (Views: 32.1ms | ActiveRecord: 57.9ms | Allocations: 10821)
+
+
+Started GET "/courses/new" for ::1 at 2024-03-11 16:50:20 -0400
+Processing by CoursesController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering courses/new.html.erb within layouts/application
+  Rendered courses/_form.html.erb (Duration: 6.2ms | Allocations: 2018)
+  Rendered courses/new.html.erb within layouts/application (Duration: 8.8ms | Allocations: 2327)
+  Rendered layout layouts/application.html.erb (Duration: 13.6ms | Allocations: 3595)
+Completed 200 OK in 118ms (Views: 18.4ms | ActiveRecord: 53.6ms | Allocations: 10687)
+
+
+DEPRECATION WARNING: `Rails.application.secrets` is deprecated in favor of `Rails.application.credentials` and will be removed in Rails 7.2. (called from <main> at /Users/apple/repos/UniversityCourseRegistration/config/environment.rb:5)
+  [1m[36mTRANSACTION (15.8ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mDepartment Create (35.6ms)[0m  [1m[32mINSERT INTO "departments" ("name", "code", "created_at", "updated_at", "department_head_id") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "Math"], ["code", "MTH"], ["created_at", "2024-03-13 19:30:58.171845"], ["updated_at", "2024-03-13 19:30:58.171845"], ["department_head_id", nil]]
+  [1m[36mTRANSACTION (20.8ms)[0m  [1m[35mCOMMIT[0m
+DEPRECATION WARNING: `Rails.application.secrets` is deprecated in favor of `Rails.application.credentials` and will be removed in Rails 7.2. (called from <main> at /Users/apple/repos/UniversityCourseRegistration/config/environment.rb:5)
+Started GET "/" for ::1 at 2024-03-13 15:58:53 -0400
+  [1m[36mActiveRecord::SchemaMigration Load (16.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by Rails::WelcomeController#index as HTML
+  Rendering /Users/apple/.rbenv/versions/3.1.2/lib/ruby/gems/3.1.0/gems/railties-7.1.3/lib/rails/templates/rails/welcome/index.html.erb
+  Rendered /Users/apple/.rbenv/versions/3.1.2/lib/ruby/gems/3.1.0/gems/railties-7.1.3/lib/rails/templates/rails/welcome/index.html.erb (Duration: 1.0ms | Allocations: 381)
+Completed 200 OK in 75ms (Views: 16.5ms | ActiveRecord: 0.0ms | Allocations: 4746)
+
+
+Started GET "/courses/" for ::1 at 2024-03-13 15:59:38 -0400
+Processing by CoursesController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering courses/index.html.erb within layouts/application
+  [1m[36mCourse Load (32.2ms)[0m  [1m[34mSELECT "courses".* FROM "courses"[0m
+  ↳ app/views/courses/index.html.erb:6
+  Rendered courses/_course.html.erb (Duration: 1.4ms | Allocations: 320)
+  Rendered courses/index.html.erb within layouts/application (Duration: 534.7ms | Allocations: 17426)
+  Rendered layout layouts/application.html.erb (Duration: 623.5ms | Allocations: 35657)
+Completed 200 OK in 686ms (Views: 389.1ms | ActiveRecord: 238.6ms | Allocations: 40962)
+
+
+Started GET "/courses/new" for ::1 at 2024-03-13 15:59:43 -0400
+Processing by CoursesController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering courses/new.html.erb within layouts/application
+  Rendered courses/_form.html.erb (Duration: 40.5ms | Allocations: 4138)
+  Rendered courses/new.html.erb within layouts/application (Duration: 44.2ms | Allocations: 4435)
+  Rendered layout layouts/application.html.erb (Duration: 46.9ms | Allocations: 5493)
+Completed 200 OK in 52ms (Views: 47.8ms | ActiveRecord: 0.0ms | Allocations: 5917)
+
+
+Started GET "/courses/new" for ::1 at 2024-03-13 16:09:03 -0400
+Processing by CoursesController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering courses/new.html.erb within layouts/application
+  Rendered courses/_form.html.erb (Duration: 5.2ms | Allocations: 2019)
+  Rendered courses/new.html.erb within layouts/application (Duration: 7.8ms | Allocations: 2330)
+  Rendered layout layouts/application.html.erb (Duration: 11.0ms | Allocations: 3589)
+Completed 200 OK in 672ms (Views: 13.3ms | ActiveRecord: 138.4ms | Allocations: 13171)
+
+
+Started GET "/courses/new" for ::1 at 2024-03-13 16:11:52 -0400
+Processing by CoursesController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering courses/new.html.erb within layouts/application
+  Rendered courses/_form.html.erb (Duration: 25.1ms | Allocations: 2037)
+  Rendered courses/new.html.erb within layouts/application (Duration: 26.5ms | Allocations: 2347)
+  Rendered layout layouts/application.html.erb (Duration: 29.3ms | Allocations: 3617)
+Completed 200 OK in 149ms (Views: 34.0ms | ActiveRecord: 72.6ms | Allocations: 10697)
+
+
+Started GET "/courses/new" for ::1 at 2024-03-13 16:12:43 -0400
+Processing by CoursesController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering courses/new.html.erb within layouts/application
+  Rendered courses/_form.html.erb (Duration: 7.2ms | Allocations: 2014)
+  Rendered courses/new.html.erb within layouts/application (Duration: 8.4ms | Allocations: 2323)
+  Rendered layout layouts/application.html.erb (Duration: 16.8ms | Allocations: 3589)
+Completed 200 OK in 121ms (Views: 25.1ms | ActiveRecord: 53.4ms | Allocations: 10764)
+
+
+Started GET "/courses/new" for ::1 at 2024-03-13 16:13:16 -0400
+Processing by CoursesController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering courses/new.html.erb within layouts/application
+  Rendered courses/_form.html.erb (Duration: 4.2ms | Allocations: 2017)
+  Rendered courses/new.html.erb within layouts/application (Duration: 9.7ms | Allocations: 2326)
+  Rendered layout layouts/application.html.erb (Duration: 19.8ms | Allocations: 3585)
+Completed 200 OK in 133ms (Views: 24.6ms | ActiveRecord: 55.5ms | Allocations: 10629)
+
+
+Started GET "/courses/new" for ::1 at 2024-03-13 16:13:21 -0400
+Processing by CoursesController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering courses/new.html.erb within layouts/application
+  Rendered courses/_form.html.erb (Duration: 3.1ms | Allocations: 2029)
+  Rendered courses/new.html.erb within layouts/application (Duration: 5.3ms | Allocations: 2342)
+  Rendered layout layouts/application.html.erb (Duration: 10.4ms | Allocations: 3613)
+Completed 200 OK in 111ms (Views: 14.2ms | ActiveRecord: 53.7ms | Allocations: 10715)
+
+
+Started GET "/courses/new" for ::1 at 2024-03-13 16:14:00 -0400
+Processing by CoursesController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering courses/new.html.erb within layouts/application
+  Rendered courses/_form.html.erb (Duration: 5.8ms | Allocations: 2007)
+  Rendered courses/new.html.erb within layouts/application (Duration: 8.8ms | Allocations: 2316)
+  Rendered layout layouts/application.html.erb (Duration: 20.1ms | Allocations: 3580)
+Completed 200 OK in 285ms (Views: 23.0ms | ActiveRecord: 53.9ms | Allocations: 10638)
+
+
+Started GET "/courses/new" for ::1 at 2024-03-13 16:18:39 -0400
+Processing by CoursesController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering courses/new.html.erb within layouts/application
+  Rendered courses/_form.html.erb (Duration: 4.2ms | Allocations: 2031)
+  Rendered courses/new.html.erb within layouts/application (Duration: 6.7ms | Allocations: 2340)
+  Rendered layout layouts/application.html.erb (Duration: 11.3ms | Allocations: 3602)
+Completed 200 OK in 201ms (Views: 16.2ms | ActiveRecord: 119.8ms | Allocations: 10654)
+
+
+Started GET "/courses/new" for ::1 at 2024-03-13 16:18:44 -0400
+Processing by CoursesController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering courses/new.html.erb within layouts/application
+  Rendered courses/_form.html.erb (Duration: 3.2ms | Allocations: 2045)
+  Rendered courses/new.html.erb within layouts/application (Duration: 4.8ms | Allocations: 2358)
+  Rendered layout layouts/application.html.erb (Duration: 9.5ms | Allocations: 3624)
+Completed 200 OK in 234ms (Views: 12.8ms | ActiveRecord: 150.5ms | Allocations: 10799)
+
+
+Started GET "/courses/new" for ::1 at 2024-03-13 16:19:55 -0400
+Processing by CoursesController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering courses/new.html.erb within layouts/application
+  Rendered courses/_form.html.erb (Duration: 3.4ms | Allocations: 2041)
+  Rendered courses/new.html.erb within layouts/application (Duration: 6.3ms | Allocations: 2350)
+  Rendered layout layouts/application.html.erb (Duration: 11.7ms | Allocations: 3616)
+Completed 200 OK in 106ms (Views: 14.8ms | ActiveRecord: 53.0ms | Allocations: 10675)
+
+
+Started GET "/courses/new" for ::1 at 2024-03-13 16:20:11 -0400
+Processing by CoursesController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering courses/new.html.erb within layouts/application
+  Rendered courses/_form.html.erb (Duration: 2.9ms | Allocations: 2010)
+  Rendered courses/new.html.erb within layouts/application (Duration: 4.4ms | Allocations: 2319)
+  Rendered layout layouts/application.html.erb (Duration: 7.3ms | Allocations: 3583)
+Completed 200 OK in 110ms (Views: 11.5ms | ActiveRecord: 57.4ms | Allocations: 10627)
+
+
+Started GET "/courses/new" for ::1 at 2024-03-13 16:21:06 -0400
+Processing by CoursesController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering courses/new.html.erb within layouts/application
+  Rendered courses/_form.html.erb (Duration: 5.5ms | Allocations: 2042)
+  Rendered courses/new.html.erb within layouts/application (Duration: 7.9ms | Allocations: 2355)
+  Rendered layout layouts/application.html.erb (Duration: 11.4ms | Allocations: 3624)
+Completed 200 OK in 109ms (Views: 15.6ms | ActiveRecord: 54.2ms | Allocations: 10800)
+
+
+Started GET "/courses/new" for ::1 at 2024-03-13 16:21:28 -0400
+Processing by CoursesController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering courses/new.html.erb within layouts/application
+  Rendered courses/_form.html.erb (Duration: 3.9ms | Allocations: 2035)
+  Rendered courses/new.html.erb within layouts/application (Duration: 5.2ms | Allocations: 2344)
+  Rendered layout layouts/application.html.erb (Duration: 9.1ms | Allocations: 3609)
+Completed 200 OK in 104ms (Views: 12.7ms | ActiveRecord: 52.9ms | Allocations: 10667)
+
+
+Started GET "/courses/1/edit" for ::1 at 2024-03-13 16:21:50 -0400
+Processing by CoursesController#edit as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mCourse Load (18.3ms)[0m  [1m[34mSELECT "courses".* FROM "courses" WHERE "courses"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/courses_controller.rb:63:in `set_course'
+  Rendering layout layouts/application.html.erb
+  Rendering courses/edit.html.erb within layouts/application
+  Rendered courses/_form.html.erb (Duration: 3.4ms | Allocations: 1549)
+  Rendered courses/edit.html.erb within layouts/application (Duration: 4.5ms | Allocations: 1847)
+  Rendered layout layouts/application.html.erb (Duration: 6.6ms | Allocations: 2881)
+Completed 200 OK in 118ms (Views: 7.2ms | ActiveRecord: 34.8ms | Allocations: 8212)
+
+
+DEPRECATION WARNING: `Rails.application.secrets` is deprecated in favor of `Rails.application.credentials` and will be removed in Rails 7.2. (called from <main> at /Users/apple/repos/UniversityCourseRegistration/config/environment.rb:5)
+Started GET "/" for ::1 at 2024-03-17 06:17:27 -0400
+  [1m[36mActiveRecord::SchemaMigration Load (35.9ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by Rails::WelcomeController#index as HTML
+  Rendering /Users/apple/.rbenv/versions/3.1.2/lib/ruby/gems/3.1.0/gems/railties-7.1.3/lib/rails/templates/rails/welcome/index.html.erb
+  Rendered /Users/apple/.rbenv/versions/3.1.2/lib/ruby/gems/3.1.0/gems/railties-7.1.3/lib/rails/templates/rails/welcome/index.html.erb (Duration: 1.6ms | Allocations: 381)
+Completed 200 OK in 66ms (Views: 12.1ms | ActiveRecord: 0.0ms | Allocations: 4746)
+
+
+Started GET "/" for ::1 at 2024-03-17 06:17:31 -0400
+Processing by Rails::WelcomeController#index as HTML
+  Rendering /Users/apple/.rbenv/versions/3.1.2/lib/ruby/gems/3.1.0/gems/railties-7.1.3/lib/rails/templates/rails/welcome/index.html.erb
+  Rendered /Users/apple/.rbenv/versions/3.1.2/lib/ruby/gems/3.1.0/gems/railties-7.1.3/lib/rails/templates/rails/welcome/index.html.erb (Duration: 10.6ms | Allocations: 24)
+Completed 200 OK in 14ms (Views: 12.9ms | ActiveRecord: 0.0ms | Allocations: 288)
+
+
+Started GET "/users/sign_in" for ::1 at 2024-03-17 06:17:32 -0400
+Processing by Devise::SessionsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering devise/sessions/new.html.erb within layouts/application
+  Rendered devise/shared/_links.html.erb (Duration: 1.9ms | Allocations: 615)
+  Rendered devise/sessions/new.html.erb within layouts/application (Duration: 29.9ms | Allocations: 3726)
+  Rendered layout layouts/application.html.erb (Duration: 135.3ms | Allocations: 21632)
+Completed 200 OK in 1067ms (Views: 144.1ms | ActiveRecord: 542.7ms | Allocations: 43751)
+
+
+Started GET "/users/sign_in" for ::1 at 2024-03-17 06:17:37 -0400
+Processing by Devise::SessionsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering devise/sessions/new.html.erb within layouts/application
+  Rendered devise/shared/_links.html.erb (Duration: 0.5ms | Allocations: 119)
+  Rendered devise/sessions/new.html.erb within layouts/application (Duration: 2.4ms | Allocations: 922)
+  Rendered layout layouts/application.html.erb (Duration: 5.2ms | Allocations: 1852)
+Completed 200 OK in 10ms (Views: 7.5ms | ActiveRecord: 0.0ms | Allocations: 2601)
+
+
+Started GET "/users/sign_up" for ::1 at 2024-03-17 06:17:41 -0400
+Processing by Users::RegistrationsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering devise/registrations/new.html.erb within layouts/application
+  Rendered devise/shared/_error_messages.html.erb (Duration: 2.9ms | Allocations: 206)
+  Rendered devise/shared/_links.html.erb (Duration: 1.8ms | Allocations: 88)
+  Rendered devise/registrations/new.html.erb within layouts/application (Duration: 17.3ms | Allocations: 1735)
+  Rendered layout layouts/application.html.erb (Duration: 31.6ms | Allocations: 2775)
+Completed 200 OK in 43ms (Views: 41.4ms | ActiveRecord: 0.0ms | Allocations: 4117)
+
+
+Started POST "/users" for ::1 at 2024-03-17 06:18:30 -0400
+Processing by Users::RegistrationsController#create as HTML
+  Parameters: {"authenticity_token"=>"[FILTERED]", "user"=>{"email"=>"abcd@a.com", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]"}, "commit"=>"Sign up"}
+  [1m[36mTRANSACTION (31.6ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/users/registrations_controller.rb:3:in `create'
+  [1m[36mUser Exists? (68.1ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "abcd@a.com"], ["LIMIT", 1]]
+  ↳ app/controllers/users/registrations_controller.rb:3:in `create'
+  [1m[36mUser Create (43.4ms)[0m  [1m[32mINSERT INTO "users" ("email", "encrypted_password", "reset_password_token", "reset_password_sent_at", "remember_created_at", "created_at", "updated_at", "first_name", "last_name", "university_id") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING "id"[0m  [["email", "abcd@a.com"], ["encrypted_password", "[FILTERED]"], ["reset_password_token", "[FILTERED]"], ["reset_password_sent_at", "[FILTERED]"], ["remember_created_at", nil], ["created_at", "2024-03-17 10:18:31.085753"], ["updated_at", "2024-03-17 10:18:31.085753"], ["first_name", nil], ["last_name", nil], ["university_id", nil]]
+  ↳ app/controllers/users/registrations_controller.rb:3:in `create'
+  [1m[36mTRANSACTION (28.2ms)[0m  [1m[31mROLLBACK[0m
+  ↳ app/controllers/users/registrations_controller.rb:3:in `create'
+Completed 500 Internal Server Error in 707ms (ActiveRecord: 168.6ms | Allocations: 10322)
+
+
+  
+ActiveRecord::NotNullViolation (PG::NotNullViolation: ERROR:  null value in column "university_id" of relation "users" violates not-null constraint
+DETAIL:  Failing row contains (1, abcd@a.com, $2a$12$bdSAaOW3k26GCQZs3uzbxeFQwyoyroUN2GOIOp98HsTaKNcnJFkj., null, null, null, 2024-03-17 10:18:31.085753, 2024-03-17 10:18:31.085753, null, null, null).
+):
+  
+Started GET "/users/sign_up" for ::1 at 2024-03-17 06:20:32 -0400
+Processing by Users::RegistrationsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering devise/registrations/new.html.erb within layouts/application
+  Rendered devise/shared/_error_messages.html.erb (Duration: 0.8ms | Allocations: 199)
+  Rendered devise/shared/_links.html.erb (Duration: 1.3ms | Allocations: 485)
+  Rendered devise/registrations/new.html.erb within layouts/application (Duration: 9.9ms | Allocations: 2506)
+  Rendered layout layouts/application.html.erb (Duration: 14.1ms | Allocations: 3770)
+Completed 200 OK in 153ms (Views: 19.8ms | ActiveRecord: 88.8ms | Allocations: 10377)
+
+
+Started POST "/users" for ::1 at 2024-03-17 06:20:54 -0400
+Processing by Users::RegistrationsController#create as HTML
+  Parameters: {"authenticity_token"=>"[FILTERED]", "user"=>{"email"=>"abcd@a.com", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "university_id"=>"1"}, "commit"=>"Sign up"}
+[31mUnpermitted parameter: :university_id. Context: { controller: Users::RegistrationsController, action: create, request: #<ActionDispatch::Request:0x0000000108702e58>, params: {"authenticity_token"=>"[FILTERED]", "user"=>{"email"=>"abcd@a.com", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "university_id"=>"1"}, "commit"=>"Sign up", "controller"=>"users/registrations", "action"=>"create"} }[0m
+  [1m[36mTRANSACTION (31.5ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/users/registrations_controller.rb:3:in `create'
+  [1m[36mUser Exists? (63.9ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "abcd@a.com"], ["LIMIT", 1]]
+  ↳ app/controllers/users/registrations_controller.rb:3:in `create'
+  [1m[36mUser Create (30.9ms)[0m  [1m[32mINSERT INTO "users" ("email", "encrypted_password", "reset_password_token", "reset_password_sent_at", "remember_created_at", "created_at", "updated_at", "first_name", "last_name", "university_id") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING "id"[0m  [["email", "abcd@a.com"], ["encrypted_password", "[FILTERED]"], ["reset_password_token", "[FILTERED]"], ["reset_password_sent_at", "[FILTERED]"], ["remember_created_at", nil], ["created_at", "2024-03-17 10:20:55.030085"], ["updated_at", "2024-03-17 10:20:55.030085"], ["first_name", nil], ["last_name", nil], ["university_id", nil]]
+  ↳ app/controllers/users/registrations_controller.rb:3:in `create'
+  [1m[36mTRANSACTION (26.8ms)[0m  [1m[31mROLLBACK[0m
+  ↳ app/controllers/users/registrations_controller.rb:3:in `create'
+Completed 500 Internal Server Error in 509ms (ActiveRecord: 153.0ms | Allocations: 5323)
+
+
+  
+ActiveRecord::NotNullViolation (PG::NotNullViolation: ERROR:  null value in column "university_id" of relation "users" violates not-null constraint
+DETAIL:  Failing row contains (2, abcd@a.com, $2a$12$wZHeA.vGakydqwuXQ5hqmenaVP8wu8dbJcsgvC/guBgbdxLJwpiYm, null, null, null, 2024-03-17 10:20:55.030085, 2024-03-17 10:20:55.030085, null, null, null).
+):
+  
+Started GET "/users/sign_up" for ::1 at 2024-03-17 06:23:18 -0400
+Processing by Users::RegistrationsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering devise/registrations/new.html.erb within layouts/application
+  Rendered devise/shared/_error_messages.html.erb (Duration: 4.5ms | Allocations: 199)
+  Rendered devise/shared/_links.html.erb (Duration: 7.9ms | Allocations: 485)
+  Rendered devise/registrations/new.html.erb within layouts/application (Duration: 54.2ms | Allocations: 2439)
+  Rendered layout layouts/application.html.erb (Duration: 79.5ms | Allocations: 3695)
+Completed 200 OK in 270ms (Views: 115.9ms | ActiveRecord: 93.6ms | Allocations: 10337)
+
+
+Started POST "/users" for ::1 at 2024-03-17 06:23:31 -0400
+Processing by Users::RegistrationsController#create as HTML
+  Parameters: {"authenticity_token"=>"[FILTERED]", "user"=>{"email"=>"a@a.com", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "university_id"=>"2"}, "commit"=>"Sign up"}
+  [1m[36mTRANSACTION (26.5ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/users/registrations_controller.rb:3:in `create'
+  [1m[36mUser Exists? (62.0ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "a@a.com"], ["LIMIT", 1]]
+  ↳ app/controllers/users/registrations_controller.rb:3:in `create'
+  [1m[36mUser Create (26.6ms)[0m  [1m[32mINSERT INTO "users" ("email", "encrypted_password", "reset_password_token", "reset_password_sent_at", "remember_created_at", "created_at", "updated_at", "first_name", "last_name", "university_id") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING "id"[0m  [["email", "a@a.com"], ["encrypted_password", "[FILTERED]"], ["reset_password_token", "[FILTERED]"], ["reset_password_sent_at", "[FILTERED]"], ["remember_created_at", nil], ["created_at", "2024-03-17 10:23:32.396793"], ["updated_at", "2024-03-17 10:23:32.396793"], ["first_name", nil], ["last_name", nil], ["university_id", "2"]]
+  ↳ app/controllers/users/registrations_controller.rb:3:in `create'
+  [1m[36mTRANSACTION (28.7ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/users/registrations_controller.rb:3:in `create'
+Redirected to http://localhost:3000/
+Completed 303 See Other in 566ms (ActiveRecord: 143.6ms | Allocations: 5686)
+
+
+Started GET "/" for ::1 at 2024-03-17 06:23:32 -0400
+Processing by Rails::WelcomeController#index as HTML
+  Rendering /Users/apple/.rbenv/versions/3.1.2/lib/ruby/gems/3.1.0/gems/railties-7.1.3/lib/rails/templates/rails/welcome/index.html.erb
+  Rendered /Users/apple/.rbenv/versions/3.1.2/lib/ruby/gems/3.1.0/gems/railties-7.1.3/lib/rails/templates/rails/welcome/index.html.erb (Duration: 1.3ms | Allocations: 286)
+Completed 200 OK in 8ms (Views: 4.3ms | ActiveRecord: 0.0ms | Allocations: 942)
+
+
+Started GET "/" for ::1 at 2024-03-17 06:23:48 -0400
+Processing by Rails::WelcomeController#index as HTML
+  Rendering /Users/apple/.rbenv/versions/3.1.2/lib/ruby/gems/3.1.0/gems/railties-7.1.3/lib/rails/templates/rails/welcome/index.html.erb
+  Rendered /Users/apple/.rbenv/versions/3.1.2/lib/ruby/gems/3.1.0/gems/railties-7.1.3/lib/rails/templates/rails/welcome/index.html.erb (Duration: 0.1ms | Allocations: 15)
+Completed 200 OK in 1ms (Views: 0.5ms | ActiveRecord: 0.0ms | Allocations: 230)
+
+
+Started GET "/users/sign_in" for ::1 at 2024-03-17 06:23:51 -0400
+Processing by Devise::SessionsController#new as HTML
+  [1m[36mUser Load (31.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+Redirected to http://localhost:3000/
+Filter chain halted as :require_no_authentication rendered or redirected
+Completed 302 Found in 125ms (ActiveRecord: 59.4ms | Allocations: 2527)
+
+
+Started GET "/" for ::1 at 2024-03-17 06:23:51 -0400
+Processing by Rails::WelcomeController#index as HTML
+  Rendering /Users/apple/.rbenv/versions/3.1.2/lib/ruby/gems/3.1.0/gems/railties-7.1.3/lib/rails/templates/rails/welcome/index.html.erb
+  Rendered /Users/apple/.rbenv/versions/3.1.2/lib/ruby/gems/3.1.0/gems/railties-7.1.3/lib/rails/templates/rails/welcome/index.html.erb (Duration: 0.1ms | Allocations: 24)
+Completed 200 OK in 1ms (Views: 0.6ms | ActiveRecord: 0.0ms | Allocations: 269)
+
+
+Started GET "/users/sign_in" for ::1 at 2024-03-17 06:23:54 -0400
+Processing by Devise::SessionsController#new as HTML
+  [1m[36mUser Load (26.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+Redirected to http://localhost:3000/
+Filter chain halted as :require_no_authentication rendered or redirected
+Completed 302 Found in 63ms (ActiveRecord: 26.5ms | Allocations: 1649)
+
+
+Started GET "/" for ::1 at 2024-03-17 06:23:54 -0400
+Processing by Rails::WelcomeController#index as HTML
+  Rendering /Users/apple/.rbenv/versions/3.1.2/lib/ruby/gems/3.1.0/gems/railties-7.1.3/lib/rails/templates/rails/welcome/index.html.erb
+  Rendered /Users/apple/.rbenv/versions/3.1.2/lib/ruby/gems/3.1.0/gems/railties-7.1.3/lib/rails/templates/rails/welcome/index.html.erb (Duration: 0.1ms | Allocations: 15)
+Completed 200 OK in 1ms (Views: 0.7ms | ActiveRecord: 0.0ms | Allocations: 207)
+
+
+Started GET "/" for ::1 at 2024-03-17 06:26:35 -0400
+Processing by Rails::WelcomeController#index as HTML
+  Rendering /Users/apple/.rbenv/versions/3.1.2/lib/ruby/gems/3.1.0/gems/railties-7.1.3/lib/rails/templates/rails/welcome/index.html.erb
+  Rendered /Users/apple/.rbenv/versions/3.1.2/lib/ruby/gems/3.1.0/gems/railties-7.1.3/lib/rails/templates/rails/welcome/index.html.erb (Duration: 0.3ms | Allocations: 15)
+Completed 200 OK in 3ms (Views: 2.1ms | ActiveRecord: 0.0ms | Allocations: 207)
+
+
+Started GET "/" for ::1 at 2024-03-17 06:26:37 -0400
+Processing by Rails::WelcomeController#index as HTML
+  Rendering /Users/apple/.rbenv/versions/3.1.2/lib/ruby/gems/3.1.0/gems/railties-7.1.3/lib/rails/templates/rails/welcome/index.html.erb
+  Rendered /Users/apple/.rbenv/versions/3.1.2/lib/ruby/gems/3.1.0/gems/railties-7.1.3/lib/rails/templates/rails/welcome/index.html.erb (Duration: 0.1ms | Allocations: 15)
+Completed 200 OK in 1ms (Views: 0.5ms | ActiveRecord: 0.0ms | Allocations: 207)
+
+
+Started GET "/users/sign_out" for ::1 at 2024-03-17 06:26:41 -0400
+  
+ActionController::RoutingError (No route matches [GET] "/users/sign_out"):
+  
+DEPRECATION WARNING: `Rails.application.secrets` is deprecated in favor of `Rails.application.credentials` and will be removed in Rails 7.2. (called from <main> at /Users/apple/repos/UniversityCourseRegistration/config/environment.rb:5)
+Started GET "/" for ::1 at 2024-03-17 06:27:05 -0400
+  [1m[36mActiveRecord::SchemaMigration Load (31.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by Rails::WelcomeController#index as HTML
+  Rendering /Users/apple/.rbenv/versions/3.1.2/lib/ruby/gems/3.1.0/gems/railties-7.1.3/lib/rails/templates/rails/welcome/index.html.erb
+  Rendered /Users/apple/.rbenv/versions/3.1.2/lib/ruby/gems/3.1.0/gems/railties-7.1.3/lib/rails/templates/rails/welcome/index.html.erb (Duration: 1.2ms | Allocations: 381)
+Completed 200 OK in 75ms (Views: 14.1ms | ActiveRecord: 0.0ms | Allocations: 4747)
+
+
+Started GET "/" for ::1 at 2024-03-17 06:27:09 -0400
+Processing by Rails::WelcomeController#index as HTML
+  Rendering /Users/apple/.rbenv/versions/3.1.2/lib/ruby/gems/3.1.0/gems/railties-7.1.3/lib/rails/templates/rails/welcome/index.html.erb
+  Rendered /Users/apple/.rbenv/versions/3.1.2/lib/ruby/gems/3.1.0/gems/railties-7.1.3/lib/rails/templates/rails/welcome/index.html.erb (Duration: 0.1ms | Allocations: 24)
+Completed 200 OK in 2ms (Views: 1.9ms | ActiveRecord: 0.0ms | Allocations: 288)
+
+
+Started GET "/users/sign_out" for ::1 at 2024-03-17 06:27:10 -0400
+Processing by Devise::SessionsController#destroy as HTML
+  [1m[36mUser Load (30.9ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+Redirected to http://localhost:3000/
+Completed 303 See Other in 1287ms (ActiveRecord: 462.9ms | Allocations: 26897)
+
+
+Started GET "/" for ::1 at 2024-03-17 06:27:11 -0400
+Processing by Rails::WelcomeController#index as HTML
+  Rendering /Users/apple/.rbenv/versions/3.1.2/lib/ruby/gems/3.1.0/gems/railties-7.1.3/lib/rails/templates/rails/welcome/index.html.erb
+  Rendered /Users/apple/.rbenv/versions/3.1.2/lib/ruby/gems/3.1.0/gems/railties-7.1.3/lib/rails/templates/rails/welcome/index.html.erb (Duration: 0.2ms | Allocations: 24)
+Completed 200 OK in 3ms (Views: 2.0ms | ActiveRecord: 0.0ms | Allocations: 270)
+
+
+Started GET "/users/sign_in" for ::1 at 2024-03-17 06:27:21 -0400
+Processing by Devise::SessionsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering devise/sessions/new.html.erb within layouts/application
+  Rendered devise/shared/_links.html.erb (Duration: 1.7ms | Allocations: 615)
+  Rendered devise/sessions/new.html.erb within layouts/application (Duration: 37.2ms | Allocations: 3621)
+  Rendered layout layouts/application.html.erb (Duration: 149.1ms | Allocations: 21537)
+Completed 200 OK in 176ms (Views: 167.9ms | ActiveRecord: 0.0ms | Allocations: 23212)
+
+
+Started GET "/users/sign_in" for ::1 at 2024-03-17 06:37:08 -0400
+Processing by Devise::SessionsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering devise/sessions/new.html.erb within layouts/application
+  Rendered devise/shared/_links.html.erb (Duration: 1.6ms | Allocations: 539)
+  Rendered devise/sessions/new.html.erb within layouts/application (Duration: 13.0ms | Allocations: 1944)
+  Rendered layout layouts/application.html.erb (Duration: 28.6ms | Allocations: 3193)
+Completed 200 OK in 896ms (Views: 37.1ms | ActiveRecord: 256.7ms | Allocations: 12013)
+
+
+Started GET "/users/sign_iup" for ::1 at 2024-03-17 06:37:18 -0400
+  
+ActionController::RoutingError (No route matches [GET] "/users/sign_iup"):
+  
+Started GET "/users/sign_up" for ::1 at 2024-03-17 06:37:22 -0400
+Processing by Users::RegistrationsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering devise/registrations/new.html.erb within layouts/application
+  Rendered devise/shared/_error_messages.html.erb (Duration: 5.4ms | Allocations: 205)
+  Rendered devise/registrations/new.html.erb within layouts/application (Duration: 25.0ms | Allocations: 6840)
+  Rendered layout layouts/application.html.erb (Duration: 25.5ms | Allocations: 6925)
+Completed 500 Internal Server Error in 34ms (ActiveRecord: 0.0ms | Allocations: 8282)
+
+
+  
+ActionView::Template::Error (undefined method `boolean' for #<ActionView::Helpers::FormBuilder:0x0000000114206a60 @nested_child_index={}, @options={:allow_method_names_outside_object=>false, :skip_default_ids=>false, :builder=>nil, :namespace=>nil, :parent_builder=>#<ActionView::Helpers::FormBuilder:0x00000001142376d8 @nested_child_index={}, @options={:allow_method_names_outside_object=>false, :skip_default_ids=>false, :as=>:user, :html=>{:class=>"new_user", :id=>"new_user"}, :local=>true}, @template=#<ActionView::Base:0x00000000012228>, @object=#<User id: nil, email: "", created_at: nil, updated_at: nil, first_name: nil, last_name: nil, university_id: nil>, @object_name=:user, @default_options={:skip_default_ids=>false, :allow_method_names_outside_object=>false}, @default_html_options={}, @multipart=nil, @index=nil>, :child_index=>nil}, @template=#<ActionView::Base:0x00000000012228>, @object=nil, @object_name="user[student]", @default_options={:namespace=>nil, :skip_default_ids=>false, :allow_method_names_outside_object=>false}, @default_html_options={:namespace=>nil}, @multipart=nil, @index=nil>
+
+      '.freeze; @output_buffer.append=( student_form.boolean :undergad ); @output_buffer.safe_append='
+                                                    ^^^^^^^^):
+    44: 
+    45:     <div class="field">
+    46:       <%= student_form.label :undergad %><br />
+    47:       <%= student_form.boolean :undergad %>
+    48:     </div>
+    49:   <% end %>
+    50: 
+  
+app/views/devise/registrations/new.html.erb:47
+app/views/devise/registrations/new.html.erb:39
+app/views/devise/registrations/new.html.erb:3
+Started GET "/users/sign_up" for ::1 at 2024-03-17 06:37:33 -0400
+Processing by Users::RegistrationsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering devise/registrations/new.html.erb within layouts/application
+  Rendered devise/shared/_error_messages.html.erb (Duration: 1.4ms | Allocations: 199)
+  Rendered devise/shared/_links.html.erb (Duration: 1.1ms | Allocations: 486)
+  Rendered devise/registrations/new.html.erb within layouts/application (Duration: 14.8ms | Allocations: 5149)
+  Rendered layout layouts/application.html.erb (Duration: 23.6ms | Allocations: 6405)
+Completed 200 OK in 268ms (Views: 30.2ms | ActiveRecord: 142.4ms | Allocations: 13076)
+
+
+Started GET "/users/sign_up" for ::1 at 2024-03-17 06:38:48 -0400
+Processing by Users::RegistrationsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering devise/registrations/new.html.erb within layouts/application
+  Rendered devise/shared/_error_messages.html.erb (Duration: 3.8ms | Allocations: 199)
+  Rendered devise/shared/_links.html.erb (Duration: 11.7ms | Allocations: 485)
+  Rendered devise/registrations/new.html.erb within layouts/application (Duration: 44.0ms | Allocations: 5165)
+  Rendered layout layouts/application.html.erb (Duration: 343.0ms | Allocations: 6414)
+Completed 200 OK in 546ms (Views: 373.5ms | ActiveRecord: 94.7ms | Allocations: 13010)
+
+
+Started GET "/users/sign_up" for ::1 at 2024-03-17 06:39:12 -0400
+Processing by Users::RegistrationsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering devise/registrations/new.html.erb within layouts/application
+  Rendered devise/shared/_error_messages.html.erb (Duration: 1.3ms | Allocations: 199)
+  Rendered devise/shared/_links.html.erb (Duration: 6.8ms | Allocations: 485)
+  Rendered devise/registrations/new.html.erb within layouts/application (Duration: 23.5ms | Allocations: 5170)
+  Rendered layout layouts/application.html.erb (Duration: 32.3ms | Allocations: 6426)
+Completed 200 OK in 192ms (Views: 44.9ms | ActiveRecord: 95.1ms | Allocations: 13047)
+
+
+DEPRECATION WARNING: `Rails.application.secrets` is deprecated in favor of `Rails.application.credentials` and will be removed in Rails 7.2. (called from <main> at /Users/apple/repos/UniversityCourseRegistration/config/environment.rb:5)
+  [1m[36mStudent Load (35.7ms)[0m  [1m[34mSELECT "students".* FROM "students" ORDER BY "students"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[36mUser Load (31.8ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" DESC LIMIT $1[0m  [["LIMIT", 1]]
+Started GET "/users/sign_up" for ::1 at 2024-03-17 06:52:32 -0400
+Processing by Users::RegistrationsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering devise/registrations/new.html.erb within layouts/application
+  Rendered devise/shared/_error_messages.html.erb (Duration: 2.3ms | Allocations: 199)
+  Rendered devise/shared/_links.html.erb (Duration: 1.5ms | Allocations: 530)
+  Rendered devise/registrations/new.html.erb within layouts/application (Duration: 77.0ms | Allocations: 6368)
+  Rendered layout layouts/application.html.erb (Duration: 81.4ms | Allocations: 7635)
+Completed 200 OK in 758ms (Views: 59.5ms | ActiveRecord: 280.2ms | Allocations: 16659)
+
+
+Started POST "/users" for ::1 at 2024-03-17 06:52:53 -0400
+Processing by Users::RegistrationsController#create as HTML
+  Parameters: {"authenticity_token"=>"[FILTERED]", "user"=>{"email"=>"a@b.com", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "first_name"=>"a", "last_name"=>"a", "university_id"=>"22"}, "commit"=>"Sign up"}
+  [1m[36mTRANSACTION (26.5ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/users/registrations_controller.rb:6:in `create'
+  [1m[36mUser Exists? (58.6ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "a@b.com"], ["LIMIT", 1]]
+  ↳ app/controllers/users/registrations_controller.rb:6:in `create'
+  [1m[36mUser Create (28.0ms)[0m  [1m[32mINSERT INTO "users" ("email", "encrypted_password", "reset_password_token", "reset_password_sent_at", "remember_created_at", "created_at", "updated_at", "first_name", "last_name", "university_id") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING "id"[0m  [["email", "a@b.com"], ["encrypted_password", "[FILTERED]"], ["reset_password_token", "[FILTERED]"], ["reset_password_sent_at", "[FILTERED]"], ["remember_created_at", nil], ["created_at", "2024-03-17 10:52:53.758958"], ["updated_at", "2024-03-17 10:52:53.758958"], ["first_name", "a"], ["last_name", "a"], ["university_id", "22"]]
+  ↳ app/controllers/users/registrations_controller.rb:6:in `create'
+  [1m[36mTRANSACTION (28.6ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/users/registrations_controller.rb:6:in `create'
+Redirected to http://localhost:3000/
+Completed 303 See Other in 500ms (ActiveRecord: 141.4ms | Allocations: 7650)
+
+
+Started GET "/" for ::1 at 2024-03-17 06:52:53 -0400
+Processing by Rails::WelcomeController#index as HTML
+  Rendering /Users/apple/.rbenv/versions/3.1.2/lib/ruby/gems/3.1.0/gems/railties-7.1.3/lib/rails/templates/rails/welcome/index.html.erb
+  Rendered /Users/apple/.rbenv/versions/3.1.2/lib/ruby/gems/3.1.0/gems/railties-7.1.3/lib/rails/templates/rails/welcome/index.html.erb (Duration: 1.0ms | Allocations: 285)
+Completed 200 OK in 6ms (Views: 2.5ms | ActiveRecord: 0.0ms | Allocations: 969)
+
+
+  [1m[36mStudent Load (25.8ms)[0m  [1m[34mSELECT "students".* FROM "students" ORDER BY "students"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+DEPRECATION WARNING: `Rails.application.secrets` is deprecated in favor of `Rails.application.credentials` and will be removed in Rails 7.2. (called from <main> at /Users/apple/repos/UniversityCourseRegistration/config/environment.rb:5)
+Started GET "/users" for ::1 at 2024-03-17 06:54:23 -0400
+  [1m[36mActiveRecord::SchemaMigration Load (30.9ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  
+ActionController::RoutingError (No route matches [GET] "/users"):
+  
+Started GET "/users" for ::1 at 2024-03-17 06:54:25 -0400
+  
+ActionController::RoutingError (No route matches [GET] "/users"):
+  
+Started GET "/users/sign_out" for ::1 at 2024-03-17 06:54:28 -0400
+Processing by Devise::SessionsController#destroy as HTML
+  [1m[36mUser Load (31.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+Redirected to http://localhost:3000/
+Completed 303 See Other in 875ms (ActiveRecord: 447.2ms | Allocations: 26259)
+
+
+Started GET "/" for ::1 at 2024-03-17 06:54:29 -0400
+Processing by Rails::WelcomeController#index as HTML
+  Rendering /Users/apple/.rbenv/versions/3.1.2/lib/ruby/gems/3.1.0/gems/railties-7.1.3/lib/rails/templates/rails/welcome/index.html.erb
+  Rendered /Users/apple/.rbenv/versions/3.1.2/lib/ruby/gems/3.1.0/gems/railties-7.1.3/lib/rails/templates/rails/welcome/index.html.erb (Duration: 2.1ms | Allocations: 294)
+Completed 200 OK in 10ms (Views: 7.2ms | ActiveRecord: 0.0ms | Allocations: 1300)
+
+
+Started GET "/" for ::1 at 2024-03-17 06:54:31 -0400
+Processing by Rails::WelcomeController#index as HTML
+  Rendering /Users/apple/.rbenv/versions/3.1.2/lib/ruby/gems/3.1.0/gems/railties-7.1.3/lib/rails/templates/rails/welcome/index.html.erb
+  Rendered /Users/apple/.rbenv/versions/3.1.2/lib/ruby/gems/3.1.0/gems/railties-7.1.3/lib/rails/templates/rails/welcome/index.html.erb (Duration: 0.2ms | Allocations: 15)
+Completed 200 OK in 3ms (Views: 2.2ms | ActiveRecord: 0.0ms | Allocations: 235)
+
+
+Started GET "/users" for ::1 at 2024-03-17 06:54:33 -0400
+  
+ActionController::RoutingError (No route matches [GET] "/users"):
+  
+Started GET "/users/sign_iup" for ::1 at 2024-03-17 06:54:39 -0400
+  
+ActionController::RoutingError (No route matches [GET] "/users/sign_iup"):
+  
+Started GET "/users/sign_up" for ::1 at 2024-03-17 06:54:43 -0400
+Processing by Users::RegistrationsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering devise/registrations/new.html.erb within layouts/application
+  Rendered devise/shared/_error_messages.html.erb (Duration: 1.4ms | Allocations: 240)
+  Rendered devise/shared/_links.html.erb (Duration: 1.9ms | Allocations: 549)
+  Rendered devise/registrations/new.html.erb within layouts/application (Duration: 119.0ms | Allocations: 7824)
+  Rendered layout layouts/application.html.erb (Duration: 203.4ms | Allocations: 26011)
+Completed 200 OK in 220ms (Views: 163.1ms | ActiveRecord: 53.5ms | Allocations: 28013)
+
+
+Started POST "/users" for ::1 at 2024-03-17 06:55:04 -0400
+Processing by Users::RegistrationsController#create as HTML
+  Parameters: {"authenticity_token"=>"[FILTERED]", "user"=>{"email"=>"b@b.com", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "first_name"=>"1", "last_name"=>"2", "university_id"=>"5bv5"}, "commit"=>"Sign up"}
+  [1m[36mTRANSACTION (26.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/users/registrations_controller.rb:6:in `create'
+  [1m[36mUser Exists? (60.4ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "b@b.com"], ["LIMIT", 1]]
+  ↳ app/controllers/users/registrations_controller.rb:6:in `create'
+  [1m[36mUser Create (26.7ms)[0m  [1m[32mINSERT INTO "users" ("email", "encrypted_password", "reset_password_token", "reset_password_sent_at", "remember_created_at", "created_at", "updated_at", "first_name", "last_name", "university_id") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING "id"[0m  [["email", "b@b.com"], ["encrypted_password", "[FILTERED]"], ["reset_password_token", "[FILTERED]"], ["reset_password_sent_at", "[FILTERED]"], ["remember_created_at", nil], ["created_at", "2024-03-17 10:55:05.009167"], ["updated_at", "2024-03-17 10:55:05.009167"], ["first_name", "1"], ["last_name", "2"], ["university_id", "5bv5"]]
+  ↳ app/controllers/users/registrations_controller.rb:6:in `create'
+  [1m[36mTRANSACTION (28.2ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/users/registrations_controller.rb:6:in `create'
+Redirected to http://localhost:3000/
+Completed 303 See Other in 651ms (ActiveRecord: 141.4ms | Allocations: 7657)
+
+
+Started GET "/" for ::1 at 2024-03-17 06:55:05 -0400
+Processing by Rails::WelcomeController#index as HTML
+  Rendering /Users/apple/.rbenv/versions/3.1.2/lib/ruby/gems/3.1.0/gems/railties-7.1.3/lib/rails/templates/rails/welcome/index.html.erb
+  Rendered /Users/apple/.rbenv/versions/3.1.2/lib/ruby/gems/3.1.0/gems/railties-7.1.3/lib/rails/templates/rails/welcome/index.html.erb (Duration: 0.4ms | Allocations: 24)
+Completed 200 OK in 4ms (Views: 2.1ms | ActiveRecord: 0.0ms | Allocations: 243)
+
+
+Started GET "/" for ::1 at 2024-03-17 06:59:00 -0400
+Processing by Rails::WelcomeController#index as HTML
+  Rendering /Users/apple/.rbenv/versions/3.1.2/lib/ruby/gems/3.1.0/gems/railties-7.1.3/lib/rails/templates/rails/welcome/index.html.erb
+  Rendered /Users/apple/.rbenv/versions/3.1.2/lib/ruby/gems/3.1.0/gems/railties-7.1.3/lib/rails/templates/rails/welcome/index.html.erb (Duration: 0.1ms | Allocations: 15)
+Completed 200 OK in 3ms (Views: 0.6ms | ActiveRecord: 0.0ms | Allocations: 207)
+
+
+Started GET "/users" for ::1 at 2024-03-17 06:59:01 -0400
+  
+ActionController::RoutingError (No route matches [GET] "/users"):
+  
+Started GET "/users/sign_up" for ::1 at 2024-03-17 06:59:02 -0400
+Processing by Users::RegistrationsController#new as HTML
+  [1m[36mUser Load (30.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+Redirected to http://localhost:3000/
+Filter chain halted as :require_no_authentication rendered or redirected
+Completed 302 Found in 64ms (ActiveRecord: 30.6ms | Allocations: 1734)
+
+
+Started GET "/" for ::1 at 2024-03-17 06:59:02 -0400
+Processing by Rails::WelcomeController#index as HTML
+  Rendering /Users/apple/.rbenv/versions/3.1.2/lib/ruby/gems/3.1.0/gems/railties-7.1.3/lib/rails/templates/rails/welcome/index.html.erb
+  Rendered /Users/apple/.rbenv/versions/3.1.2/lib/ruby/gems/3.1.0/gems/railties-7.1.3/lib/rails/templates/rails/welcome/index.html.erb (Duration: 0.1ms | Allocations: 15)
+Completed 200 OK in 1ms (Views: 0.7ms | ActiveRecord: 0.0ms | Allocations: 208)
+
+
+Started GET "/users/sign_out" for ::1 at 2024-03-17 06:59:05 -0400
+Processing by Devise::SessionsController#destroy as HTML
+  [1m[36mUser Load (30.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+Redirected to http://localhost:3000/
+Completed 303 See Other in 66ms (ActiveRecord: 30.2ms | Allocations: 1863)
+
+
+Started GET "/" for ::1 at 2024-03-17 06:59:05 -0400
+Processing by Rails::WelcomeController#index as HTML
+  Rendering /Users/apple/.rbenv/versions/3.1.2/lib/ruby/gems/3.1.0/gems/railties-7.1.3/lib/rails/templates/rails/welcome/index.html.erb
+  Rendered /Users/apple/.rbenv/versions/3.1.2/lib/ruby/gems/3.1.0/gems/railties-7.1.3/lib/rails/templates/rails/welcome/index.html.erb (Duration: 0.1ms | Allocations: 15)
+Completed 200 OK in 2ms (Views: 1.3ms | ActiveRecord: 0.0ms | Allocations: 207)
+
+
+Started GET "/" for ::1 at 2024-03-17 06:59:07 -0400
+Processing by Rails::WelcomeController#index as HTML
+  Rendering /Users/apple/.rbenv/versions/3.1.2/lib/ruby/gems/3.1.0/gems/railties-7.1.3/lib/rails/templates/rails/welcome/index.html.erb
+  Rendered /Users/apple/.rbenv/versions/3.1.2/lib/ruby/gems/3.1.0/gems/railties-7.1.3/lib/rails/templates/rails/welcome/index.html.erb (Duration: 0.1ms | Allocations: 15)
+Completed 200 OK in 4ms (Views: 2.0ms | ActiveRecord: 0.0ms | Allocations: 207)
+
+
+Started GET "/users" for ::1 at 2024-03-17 06:59:08 -0400
+  
+ActionController::RoutingError (No route matches [GET] "/users"):
+  
+Started GET "/users/sign_up" for ::1 at 2024-03-17 06:59:09 -0400
+Processing by Users::RegistrationsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering devise/registrations/new.html.erb within layouts/application
+  Rendered devise/shared/_error_messages.html.erb (Duration: 0.1ms | Allocations: 13)
+  Rendered devise/shared/_links.html.erb (Duration: 0.3ms | Allocations: 72)
+  Rendered devise/registrations/new.html.erb within layouts/application (Duration: 8.7ms | Allocations: 1506)
+  Rendered layout layouts/application.html.erb (Duration: 12.8ms | Allocations: 2543)
+Completed 200 OK in 15ms (Views: 13.6ms | ActiveRecord: 0.0ms | Allocations: 3178)
+
+
+Started GET "/users/sign_up" for ::1 at 2024-03-17 06:59:30 -0400
+Processing by Users::RegistrationsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering devise/registrations/new.html.erb within layouts/application
+  Rendered devise/shared/_error_messages.html.erb (Duration: 0.7ms | Allocations: 13)
+  Rendered devise/shared/_links.html.erb (Duration: 0.4ms | Allocations: 72)
+  Rendered devise/registrations/new.html.erb within layouts/application (Duration: 6.4ms | Allocations: 1444)
+  Rendered layout layouts/application.html.erb (Duration: 16.0ms | Allocations: 2377)
+Completed 200 OK in 18ms (Views: 17.1ms | ActiveRecord: 0.0ms | Allocations: 3013)
+
+
+Started GET "/users/sign_up" for ::1 at 2024-03-17 07:02:28 -0400
+Processing by Users::RegistrationsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering devise/registrations/new.html.erb within layouts/application
+  Rendered devise/shared/_error_messages.html.erb (Duration: 2.4ms | Allocations: 199)
+  Rendered devise/shared/_links.html.erb (Duration: 18.2ms | Allocations: 546)
+  Rendered devise/registrations/new.html.erb within layouts/application (Duration: 332.2ms | Allocations: 5502)
+  Rendered layout layouts/application.html.erb (Duration: 392.4ms | Allocations: 6769)
+Completed 200 OK in 976ms (Views: 422.7ms | ActiveRecord: 439.1ms | Allocations: 13425)
+
+
+Started POST "/users" for ::1 at 2024-03-17 07:02:35 -0400
+Processing by Users::RegistrationsController#create as HTML
+  Parameters: {"authenticity_token"=>"[FILTERED]", "user"=>{"email"=>"", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "first_name"=>"", "last_name"=>"", "university_id"=>"", "student_attributes"=>{"major"=>"", "is_undergraduate"=>"1"}}, "commit"=>"Sign up"}
+  Rendering layout layouts/application.html.erb
+  Rendering devise/registrations/new.html.erb within layouts/application
+  Rendered devise/shared/_error_messages.html.erb (Duration: 1.5ms | Allocations: 823)
+  Rendered devise/shared/_links.html.erb (Duration: 0.3ms | Allocations: 73)
+  Rendered devise/registrations/new.html.erb within layouts/application (Duration: 15.8ms | Allocations: 5431)
+  Rendered layout layouts/application.html.erb (Duration: 22.7ms | Allocations: 6468)
+Completed 422 Unprocessable Entity in 439ms (Views: 24.8ms | ActiveRecord: 182.8ms | Allocations: 18457)
+
+
+Started POST "/users" for ::1 at 2024-03-17 07:06:56 -0400
+Processing by Users::RegistrationsController#create as HTML
+  Parameters: {"authenticity_token"=>"[FILTERED]", "user"=>{"email"=>"", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "first_name"=>"", "last_name"=>"", "university_id"=>"", "student_attributes"=>{"major"=>"", "is_undergraduate"=>"1"}}, "commit"=>"Sign up"}
+  Rendering layout layouts/application.html.erb
+  Rendering devise/registrations/new.html.erb within layouts/application
+  Rendered devise/shared/_error_messages.html.erb (Duration: 6.3ms | Allocations: 890)
+  Rendered devise/shared/_links.html.erb (Duration: 1.8ms | Allocations: 486)
+  Rendered devise/registrations/new.html.erb within layouts/application (Duration: 24.7ms | Allocations: 4972)
+  Rendered layout layouts/application.html.erb (Duration: 40.2ms | Allocations: 6228)
+Completed 422 Unprocessable Entity in 285ms (Views: 48.0ms | ActiveRecord: 152.9ms | Allocations: 20412)
+
+
+Started POST "/users" for ::1 at 2024-03-17 07:07:14 -0400
+Processing by Users::RegistrationsController#create as HTML
+  Parameters: {"authenticity_token"=>"[FILTERED]", "user"=>{"email"=>"", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "first_name"=>"", "last_name"=>"", "university_id"=>"", "student_attributes"=>{"major"=>"", "is_undergraduate"=>"1"}}, "commit"=>"Sign up"}
+  Rendering layout layouts/application.html.erb
+  Rendering devise/registrations/new.html.erb within layouts/application
+  Rendered devise/shared/_error_messages.html.erb (Duration: 3.1ms | Allocations: 648)
+  Rendered devise/shared/_links.html.erb (Duration: 0.4ms | Allocations: 72)
+  Rendered devise/registrations/new.html.erb within layouts/application (Duration: 59.5ms | Allocations: 3376)
+  Rendered layout layouts/application.html.erb (Duration: 61.5ms | Allocations: 4312)
+Completed 422 Unprocessable Entity in 70ms (Views: 62.9ms | ActiveRecord: 0.0ms | Allocations: 6703)
+
+
+Started POST "/users" for ::1 at 2024-03-17 07:08:19 -0400
+Processing by Users::RegistrationsController#create as HTML
+  Parameters: {"authenticity_token"=>"[FILTERED]", "user"=>{"email"=>"1@a.com", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "first_name"=>"k", "last_name"=>"k", "university_id"=>"wfjiwfnkw", "student_attributes"=>{"major"=>"a", "is_undergraduate"=>"1"}}, "commit"=>"Sign up"}
+  [1m[36mTRANSACTION (34.0ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/users/registrations_controller.rb:6:in `create'
+  [1m[36mUser Exists? (143.1ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "1@a.com"], ["LIMIT", 1]]
+  ↳ app/controllers/users/registrations_controller.rb:6:in `create'
+  [1m[36mUser Create (44.3ms)[0m  [1m[32mINSERT INTO "users" ("email", "encrypted_password", "reset_password_token", "reset_password_sent_at", "remember_created_at", "created_at", "updated_at", "first_name", "last_name", "university_id") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING "id"[0m  [["email", "1@a.com"], ["encrypted_password", "[FILTERED]"], ["reset_password_token", "[FILTERED]"], ["reset_password_sent_at", "[FILTERED]"], ["remember_created_at", nil], ["created_at", "2024-03-17 11:08:21.146413"], ["updated_at", "2024-03-17 11:08:21.146413"], ["first_name", "k"], ["last_name", "k"], ["university_id", "wfjiwfnkw"]]
+  ↳ app/controllers/users/registrations_controller.rb:6:in `create'
+  [1m[36mStudent Create (32.2ms)[0m  [1m[32mINSERT INTO "students" ("major", "is_undergraduate", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["major", "a"], ["is_undergraduate", true], ["user_id", 6], ["created_at", "2024-03-17 11:08:21.254136"], ["updated_at", "2024-03-17 11:08:21.254136"]]
+  ↳ app/controllers/users/registrations_controller.rb:6:in `create'
+  [1m[36mTRANSACTION (26.7ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/users/registrations_controller.rb:6:in `create'
+Completed 422 Unprocessable Entity in 1435ms (ActiveRecord: 427.3ms | Allocations: 16987)
+
+
+  
+ActiveRecord::RecordNotSaved (Failed to remove the existing associated student. The record failed to save after its foreign key was set to nil.):
+  
+app/controllers/users/registrations_controller.rb:8:in `block in create'
+app/controllers/users/registrations_controller.rb:6:in `create'
+  [1m[36mStudent Load (27.4ms)[0m  [1m[34mSELECT "students".* FROM "students" ORDER BY "students"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+Started POST "/users" for ::1 at 2024-03-17 07:08:52 -0400
+Processing by Users::RegistrationsController#create as HTML
+  Parameters: {"authenticity_token"=>"[FILTERED]", "user"=>{"email"=>"1@a.com", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "first_name"=>"k", "last_name"=>"k", "university_id"=>"wfjiwfnkw", "student_attributes"=>{"major"=>"a", "is_undergraduate"=>"1"}}, "commit"=>"Sign up"}
+  [1m[36mTRANSACTION (26.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/users/registrations_controller.rb:6:in `create'
+  [1m[36mUser Exists? (59.1ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "1@a.com"], ["LIMIT", 1]]
+  ↳ app/controllers/users/registrations_controller.rb:6:in `create'
+  [1m[36mTRANSACTION (28.9ms)[0m  [1m[31mROLLBACK[0m
+  ↳ app/controllers/users/registrations_controller.rb:6:in `create'
+  Rendering layout layouts/application.html.erb
+  Rendering devise/registrations/new.html.erb within layouts/application
+  Rendered devise/shared/_error_messages.html.erb (Duration: 3.2ms | Allocations: 647)
+  Rendered devise/shared/_links.html.erb (Duration: 3.1ms | Allocations: 486)
+  Rendered devise/registrations/new.html.erb within layouts/application (Duration: 21.8ms | Allocations: 4223)
+  Rendered layout layouts/application.html.erb (Duration: 32.2ms | Allocations: 5479)
+Completed 422 Unprocessable Entity in 647ms (Views: 44.1ms | ActiveRecord: 269.6ms | Allocations: 22053)
+
+
+Started GET "/users/sign_up" for ::1 at 2024-03-17 07:09:01 -0400
+Processing by Users::RegistrationsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering devise/registrations/new.html.erb within layouts/application
+  Rendered devise/shared/_error_messages.html.erb (Duration: 0.0ms | Allocations: 14)
+  Rendered devise/shared/_links.html.erb (Duration: 0.3ms | Allocations: 72)
+  Rendered devise/registrations/new.html.erb within layouts/application (Duration: 10.4ms | Allocations: 1457)
+  Rendered layout layouts/application.html.erb (Duration: 30.3ms | Allocations: 2394)
+Completed 200 OK in 36ms (Views: 31.5ms | ActiveRecord: 0.0ms | Allocations: 3121)
+
+
+Started GET "/users/sign_up" for ::1 at 2024-03-17 07:09:23 -0400
+Processing by Users::RegistrationsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering devise/registrations/new.html.erb within layouts/application
+  Rendered devise/shared/_error_messages.html.erb (Duration: 0.1ms | Allocations: 13)
+  Rendered devise/shared/_links.html.erb (Duration: 0.2ms | Allocations: 72)
+  Rendered devise/registrations/new.html.erb within layouts/application (Duration: 4.9ms | Allocations: 1444)
+  Rendered layout layouts/application.html.erb (Duration: 12.8ms | Allocations: 2378)
+Completed 200 OK in 15ms (Views: 13.9ms | ActiveRecord: 0.0ms | Allocations: 2999)
+
+
+Started GET "/users/sign_out" for ::1 at 2024-03-17 07:09:39 -0400
+Processing by Devise::SessionsController#destroy as HTML
+Redirected to http://localhost:3000/
+Filter chain halted as :verify_signed_out_user rendered or redirected
+Completed 303 See Other in 1ms (ActiveRecord: 0.0ms | Allocations: 740)
+
+
+Started GET "/" for ::1 at 2024-03-17 07:09:39 -0400
+Processing by Rails::WelcomeController#index as HTML
+  Rendering /Users/apple/.rbenv/versions/3.1.2/lib/ruby/gems/3.1.0/gems/railties-7.1.3/lib/rails/templates/rails/welcome/index.html.erb
+  Rendered /Users/apple/.rbenv/versions/3.1.2/lib/ruby/gems/3.1.0/gems/railties-7.1.3/lib/rails/templates/rails/welcome/index.html.erb (Duration: 9.3ms | Allocations: 286)
+Completed 200 OK in 17ms (Views: 14.1ms | ActiveRecord: 0.0ms | Allocations: 996)
+
+
+Started GET "/users/sign_up" for ::1 at 2024-03-17 07:09:47 -0400
+Processing by Users::RegistrationsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering devise/registrations/new.html.erb within layouts/application
+  Rendered devise/shared/_error_messages.html.erb (Duration: 0.1ms | Allocations: 14)
+  Rendered devise/shared/_links.html.erb (Duration: 0.3ms | Allocations: 74)
+  Rendered devise/registrations/new.html.erb within layouts/application (Duration: 12.6ms | Allocations: 1565)
+  Rendered layout layouts/application.html.erb (Duration: 17.6ms | Allocations: 2602)
+Completed 200 OK in 23ms (Views: 19.8ms | ActiveRecord: 0.0ms | Allocations: 3364)
+
+
+Started GET "/users/sign_in" for ::1 at 2024-03-17 07:10:44 -0400
+Processing by Devise::SessionsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering devise/sessions/new.html.erb within layouts/application
+  Rendered devise/shared/_links.html.erb (Duration: 0.3ms | Allocations: 141)
+  Rendered devise/sessions/new.html.erb within layouts/application (Duration: 3.4ms | Allocations: 1300)
+  Rendered layout layouts/application.html.erb (Duration: 6.9ms | Allocations: 2232)
+Completed 200 OK in 14ms (Views: 10.8ms | ActiveRecord: 0.0ms | Allocations: 3110)
+
+
+Started GET "/users/sign_up" for ::1 at 2024-03-17 07:10:46 -0400
+Processing by Users::RegistrationsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering devise/registrations/new.html.erb within layouts/application
+  Rendered devise/shared/_error_messages.html.erb (Duration: 0.1ms | Allocations: 13)
+  Rendered devise/shared/_links.html.erb (Duration: 0.7ms | Allocations: 72)
+  Rendered devise/registrations/new.html.erb within layouts/application (Duration: 8.9ms | Allocations: 1444)
+  Rendered layout layouts/application.html.erb (Duration: 18.0ms | Allocations: 2377)
+Completed 200 OK in 20ms (Views: 18.8ms | ActiveRecord: 0.0ms | Allocations: 3040)
+
+
+Started GET "/users/sign_up" for ::1 at 2024-03-17 07:11:00 -0400
+Processing by Users::RegistrationsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering devise/registrations/new.html.erb within layouts/application
+  Rendered devise/shared/_error_messages.html.erb (Duration: 3.2ms | Allocations: 199)
+  Rendered devise/shared/_links.html.erb (Duration: 1.5ms | Allocations: 530)
+  Rendered devise/registrations/new.html.erb within layouts/application (Duration: 57.3ms | Allocations: 5211)
+  Rendered layout layouts/application.html.erb (Duration: 60.1ms | Allocations: 6474)
+Completed 200 OK in 197ms (Views: 36.7ms | ActiveRecord: 120.8ms | Allocations: 13134)
+
+
+DEPRECATION WARNING: `Rails.application.secrets` is deprecated in favor of `Rails.application.credentials` and will be removed in Rails 7.2. (called from <main> at /Users/apple/repos/UniversityCourseRegistration/config/environment.rb:5)
+Started GET "/users/sign_up" for ::1 at 2024-03-17 07:11:18 -0400
+  [1m[36mActiveRecord::SchemaMigration Load (31.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by Users::RegistrationsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering devise/registrations/new.html.erb within layouts/application
+  Rendered devise/shared/_error_messages.html.erb (Duration: 0.7ms | Allocations: 248)
+  Rendered devise/shared/_links.html.erb (Duration: 2.1ms | Allocations: 549)
+  Rendered devise/registrations/new.html.erb within layouts/application (Duration: 84.9ms | Allocations: 8183)
+  Rendered layout layouts/application.html.erb (Duration: 156.4ms | Allocations: 25705)
+Completed 200 OK in 992ms (Views: 174.6ms | ActiveRecord: 437.7ms | Allocations: 51302)
+
+
+Started GET "/users/sign_up" for ::1 at 2024-03-17 07:11:27 -0400
+Processing by Users::RegistrationsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering devise/registrations/new.html.erb within layouts/application
+  Rendered devise/shared/_error_messages.html.erb (Duration: 3.2ms | Allocations: 199)
+  Rendered devise/shared/_links.html.erb (Duration: 5.9ms | Allocations: 530)
+  Rendered devise/registrations/new.html.erb within layouts/application (Duration: 231.4ms | Allocations: 5188)
+  Rendered layout layouts/application.html.erb (Duration: 251.3ms | Allocations: 6448)
+Completed 200 OK in 895ms (Views: 277.3ms | ActiveRecord: 331.8ms | Allocations: 13079)
+
+
+Started GET "/users/sign_up" for ::1 at 2024-03-17 07:11:36 -0400
+Processing by Users::RegistrationsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering devise/registrations/new.html.erb within layouts/application
+  Rendered devise/shared/_error_messages.html.erb (Duration: 0.5ms | Allocations: 199)
+  Rendered devise/shared/_links.html.erb (Duration: 1.0ms | Allocations: 530)
+  Rendered devise/registrations/new.html.erb within layouts/application (Duration: 44.5ms | Allocations: 5184)
+  Rendered layout layouts/application.html.erb (Duration: 48.5ms | Allocations: 6444)
+Completed 200 OK in 192ms (Views: 24.1ms | ActiveRecord: 121.8ms | Allocations: 13034)
+
+
+Started GET "/users/sign_up" for ::1 at 2024-03-17 07:11:49 -0400
+Processing by Users::RegistrationsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering devise/registrations/new.html.erb within layouts/application
+  Rendered devise/shared/_error_messages.html.erb (Duration: 0.6ms | Allocations: 199)
+  Rendered devise/shared/_links.html.erb (Duration: 4.8ms | Allocations: 530)
+  Rendered devise/registrations/new.html.erb within layouts/application (Duration: 71.1ms | Allocations: 5214)
+  Rendered layout layouts/application.html.erb (Duration: 78.6ms | Allocations: 6481)
+Completed 200 OK in 221ms (Views: 56.2ms | ActiveRecord: 124.9ms | Allocations: 13169)
+
+
+Started GET "/users/sign_up" for ::1 at 2024-03-17 07:11:57 -0400
+Processing by Users::RegistrationsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering devise/registrations/new.html.erb within layouts/application
+  Rendered devise/shared/_error_messages.html.erb (Duration: 0.8ms | Allocations: 199)
+  Rendered devise/shared/_links.html.erb (Duration: 1.7ms | Allocations: 530)
+  Rendered devise/registrations/new.html.erb within layouts/application (Duration: 46.7ms | Allocations: 5184)
+  Rendered layout layouts/application.html.erb (Duration: 53.1ms | Allocations: 6444)
+Completed 200 OK in 265ms (Views: 34.4ms | ActiveRecord: 181.4ms | Allocations: 13045)
+
+
+Started GET "/users/sign_up" for ::1 at 2024-03-17 07:12:27 -0400
+Processing by Users::RegistrationsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering devise/registrations/new.html.erb within layouts/application
+  Rendered devise/shared/_error_messages.html.erb (Duration: 0.7ms | Allocations: 199)
+  Rendered devise/shared/_links.html.erb (Duration: 3.1ms | Allocations: 485)
+  Rendered devise/registrations/new.html.erb within layouts/application (Duration: 16.6ms | Allocations: 2654)
+  Rendered layout layouts/application.html.erb (Duration: 26.9ms | Allocations: 3918)
+Completed 200 OK in 206ms (Views: 33.4ms | ActiveRecord: 94.9ms | Allocations: 10544)
+
+
+Started GET "/users/sign_up" for ::1 at 2024-03-17 07:12:31 -0400
+Processing by Users::RegistrationsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering devise/registrations/new.html.erb within layouts/application
+  Rendered devise/shared/_error_messages.html.erb (Duration: 1.0ms | Allocations: 199)
+  Rendered devise/shared/_links.html.erb (Duration: 1.1ms | Allocations: 530)
+  Rendered devise/registrations/new.html.erb within layouts/application (Duration: 54.5ms | Allocations: 5210)
+  Rendered layout layouts/application.html.erb (Duration: 57.9ms | Allocations: 6477)
+Completed 200 OK in 210ms (Views: 34.0ms | ActiveRecord: 125.3ms | Allocations: 13080)
+
+
+  [1m[36mStudent Load (28.3ms)[0m  [1m[34mSELECT "students".* FROM "students" ORDER BY "students"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[36mStudent Load (29.6ms)[0m  [1m[34mSELECT "students".* FROM "students" ORDER BY "students"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[36mStudent Destroy (30.0ms)[0m  [1m[31mDELETE FROM "students" WHERE "students"."id" = $1[0m  [["id", 1]]
+  [1m[36mStudent Load (30.3ms)[0m  [1m[34mSELECT "students".* FROM "students" ORDER BY "students"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+Started GET "/users/sign_up" for ::1 at 2024-03-17 07:13:14 -0400
+Processing by Users::RegistrationsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering devise/registrations/new.html.erb within layouts/application
+  Rendered devise/shared/_error_messages.html.erb (Duration: 0.0ms | Allocations: 14)
+  Rendered devise/shared/_links.html.erb (Duration: 1.1ms | Allocations: 72)
+  Rendered devise/registrations/new.html.erb within layouts/application (Duration: 9.4ms | Allocations: 1499)
+  Rendered layout layouts/application.html.erb (Duration: 12.4ms | Allocations: 2433)
+Completed 200 OK in 14ms (Views: 13.1ms | ActiveRecord: 0.0ms | Allocations: 3196)
+
+
+Started GET "/users/sign_up" for ::1 at 2024-03-17 07:13:17 -0400
+Processing by Users::RegistrationsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering devise/registrations/new.html.erb within layouts/application
+  Rendered devise/shared/_error_messages.html.erb (Duration: 0.0ms | Allocations: 13)
+  Rendered devise/shared/_links.html.erb (Duration: 0.2ms | Allocations: 72)
+  Rendered devise/registrations/new.html.erb within layouts/application (Duration: 2.8ms | Allocations: 1444)
+  Rendered layout layouts/application.html.erb (Duration: 5.6ms | Allocations: 2377)
+Completed 200 OK in 7ms (Views: 6.3ms | ActiveRecord: 0.0ms | Allocations: 3008)
+
+
+Started GET "/users/sign_up" for ::1 at 2024-03-17 07:13:18 -0400
+Processing by Users::RegistrationsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering devise/registrations/new.html.erb within layouts/application
+  Rendered devise/shared/_error_messages.html.erb (Duration: 0.0ms | Allocations: 13)
+  Rendered devise/shared/_links.html.erb (Duration: 0.2ms | Allocations: 72)
+  Rendered devise/registrations/new.html.erb within layouts/application (Duration: 3.0ms | Allocations: 1444)
+  Rendered layout layouts/application.html.erb (Duration: 6.2ms | Allocations: 2377)
+Completed 200 OK in 8ms (Views: 7.2ms | ActiveRecord: 0.0ms | Allocations: 2996)
+
+
+Started GET "/users/sign_out" for ::1 at 2024-03-17 07:13:39 -0400
+Processing by Devise::SessionsController#destroy as HTML
+Redirected to http://localhost:3000/
+Filter chain halted as :verify_signed_out_user rendered or redirected
+Completed 303 See Other in 3ms (ActiveRecord: 0.0ms | Allocations: 927)
+
+
+Started GET "/" for ::1 at 2024-03-17 07:13:39 -0400
+Processing by Rails::WelcomeController#index as HTML
+  Rendering /Users/apple/.rbenv/versions/3.1.2/lib/ruby/gems/3.1.0/gems/railties-7.1.3/lib/rails/templates/rails/welcome/index.html.erb
+  Rendered /Users/apple/.rbenv/versions/3.1.2/lib/ruby/gems/3.1.0/gems/railties-7.1.3/lib/rails/templates/rails/welcome/index.html.erb (Duration: 1.5ms | Allocations: 292)
+Completed 200 OK in 6ms (Views: 3.7ms | ActiveRecord: 0.0ms | Allocations: 1177)
+
+
+Started GET "/users/sign_up" for ::1 at 2024-03-17 07:13:45 -0400
+Processing by Users::RegistrationsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering devise/registrations/new.html.erb within layouts/application
+  Rendered devise/shared/_error_messages.html.erb (Duration: 0.1ms | Allocations: 14)
+  Rendered devise/shared/_links.html.erb (Duration: 0.3ms | Allocations: 74)
+  Rendered devise/registrations/new.html.erb within layouts/application (Duration: 10.2ms | Allocations: 1565)
+  Rendered layout layouts/application.html.erb (Duration: 12.6ms | Allocations: 2602)
+Completed 200 OK in 14ms (Views: 13.3ms | ActiveRecord: 0.0ms | Allocations: 3363)
+
+
+Started GET "/users/sign_in" for ::1 at 2024-03-17 07:13:57 -0400
+Processing by Devise::SessionsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering devise/sessions/new.html.erb within layouts/application
+  Rendered devise/shared/_links.html.erb (Duration: 1.9ms | Allocations: 160)
+  Rendered devise/sessions/new.html.erb within layouts/application (Duration: 17.0ms | Allocations: 1736)
+  Rendered layout layouts/application.html.erb (Duration: 20.7ms | Allocations: 2779)
+Completed 200 OK in 30ms (Views: 25.2ms | ActiveRecord: 0.0ms | Allocations: 3914)
+
+
+Started GET "/users/sign_in" for ::1 at 2024-03-17 07:14:50 -0400
+Processing by Devise::SessionsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering devise/sessions/new.html.erb within layouts/application
+  Rendered devise/shared/_links.html.erb (Duration: 1.4ms | Allocations: 539)
+  Rendered devise/sessions/new.html.erb within layouts/application (Duration: 4.3ms | Allocations: 1946)
+  Rendered layout layouts/application.html.erb (Duration: 7.8ms | Allocations: 3202)
+Completed 200 OK in 154ms (Views: 13.3ms | ActiveRecord: 98.2ms | Allocations: 9666)
+
+
+Started GET "/users/sign_up" for ::1 at 2024-03-17 07:14:54 -0400
+Processing by Users::RegistrationsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering devise/registrations/new.html.erb within layouts/application
+  Rendered devise/shared/_error_messages.html.erb (Duration: 0.6ms | Allocations: 197)
+  Rendered devise/shared/_links.html.erb (Duration: 0.9ms | Allocations: 106)
+  Rendered devise/registrations/new.html.erb within layouts/application (Duration: 70.5ms | Allocations: 4711)
+  Rendered layout layouts/application.html.erb (Duration: 74.6ms | Allocations: 5762)
+Completed 200 OK in 80ms (Views: 24.7ms | ActiveRecord: 54.3ms | Allocations: 7165)
+
+
+DEPRECATION WARNING: `Rails.application.secrets` is deprecated in favor of `Rails.application.credentials` and will be removed in Rails 7.2. (called from <main> at /Users/apple/repos/UniversityCourseRegistration/config/environment.rb:5)
+Started GET "/users/sign_up" for ::1 at 2024-03-17 07:15:58 -0400
+  [1m[36mActiveRecord::SchemaMigration Load (29.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by Users::RegistrationsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering devise/registrations/new.html.erb within layouts/application
+  Rendered devise/shared/_error_messages.html.erb (Duration: 1.5ms | Allocations: 248)
+  Rendered devise/shared/_links.html.erb (Duration: 1.7ms | Allocations: 549)
+  Rendered devise/registrations/new.html.erb within layouts/application (Duration: 116.6ms | Allocations: 8308)
+  Rendered layout layouts/application.html.erb (Duration: 198.3ms | Allocations: 25770)
+Completed 200 OK in 1134ms (Views: 213.8ms | ActiveRecord: 481.8ms | Allocations: 51364)
+
+
+  [1m[36mUser Load (27.8ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" DESC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[36mUser Destroy (32.1ms)[0m  [1m[31mDELETE FROM "users" WHERE "users"."id" = $1[0m  [["id", 6]]
+Started GET "/users/sign_up" for ::1 at 2024-03-17 07:16:53 -0400
+Processing by Users::RegistrationsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering devise/registrations/new.html.erb within layouts/application
+  Rendered devise/shared/_error_messages.html.erb (Duration: 0.0ms | Allocations: 16)
+  Rendered devise/shared/_links.html.erb (Duration: 0.2ms | Allocations: 73)
+  Rendered devise/registrations/new.html.erb within layouts/application (Duration: 3.8ms | Allocations: 1615)
+  Rendered layout layouts/application.html.erb (Duration: 8.3ms | Allocations: 2654)
+Completed 200 OK in 10ms (Views: 9.0ms | ActiveRecord: 0.0ms | Allocations: 3443)
+
+
+Started GET "/users/sign_up" for ::1 at 2024-03-17 07:16:55 -0400
+Processing by Users::RegistrationsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering devise/registrations/new.html.erb within layouts/application
+  Rendered devise/shared/_error_messages.html.erb (Duration: 0.1ms | Allocations: 13)
+  Rendered devise/shared/_links.html.erb (Duration: 0.4ms | Allocations: 72)
+  Rendered devise/registrations/new.html.erb within layouts/application (Duration: 3.4ms | Allocations: 1484)
+  Rendered layout layouts/application.html.erb (Duration: 6.8ms | Allocations: 2417)
+Completed 200 OK in 8ms (Views: 7.5ms | ActiveRecord: 0.0ms | Allocations: 3050)
+
+
+Started GET "/users/sign_up" for ::1 at 2024-03-17 07:16:56 -0400
+Processing by Users::RegistrationsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering devise/registrations/new.html.erb within layouts/application
+  Rendered devise/shared/_error_messages.html.erb (Duration: 0.0ms | Allocations: 13)
+  Rendered devise/shared/_links.html.erb (Duration: 0.3ms | Allocations: 72)
+  Rendered devise/registrations/new.html.erb within layouts/application (Duration: 3.3ms | Allocations: 1484)
+  Rendered layout layouts/application.html.erb (Duration: 6.1ms | Allocations: 2417)
+Completed 200 OK in 9ms (Views: 7.7ms | ActiveRecord: 0.0ms | Allocations: 3084)
+
+
+Started GET "/users/sign_up" for ::1 at 2024-03-17 07:16:56 -0400
+Processing by Users::RegistrationsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering devise/registrations/new.html.erb within layouts/application
+  Rendered devise/shared/_error_messages.html.erb (Duration: 0.0ms | Allocations: 13)
+  Rendered devise/shared/_links.html.erb (Duration: 0.2ms | Allocations: 72)
+  Rendered devise/registrations/new.html.erb within layouts/application (Duration: 6.4ms | Allocations: 1484)
+  Rendered layout layouts/application.html.erb (Duration: 8.3ms | Allocations: 2417)
+Completed 200 OK in 10ms (Views: 8.9ms | ActiveRecord: 0.0ms | Allocations: 3080)
+
+
+Started GET "/users/sign_up" for ::1 at 2024-03-17 07:21:55 -0400
+Processing by Users::RegistrationsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering devise/registrations/new.html.erb within layouts/application
+  Rendered devise/shared/_error_messages.html.erb (Duration: 0.0ms | Allocations: 13)
+  Rendered devise/shared/_links.html.erb (Duration: 0.1ms | Allocations: 72)
+  Rendered devise/registrations/new.html.erb within layouts/application (Duration: 3.5ms | Allocations: 1484)
+  Rendered layout layouts/application.html.erb (Duration: 6.1ms | Allocations: 2417)
+Completed 200 OK in 9ms (Views: 7.5ms | ActiveRecord: 0.0ms | Allocations: 3059)
+
+
+Started GET "/users/sign_up" for ::1 at 2024-03-17 07:22:56 -0400
+Processing by Users::RegistrationsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering devise/registrations/new.html.erb within layouts/application
+  Rendered devise/shared/_error_messages.html.erb (Duration: 1.0ms | Allocations: 199)
+  Rendered devise/shared/_links.html.erb (Duration: 5.7ms | Allocations: 546)
+  Rendered devise/registrations/new.html.erb within layouts/application (Duration: 24.6ms | Allocations: 5616)
+  Rendered layout layouts/application.html.erb (Duration: 31.9ms | Allocations: 6876)
+Completed 200 OK in 688ms (Views: 37.3ms | ActiveRecord: 259.5ms | Allocations: 15852)
+
+
+Started GET "/users/sign_up" for ::1 at 2024-03-17 07:23:01 -0400
+Processing by Users::RegistrationsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering devise/registrations/new.html.erb within layouts/application
+  Rendered devise/shared/_error_messages.html.erb (Duration: 0.1ms | Allocations: 14)
+  Rendered devise/shared/_links.html.erb (Duration: 0.2ms | Allocations: 72)
+  Rendered devise/registrations/new.html.erb within layouts/application (Duration: 9.2ms | Allocations: 3764)
+  Rendered layout layouts/application.html.erb (Duration: 12.5ms | Allocations: 4698)
+Completed 200 OK in 15ms (Views: 14.1ms | ActiveRecord: 0.0ms | Allocations: 5480)
+
+
+Started POST "/users" for ::1 at 2024-03-17 07:23:41 -0400
+Processing by Users::RegistrationsController#create as HTML
+  Parameters: {"authenticity_token"=>"[FILTERED]", "user"=>{"email"=>"11@a.com", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "first_name"=>"a", "last_name"=>"a", "university_id"=>"arehrjt", "student_attributes"=>{"major"=>"a", "is_undergraduate"=>"1"}}, "commit"=>"Sign up"}
+  [1m[36mTRANSACTION (27.4ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/users/registrations_controller.rb:6:in `create'
+  [1m[36mUser Exists? (61.4ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "11@a.com"], ["LIMIT", 1]]
+  ↳ app/controllers/users/registrations_controller.rb:6:in `create'
+  [1m[36mUser Create (27.1ms)[0m  [1m[32mINSERT INTO "users" ("email", "encrypted_password", "reset_password_token", "reset_password_sent_at", "remember_created_at", "created_at", "updated_at", "first_name", "last_name", "university_id") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING "id"[0m  [["email", "11@a.com"], ["encrypted_password", "[FILTERED]"], ["reset_password_token", "[FILTERED]"], ["reset_password_sent_at", "[FILTERED]"], ["remember_created_at", nil], ["created_at", "2024-03-17 11:23:43.431094"], ["updated_at", "2024-03-17 11:23:43.431094"], ["first_name", "a"], ["last_name", "a"], ["university_id", "arehrjt"]]
+  ↳ app/controllers/users/registrations_controller.rb:6:in `create'
+  [1m[36mStudent Create (27.1ms)[0m  [1m[32mINSERT INTO "students" ("major", "is_undergraduate", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["major", "a"], ["is_undergraduate", true], ["user_id", 7], ["created_at", "2024-03-17 11:23:43.523470"], ["updated_at", "2024-03-17 11:23:43.523470"]]
+  ↳ app/controllers/users/registrations_controller.rb:6:in `create'
+  [1m[36mTRANSACTION (28.7ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/users/registrations_controller.rb:6:in `create'
+Redirected to http://localhost:3000/
+Completed 303 See Other in 2337ms (ActiveRecord: 263.6ms | Allocations: 21249)
+
+
+Started GET "/" for ::1 at 2024-03-17 07:23:43 -0400
+Processing by Rails::WelcomeController#index as HTML
+  Rendering /Users/apple/.rbenv/versions/3.1.2/lib/ruby/gems/3.1.0/gems/railties-7.1.3/lib/rails/templates/rails/welcome/index.html.erb
+  Rendered /Users/apple/.rbenv/versions/3.1.2/lib/ruby/gems/3.1.0/gems/railties-7.1.3/lib/rails/templates/rails/welcome/index.html.erb (Duration: 2.4ms | Allocations: 293)
+Completed 200 OK in 9ms (Views: 5.5ms | ActiveRecord: 0.0ms | Allocations: 1180)
+
+
+  [1m[36mStudent Load (27.8ms)[0m  [1m[34mSELECT "students".* FROM "students" ORDER BY "students"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+Started GET "/users/sign_up" for ::1 at 2024-03-17 07:24:10 -0400
+Processing by Users::RegistrationsController#new as HTML
+  [1m[36mUser Load (31.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 7], ["LIMIT", 1]]
+Redirected to http://localhost:3000/
+Filter chain halted as :require_no_authentication rendered or redirected
+Completed 302 Found in 137ms (ActiveRecord: 62.9ms | Allocations: 2325)
+
+
+Started GET "/" for ::1 at 2024-03-17 07:24:10 -0400
+Processing by Rails::WelcomeController#index as HTML
+  Rendering /Users/apple/.rbenv/versions/3.1.2/lib/ruby/gems/3.1.0/gems/railties-7.1.3/lib/rails/templates/rails/welcome/index.html.erb
+  Rendered /Users/apple/.rbenv/versions/3.1.2/lib/ruby/gems/3.1.0/gems/railties-7.1.3/lib/rails/templates/rails/welcome/index.html.erb (Duration: 0.1ms | Allocations: 15)
+Completed 200 OK in 1ms (Views: 0.9ms | ActiveRecord: 0.0ms | Allocations: 228)
+
+
+Started GET "/users/sign_out" for ::1 at 2024-03-17 07:24:14 -0400
+Processing by Devise::SessionsController#destroy as HTML
+  [1m[36mUser Load (31.8ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 7], ["LIMIT", 1]]
+Redirected to http://localhost:3000/
+Completed 303 See Other in 73ms (ActiveRecord: 31.8ms | Allocations: 2988)
+
+
+Started GET "/" for ::1 at 2024-03-17 07:24:14 -0400
+Processing by Rails::WelcomeController#index as HTML
+  Rendering /Users/apple/.rbenv/versions/3.1.2/lib/ruby/gems/3.1.0/gems/railties-7.1.3/lib/rails/templates/rails/welcome/index.html.erb
+  Rendered /Users/apple/.rbenv/versions/3.1.2/lib/ruby/gems/3.1.0/gems/railties-7.1.3/lib/rails/templates/rails/welcome/index.html.erb (Duration: 0.1ms | Allocations: 24)
+Completed 200 OK in 1ms (Views: 0.5ms | ActiveRecord: 0.0ms | Allocations: 270)
+
+
+Started GET "/users/sign_up" for ::1 at 2024-03-17 07:24:18 -0400
+Processing by Users::RegistrationsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering devise/registrations/new.html.erb within layouts/application
+  Rendered devise/shared/_error_messages.html.erb (Duration: 0.0ms | Allocations: 14)
+  Rendered devise/shared/_links.html.erb (Duration: 0.2ms | Allocations: 74)
+  Rendered devise/registrations/new.html.erb within layouts/application (Duration: 5.8ms | Allocations: 3810)
+  Rendered layout layouts/application.html.erb (Duration: 12.1ms | Allocations: 4852)
+Completed 200 OK in 18ms (Views: 14.3ms | ActiveRecord: 0.0ms | Allocations: 5556)
+
+
+Started GET "/users/sign_in" for ::1 at 2024-03-17 07:28:11 -0400
+Processing by Devise::SessionsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering devise/sessions/new.html.erb within layouts/application
+  Rendered devise/shared/_links.html.erb (Duration: 1.9ms | Allocations: 541)
+  Rendered devise/sessions/new.html.erb within layouts/application (Duration: 12.7ms | Allocations: 1988)
+  Rendered layout layouts/application.html.erb (Duration: 26.5ms | Allocations: 3237)
+Completed 200 OK in 412ms (Views: 238.9ms | ActiveRecord: 92.3ms | Allocations: 9716)
+
+
+Started POST "/users/sign_in" for ::1 at 2024-03-17 07:28:18 -0400
+Processing by Devise::SessionsController#create as HTML
+  Parameters: {"authenticity_token"=>"[FILTERED]", "user"=>{"email"=>"11@a.com", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Log in"}
+  [1m[36mUser Load (27.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["email", "11@a.com"], ["LIMIT", 1]]
+Redirected to http://localhost:3000/
+Completed 303 See Other in 458ms (ActiveRecord: 27.3ms | Allocations: 3811)
+
+
+Started GET "/" for ::1 at 2024-03-17 07:28:19 -0400
+Processing by Rails::WelcomeController#index as HTML
+  Rendering /Users/apple/.rbenv/versions/3.1.2/lib/ruby/gems/3.1.0/gems/railties-7.1.3/lib/rails/templates/rails/welcome/index.html.erb
+  Rendered /Users/apple/.rbenv/versions/3.1.2/lib/ruby/gems/3.1.0/gems/railties-7.1.3/lib/rails/templates/rails/welcome/index.html.erb (Duration: 2.0ms | Allocations: 285)
+Completed 200 OK in 9ms (Views: 4.6ms | ActiveRecord: 0.0ms | Allocations: 971)
+
+
+Started GET "/users/sign_up" for ::1 at 2024-03-17 07:28:23 -0400
+Processing by Users::RegistrationsController#new as HTML
+  [1m[36mUser Load (31.7ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 7], ["LIMIT", 1]]
+Redirected to http://localhost:3000/
+Filter chain halted as :require_no_authentication rendered or redirected
+Completed 302 Found in 75ms (ActiveRecord: 31.6ms | Allocations: 2109)
+
+
+Started GET "/" for ::1 at 2024-03-17 07:28:23 -0400
+Processing by Rails::WelcomeController#index as HTML
+  Rendering /Users/apple/.rbenv/versions/3.1.2/lib/ruby/gems/3.1.0/gems/railties-7.1.3/lib/rails/templates/rails/welcome/index.html.erb
+  Rendered /Users/apple/.rbenv/versions/3.1.2/lib/ruby/gems/3.1.0/gems/railties-7.1.3/lib/rails/templates/rails/welcome/index.html.erb (Duration: 0.1ms | Allocations: 24)
+Completed 200 OK in 1ms (Views: 0.7ms | ActiveRecord: 0.0ms | Allocations: 270)
+
+
+Started GET "/users/edit" for ::1 at 2024-03-17 07:28:26 -0400
+Processing by Users::RegistrationsController#edit as HTML
+  [1m[36mUser Load (31.9ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 7], ["LIMIT", 1]]
+  Rendering layout layouts/application.html.erb
+  Rendering devise/registrations/edit.html.erb within layouts/application
+  Rendered devise/shared/_error_messages.html.erb (Duration: 0.8ms | Allocations: 195)
+  Rendered devise/registrations/edit.html.erb within layouts/application (Duration: 12.9ms | Allocations: 2074)
+  Rendered layout layouts/application.html.erb (Duration: 17.4ms | Allocations: 3108)
+Completed 200 OK in 93ms (Views: 23.1ms | ActiveRecord: 31.8ms | Allocations: 5324)
+
+
+Started GET "/users/edit" for ::1 at 2024-03-17 07:28:43 -0400
+Processing by Users::RegistrationsController#edit as HTML
+  [1m[36mUser Load (29.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 7], ["LIMIT", 1]]
+  Rendering layout layouts/application.html.erb
+  Rendering devise/registrations/edit.html.erb within layouts/application
+  Rendered devise/shared/_error_messages.html.erb (Duration: 2.6ms | Allocations: 199)
+  Rendered devise/registrations/edit.html.erb within layouts/application (Duration: 70.7ms | Allocations: 4414)
+  Rendered layout layouts/application.html.erb (Duration: 326.4ms | Allocations: 5678)
+Completed 200 OK in 657ms (Views: 356.5ms | ActiveRecord: 148.0ms | Allocations: 13804)
+
+
+Started GET "/users/edit" for ::1 at 2024-03-17 07:29:02 -0400
+Processing by Users::RegistrationsController#edit as HTML
+  [1m[36mUser Load (29.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 7], ["LIMIT", 1]]
+  Rendering layout layouts/application.html.erb
+  Rendering devise/registrations/edit.html.erb within layouts/application
+  Rendered devise/shared/_error_messages.html.erb (Duration: 1.3ms | Allocations: 199)
+  [1m[36mStudent Load (33.1ms)[0m  [1m[34mSELECT "students".* FROM "students" WHERE "students"."user_id" = $1 LIMIT $2[0m  [["user_id", 7], ["LIMIT", 1]]
+  ↳ app/views/devise/registrations/edit.html.erb:15
+  Rendered devise/registrations/edit.html.erb within layouts/application (Duration: 170.9ms | Allocations: 10336)
+  Rendered layout layouts/application.html.erb (Duration: 177.6ms | Allocations: 11656)
+Completed 200 OK in 372ms (Views: 100.2ms | ActiveRecord: 246.9ms | Allocations: 19766)
+
+
+Started PUT "/users" for ::1 at 2024-03-17 07:29:16 -0400
+Processing by Users::RegistrationsController#update as HTML
+  Parameters: {"authenticity_token"=>"[FILTERED]", "user"=>{"email"=>"11@a.com", "student_attributes"=>{"major"=>"a", "is_undergraduate"=>"0", "id"=>"2"}, "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "current_password"=>"[FILTERED]"}, "commit"=>"Update"}
+  [1m[36mUser Load (31.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 7], ["LIMIT", 1]]
+  [1m[36mUser Load (33.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 7], ["LIMIT", 1]]
+[31mUnpermitted parameter: :id. Context: { controller: Users::RegistrationsController, action: update, request: #<ActionDispatch::Request:0x000000011448c370>, params: {"_method"=>"put", "authenticity_token"=>"[FILTERED]", "user"=>{"email"=>"11@a.com", "student_attributes"=>{"major"=>"a", "is_undergraduate"=>"0", "id"=>"2"}, "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "current_password"=>"[FILTERED]"}, "commit"=>"Update", "controller"=>"users/registrations", "action"=>"update"} }[0m
+  [1m[36mTRANSACTION (29.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mStudent Load (30.1ms)[0m  [1m[34mSELECT "students".* FROM "students" WHERE "students"."user_id" = $1 LIMIT $2[0m  [["user_id", 7], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (26.4ms)[0m  [1m[31mROLLBACK[0m
+Completed 422 Unprocessable Entity in 512ms (ActiveRecord: 150.3ms | Allocations: 8446)
+
+
+  
+ActiveRecord::RecordNotSaved (Failed to remove the existing associated student. The record failed to save after its foreign key was set to nil.):
+  
+activerecord (7.1.3) lib/active_record/associations/has_one_association.rb:110:in `remove_target!'
+activerecord (7.1.3) lib/active_record/associations/has_one_association.rb:69:in `block in replace'
+activerecord (7.1.3) lib/active_record/associations/has_one_association.rb:129:in `transaction_if'
+activerecord (7.1.3) lib/active_record/associations/has_one_association.rb:68:in `replace'
+activerecord (7.1.3) lib/active_record/associations/has_one_association.rb:92:in `set_new_record'
+activerecord (7.1.3) lib/active_record/associations/singular_association.rb:24:in `build'
+activerecord (7.1.3) lib/active_record/associations/builder/singular_association.rb:33:in `build_student'
+activerecord (7.1.3) lib/active_record/nested_attributes.rb:447:in `assign_nested_attributes_for_one_to_one_association'
+activerecord (7.1.3) lib/active_record/nested_attributes.rb:390:in `student_attributes='
+activemodel (7.1.3) lib/active_model/attribute_assignment.rb:49:in `public_send'
+activemodel (7.1.3) lib/active_model/attribute_assignment.rb:49:in `_assign_attribute'
+activerecord (7.1.3) lib/active_record/attribute_assignment.rb:29:in `block in assign_nested_parameter_attributes'
+activerecord (7.1.3) lib/active_record/attribute_assignment.rb:29:in `each'
+activerecord (7.1.3) lib/active_record/attribute_assignment.rb:29:in `assign_nested_parameter_attributes'
+activerecord (7.1.3) lib/active_record/attribute_assignment.rb:23:in `_assign_attributes'
+activemodel (7.1.3) lib/active_model/attribute_assignment.rb:34:in `assign_attributes'
+activerecord (7.1.3) lib/active_record/persistence.rb:894:in `block in update'
+activerecord (7.1.3) lib/active_record/transactions.rb:365:in `block in with_transaction_returning_status'
+activerecord (7.1.3) lib/active_record/connection_adapters/abstract/transaction.rb:535:in `block in within_new_transaction'
+activesupport (7.1.3) lib/active_support/concurrency/null_lock.rb:9:in `synchronize'
+activerecord (7.1.3) lib/active_record/connection_adapters/abstract/transaction.rb:532:in `within_new_transaction'
+activerecord (7.1.3) lib/active_record/connection_adapters/abstract/database_statements.rb:344:in `transaction'
+activerecord (7.1.3) lib/active_record/transactions.rb:361:in `with_transaction_returning_status'
+activerecord (7.1.3) lib/active_record/persistence.rb:893:in `update'
+devise (4.9.3) lib/devise/models/database_authenticatable.rb:105:in `update_with_password'
+devise (4.9.3) app/controllers/devise/registrations_controller.rb:94:in `update_resource'
+devise (4.9.3) app/controllers/devise/registrations_controller.rb:50:in `update'
+actionpack (7.1.3) lib/action_controller/metal/basic_implicit_render.rb:6:in `send_action'
+actionpack (7.1.3) lib/abstract_controller/base.rb:224:in `process_action'
+actionpack (7.1.3) lib/action_controller/metal/rendering.rb:165:in `process_action'
+actionpack (7.1.3) lib/abstract_controller/callbacks.rb:259:in `block in process_action'
+activesupport (7.1.3) lib/active_support/callbacks.rb:121:in `block in run_callbacks'
+actiontext (7.1.3) lib/action_text/rendering.rb:23:in `with_renderer'
+actiontext (7.1.3) lib/action_text/engine.rb:69:in `block (4 levels) in <class:Engine>'
+activesupport (7.1.3) lib/active_support/callbacks.rb:130:in `instance_exec'
+activesupport (7.1.3) lib/active_support/callbacks.rb:130:in `block in run_callbacks'
+activesupport (7.1.3) lib/active_support/callbacks.rb:141:in `run_callbacks'
+actionpack (7.1.3) lib/abstract_controller/callbacks.rb:258:in `process_action'
+actionpack (7.1.3) lib/action_controller/metal/rescue.rb:25:in `process_action'
+actionpack (7.1.3) lib/action_controller/metal/instrumentation.rb:74:in `block in process_action'
+activesupport (7.1.3) lib/active_support/notifications.rb:206:in `block in instrument'
+activesupport (7.1.3) lib/active_support/notifications/instrumenter.rb:58:in `instrument'
+activesupport (7.1.3) lib/active_support/notifications.rb:206:in `instrument'
+actionpack (7.1.3) lib/action_controller/metal/instrumentation.rb:73:in `process_action'
+actionpack (7.1.3) lib/action_controller/metal/params_wrapper.rb:261:in `process_action'
+activerecord (7.1.3) lib/active_record/railties/controller_runtime.rb:32:in `process_action'
+actionpack (7.1.3) lib/abstract_controller/base.rb:160:in `process'
+actionview (7.1.3) lib/action_view/rendering.rb:40:in `process'
+actionpack (7.1.3) lib/action_controller/metal.rb:227:in `dispatch'
+actionpack (7.1.3) lib/action_controller/metal.rb:309:in `dispatch'
+actionpack (7.1.3) lib/action_dispatch/routing/route_set.rb:49:in `dispatch'
+actionpack (7.1.3) lib/action_dispatch/routing/route_set.rb:32:in `serve'
+actionpack (7.1.3) lib/action_dispatch/routing/mapper.rb:21:in `block in <class:Constraints>'
+actionpack (7.1.3) lib/action_dispatch/routing/mapper.rb:51:in `serve'
+actionpack (7.1.3) lib/action_dispatch/journey/router.rb:51:in `block in serve'
+actionpack (7.1.3) lib/action_dispatch/journey/router.rb:131:in `block in find_routes'
+actionpack (7.1.3) lib/action_dispatch/journey/router.rb:124:in `each'
+actionpack (7.1.3) lib/action_dispatch/journey/router.rb:124:in `find_routes'
+actionpack (7.1.3) lib/action_dispatch/journey/router.rb:32:in `serve'
+actionpack (7.1.3) lib/action_dispatch/routing/route_set.rb:882:in `call'
+warden (1.2.9) lib/warden/manager.rb:36:in `block in call'
+warden (1.2.9) lib/warden/manager.rb:34:in `catch'
+warden (1.2.9) lib/warden/manager.rb:34:in `call'
+rack (3.0.9) lib/rack/tempfile_reaper.rb:20:in `call'
+rack (3.0.9) lib/rack/etag.rb:29:in `call'
+rack (3.0.9) lib/rack/conditional_get.rb:43:in `call'
+rack (3.0.9) lib/rack/head.rb:15:in `call'
+actionpack (7.1.3) lib/action_dispatch/http/permissions_policy.rb:36:in `call'
+actionpack (7.1.3) lib/action_dispatch/http/content_security_policy.rb:33:in `call'
+rack-session (2.0.0) lib/rack/session/abstract/id.rb:272:in `context'
+rack-session (2.0.0) lib/rack/session/abstract/id.rb:266:in `call'
+actionpack (7.1.3) lib/action_dispatch/middleware/cookies.rb:689:in `call'
+activerecord (7.1.3) lib/active_record/migration.rb:655:in `call'
+actionpack (7.1.3) lib/action_dispatch/middleware/callbacks.rb:29:in `block in call'
+activesupport (7.1.3) lib/active_support/callbacks.rb:101:in `run_callbacks'
+actionpack (7.1.3) lib/action_dispatch/middleware/callbacks.rb:28:in `call'
+actionpack (7.1.3) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (7.1.3) lib/action_dispatch/middleware/actionable_exceptions.rb:16:in `call'
+actionpack (7.1.3) lib/action_dispatch/middleware/debug_exceptions.rb:29:in `call'
+web-console (4.2.1) lib/web_console/middleware.rb:132:in `call_app'
+web-console (4.2.1) lib/web_console/middleware.rb:28:in `block in call'
+web-console (4.2.1) lib/web_console/middleware.rb:17:in `catch'
+web-console (4.2.1) lib/web_console/middleware.rb:17:in `call'
+actionpack (7.1.3) lib/action_dispatch/middleware/show_exceptions.rb:31:in `call'
+railties (7.1.3) lib/rails/rack/logger.rb:37:in `call_app'
+railties (7.1.3) lib/rails/rack/logger.rb:24:in `block in call'
+activesupport (7.1.3) lib/active_support/tagged_logging.rb:135:in `block in tagged'
+activesupport (7.1.3) lib/active_support/tagged_logging.rb:39:in `tagged'
+activesupport (7.1.3) lib/active_support/tagged_logging.rb:135:in `tagged'
+activesupport (7.1.3) lib/active_support/broadcast_logger.rb:240:in `method_missing'
+railties (7.1.3) lib/rails/rack/logger.rb:24:in `call'
+sprockets-rails (3.4.2) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+actionpack (7.1.3) lib/action_dispatch/middleware/remote_ip.rb:92:in `call'
+actionpack (7.1.3) lib/action_dispatch/middleware/request_id.rb:28:in `call'
+rack (3.0.9) lib/rack/method_override.rb:28:in `call'
+rack (3.0.9) lib/rack/runtime.rb:24:in `call'
+activesupport (7.1.3) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (7.1.3) lib/action_dispatch/middleware/server_timing.rb:59:in `block in call'
+actionpack (7.1.3) lib/action_dispatch/middleware/server_timing.rb:24:in `collect_events'
+actionpack (7.1.3) lib/action_dispatch/middleware/server_timing.rb:58:in `call'
+actionpack (7.1.3) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (7.1.3) lib/action_dispatch/middleware/static.rb:25:in `call'
+rack (3.0.9) lib/rack/sendfile.rb:114:in `call'
+actionpack (7.1.3) lib/action_dispatch/middleware/host_authorization.rb:141:in `call'
+railties (7.1.3) lib/rails/engine.rb:536:in `call'
+puma (6.4.2) lib/puma/configuration.rb:272:in `call'
+puma (6.4.2) lib/puma/request.rb:100:in `block in handle_request'
+puma (6.4.2) lib/puma/thread_pool.rb:378:in `with_force_shutdown'
+puma (6.4.2) lib/puma/request.rb:99:in `handle_request'
+puma (6.4.2) lib/puma/server.rb:464:in `process_client'
+puma (6.4.2) lib/puma/server.rb:245:in `block in run'
+puma (6.4.2) lib/puma/thread_pool.rb:155:in `block in spawn_thread'
+Started GET "/users/edit" for ::1 at 2024-03-17 07:29:30 -0400
+Processing by Users::RegistrationsController#edit as HTML
+  [1m[36mUser Load (28.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 7], ["LIMIT", 1]]
+  Rendering layout layouts/application.html.erb
+  Rendering devise/registrations/edit.html.erb within layouts/application
+  Rendered devise/shared/_error_messages.html.erb (Duration: 0.0ms | Allocations: 14)
+  [1m[36mStudent Load (28.4ms)[0m  [1m[34mSELECT "students".* FROM "students" WHERE "students"."user_id" = $1 LIMIT $2[0m  [["user_id", 7], ["LIMIT", 1]]
+  ↳ app/views/devise/registrations/edit.html.erb:15
+  Rendered devise/registrations/edit.html.erb within layouts/application (Duration: 34.9ms | Allocations: 2552)
+  Rendered layout layouts/application.html.erb (Duration: 39.9ms | Allocations: 3591)
+Completed 200 OK in 102ms (Views: 12.5ms | ActiveRecord: 56.6ms | Allocations: 5643)
+
+
+Started PUT "/users" for ::1 at 2024-03-17 07:29:42 -0400
+Processing by Users::RegistrationsController#update as HTML
+  Parameters: {"authenticity_token"=>"[FILTERED]", "user"=>{"email"=>"11@a.com", "student_attributes"=>{"major"=>"a", "is_undergraduate"=>"0", "id"=>"2"}, "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "current_password"=>"[FILTERED]"}, "commit"=>"Update"}
+  [1m[36mUser Load (32.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 7], ["LIMIT", 1]]
+  [1m[36mUser Load (153.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 7], ["LIMIT", 1]]
+[31mUnpermitted parameter: :id. Context: { controller: Users::RegistrationsController, action: update, request: #<ActionDispatch::Request:0x00000001146257b8>, params: {"_method"=>"put", "authenticity_token"=>"[FILTERED]", "user"=>{"email"=>"11@a.com", "student_attributes"=>{"major"=>"a", "is_undergraduate"=>"0", "id"=>"2"}, "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "current_password"=>"[FILTERED]"}, "commit"=>"Update", "controller"=>"users/registrations", "action"=>"update"} }[0m
+  [1m[36mTRANSACTION (26.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mStudent Load (27.2ms)[0m  [1m[34mSELECT "students".* FROM "students" WHERE "students"."user_id" = $1 LIMIT $2[0m  [["user_id", 7], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (27.2ms)[0m  [1m[31mROLLBACK[0m
+Completed 422 Unprocessable Entity in 1018ms (ActiveRecord: 266.1ms | Allocations: 7295)
+
+
+  
+ActiveRecord::RecordNotSaved (Failed to remove the existing associated student. The record failed to save after its foreign key was set to nil.):
+  
+activerecord (7.1.3) lib/active_record/associations/has_one_association.rb:110:in `remove_target!'
+activerecord (7.1.3) lib/active_record/associations/has_one_association.rb:69:in `block in replace'
+activerecord (7.1.3) lib/active_record/associations/has_one_association.rb:129:in `transaction_if'
+activerecord (7.1.3) lib/active_record/associations/has_one_association.rb:68:in `replace'
+activerecord (7.1.3) lib/active_record/associations/has_one_association.rb:92:in `set_new_record'
+activerecord (7.1.3) lib/active_record/associations/singular_association.rb:24:in `build'
+activerecord (7.1.3) lib/active_record/associations/builder/singular_association.rb:33:in `build_student'
+activerecord (7.1.3) lib/active_record/nested_attributes.rb:447:in `assign_nested_attributes_for_one_to_one_association'
+activerecord (7.1.3) lib/active_record/nested_attributes.rb:390:in `student_attributes='
+activemodel (7.1.3) lib/active_model/attribute_assignment.rb:49:in `public_send'
+activemodel (7.1.3) lib/active_model/attribute_assignment.rb:49:in `_assign_attribute'
+activerecord (7.1.3) lib/active_record/attribute_assignment.rb:29:in `block in assign_nested_parameter_attributes'
+activerecord (7.1.3) lib/active_record/attribute_assignment.rb:29:in `each'
+activerecord (7.1.3) lib/active_record/attribute_assignment.rb:29:in `assign_nested_parameter_attributes'
+activerecord (7.1.3) lib/active_record/attribute_assignment.rb:23:in `_assign_attributes'
+activemodel (7.1.3) lib/active_model/attribute_assignment.rb:34:in `assign_attributes'
+activerecord (7.1.3) lib/active_record/persistence.rb:894:in `block in update'
+activerecord (7.1.3) lib/active_record/transactions.rb:365:in `block in with_transaction_returning_status'
+activerecord (7.1.3) lib/active_record/connection_adapters/abstract/transaction.rb:535:in `block in within_new_transaction'
+activesupport (7.1.3) lib/active_support/concurrency/null_lock.rb:9:in `synchronize'
+activerecord (7.1.3) lib/active_record/connection_adapters/abstract/transaction.rb:532:in `within_new_transaction'
+activerecord (7.1.3) lib/active_record/connection_adapters/abstract/database_statements.rb:344:in `transaction'
+activerecord (7.1.3) lib/active_record/transactions.rb:361:in `with_transaction_returning_status'
+activerecord (7.1.3) lib/active_record/persistence.rb:893:in `update'
+devise (4.9.3) lib/devise/models/database_authenticatable.rb:105:in `update_with_password'
+devise (4.9.3) app/controllers/devise/registrations_controller.rb:94:in `update_resource'
+devise (4.9.3) app/controllers/devise/registrations_controller.rb:50:in `update'
+actionpack (7.1.3) lib/action_controller/metal/basic_implicit_render.rb:6:in `send_action'
+actionpack (7.1.3) lib/abstract_controller/base.rb:224:in `process_action'
+actionpack (7.1.3) lib/action_controller/metal/rendering.rb:165:in `process_action'
+actionpack (7.1.3) lib/abstract_controller/callbacks.rb:259:in `block in process_action'
+activesupport (7.1.3) lib/active_support/callbacks.rb:121:in `block in run_callbacks'
+actiontext (7.1.3) lib/action_text/rendering.rb:23:in `with_renderer'
+actiontext (7.1.3) lib/action_text/engine.rb:69:in `block (4 levels) in <class:Engine>'
+activesupport (7.1.3) lib/active_support/callbacks.rb:130:in `instance_exec'
+activesupport (7.1.3) lib/active_support/callbacks.rb:130:in `block in run_callbacks'
+activesupport (7.1.3) lib/active_support/callbacks.rb:141:in `run_callbacks'
+actionpack (7.1.3) lib/abstract_controller/callbacks.rb:258:in `process_action'
+actionpack (7.1.3) lib/action_controller/metal/rescue.rb:25:in `process_action'
+actionpack (7.1.3) lib/action_controller/metal/instrumentation.rb:74:in `block in process_action'
+activesupport (7.1.3) lib/active_support/notifications.rb:206:in `block in instrument'
+activesupport (7.1.3) lib/active_support/notifications/instrumenter.rb:58:in `instrument'
+activesupport (7.1.3) lib/active_support/notifications.rb:206:in `instrument'
+actionpack (7.1.3) lib/action_controller/metal/instrumentation.rb:73:in `process_action'
+actionpack (7.1.3) lib/action_controller/metal/params_wrapper.rb:261:in `process_action'
+activerecord (7.1.3) lib/active_record/railties/controller_runtime.rb:32:in `process_action'
+actionpack (7.1.3) lib/abstract_controller/base.rb:160:in `process'
+actionview (7.1.3) lib/action_view/rendering.rb:40:in `process'
+actionpack (7.1.3) lib/action_controller/metal.rb:227:in `dispatch'
+actionpack (7.1.3) lib/action_controller/metal.rb:309:in `dispatch'
+actionpack (7.1.3) lib/action_dispatch/routing/route_set.rb:49:in `dispatch'
+actionpack (7.1.3) lib/action_dispatch/routing/route_set.rb:32:in `serve'
+actionpack (7.1.3) lib/action_dispatch/routing/mapper.rb:21:in `block in <class:Constraints>'
+actionpack (7.1.3) lib/action_dispatch/routing/mapper.rb:51:in `serve'
+actionpack (7.1.3) lib/action_dispatch/journey/router.rb:51:in `block in serve'
+actionpack (7.1.3) lib/action_dispatch/journey/router.rb:131:in `block in find_routes'
+actionpack (7.1.3) lib/action_dispatch/journey/router.rb:124:in `each'
+actionpack (7.1.3) lib/action_dispatch/journey/router.rb:124:in `find_routes'
+actionpack (7.1.3) lib/action_dispatch/journey/router.rb:32:in `serve'
+actionpack (7.1.3) lib/action_dispatch/routing/route_set.rb:882:in `call'
+warden (1.2.9) lib/warden/manager.rb:36:in `block in call'
+warden (1.2.9) lib/warden/manager.rb:34:in `catch'
+warden (1.2.9) lib/warden/manager.rb:34:in `call'
+rack (3.0.9) lib/rack/tempfile_reaper.rb:20:in `call'
+rack (3.0.9) lib/rack/etag.rb:29:in `call'
+rack (3.0.9) lib/rack/conditional_get.rb:43:in `call'
+rack (3.0.9) lib/rack/head.rb:15:in `call'
+actionpack (7.1.3) lib/action_dispatch/http/permissions_policy.rb:36:in `call'
+actionpack (7.1.3) lib/action_dispatch/http/content_security_policy.rb:33:in `call'
+rack-session (2.0.0) lib/rack/session/abstract/id.rb:272:in `context'
+rack-session (2.0.0) lib/rack/session/abstract/id.rb:266:in `call'
+actionpack (7.1.3) lib/action_dispatch/middleware/cookies.rb:689:in `call'
+activerecord (7.1.3) lib/active_record/migration.rb:655:in `call'
+actionpack (7.1.3) lib/action_dispatch/middleware/callbacks.rb:29:in `block in call'
+activesupport (7.1.3) lib/active_support/callbacks.rb:101:in `run_callbacks'
+actionpack (7.1.3) lib/action_dispatch/middleware/callbacks.rb:28:in `call'
+actionpack (7.1.3) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (7.1.3) lib/action_dispatch/middleware/actionable_exceptions.rb:16:in `call'
+actionpack (7.1.3) lib/action_dispatch/middleware/debug_exceptions.rb:29:in `call'
+web-console (4.2.1) lib/web_console/middleware.rb:132:in `call_app'
+web-console (4.2.1) lib/web_console/middleware.rb:28:in `block in call'
+web-console (4.2.1) lib/web_console/middleware.rb:17:in `catch'
+web-console (4.2.1) lib/web_console/middleware.rb:17:in `call'
+actionpack (7.1.3) lib/action_dispatch/middleware/show_exceptions.rb:31:in `call'
+railties (7.1.3) lib/rails/rack/logger.rb:37:in `call_app'
+railties (7.1.3) lib/rails/rack/logger.rb:24:in `block in call'
+activesupport (7.1.3) lib/active_support/tagged_logging.rb:135:in `block in tagged'
+activesupport (7.1.3) lib/active_support/tagged_logging.rb:39:in `tagged'
+activesupport (7.1.3) lib/active_support/tagged_logging.rb:135:in `tagged'
+activesupport (7.1.3) lib/active_support/broadcast_logger.rb:240:in `method_missing'
+railties (7.1.3) lib/rails/rack/logger.rb:24:in `call'
+sprockets-rails (3.4.2) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+actionpack (7.1.3) lib/action_dispatch/middleware/remote_ip.rb:92:in `call'
+actionpack (7.1.3) lib/action_dispatch/middleware/request_id.rb:28:in `call'
+rack (3.0.9) lib/rack/method_override.rb:28:in `call'
+rack (3.0.9) lib/rack/runtime.rb:24:in `call'
+activesupport (7.1.3) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (7.1.3) lib/action_dispatch/middleware/server_timing.rb:59:in `block in call'
+actionpack (7.1.3) lib/action_dispatch/middleware/server_timing.rb:24:in `collect_events'
+actionpack (7.1.3) lib/action_dispatch/middleware/server_timing.rb:58:in `call'
+actionpack (7.1.3) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (7.1.3) lib/action_dispatch/middleware/static.rb:25:in `call'
+rack (3.0.9) lib/rack/sendfile.rb:114:in `call'
+actionpack (7.1.3) lib/action_dispatch/middleware/host_authorization.rb:141:in `call'
+railties (7.1.3) lib/rails/engine.rb:536:in `call'
+puma (6.4.2) lib/puma/configuration.rb:272:in `call'
+puma (6.4.2) lib/puma/request.rb:100:in `block in handle_request'
+puma (6.4.2) lib/puma/thread_pool.rb:378:in `with_force_shutdown'
+puma (6.4.2) lib/puma/request.rb:99:in `handle_request'
+puma (6.4.2) lib/puma/server.rb:464:in `process_client'
+puma (6.4.2) lib/puma/server.rb:245:in `block in run'
+puma (6.4.2) lib/puma/thread_pool.rb:155:in `block in spawn_thread'
+Started GET "/users/edit" for ::1 at 2024-03-17 07:30:50 -0400
+Processing by Users::RegistrationsController#edit as HTML
+  [1m[36mUser Load (27.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 7], ["LIMIT", 1]]
+  Rendering layout layouts/application.html.erb
+  Rendering devise/registrations/edit.html.erb within layouts/application
+  Rendered devise/shared/_error_messages.html.erb (Duration: 1.6ms | Allocations: 199)
+  [1m[36mStudent Load (27.0ms)[0m  [1m[34mSELECT "students".* FROM "students" WHERE "students"."user_id" = $1 LIMIT $2[0m  [["user_id", 7], ["LIMIT", 1]]
+  ↳ app/views/devise/registrations/edit.html.erb:15
+  Rendered devise/registrations/edit.html.erb within layouts/application (Duration: 144.1ms | Allocations: 9985)
+  Rendered layout layouts/application.html.erb (Duration: 155.0ms | Allocations: 11279)
+Completed 200 OK in 331ms (Views: 76.0ms | ActiveRecord: 238.2ms | Allocations: 19436)
+
+
+Started PUT "/users" for ::1 at 2024-03-17 07:30:54 -0400
+Processing by Users::RegistrationsController#update as HTML
+  Parameters: {"authenticity_token"=>"[FILTERED]", "user"=>{"email"=>"11@a.com", "student_attributes"=>{"major"=>"a", "is_undergraduate"=>"0", "id"=>"2"}, "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "current_password"=>"[FILTERED]"}, "commit"=>"Update"}
+  [1m[36mUser Load (33.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 7], ["LIMIT", 1]]
+  [1m[36mUser Load (26.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 7], ["LIMIT", 1]]
+[31mUnpermitted parameter: :id. Context: { controller: Users::RegistrationsController, action: update, request: #<ActionDispatch::Request:0x000000011425d748>, params: {"_method"=>"put", "authenticity_token"=>"[FILTERED]", "user"=>{"email"=>"11@a.com", "student_attributes"=>{"major"=>"a", "is_undergraduate"=>"0", "id"=>"2"}, "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "current_password"=>"[FILTERED]"}, "commit"=>"Update", "controller"=>"users/registrations", "action"=>"update"} }[0m
+  [1m[36mTRANSACTION (32.6ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mStudent Load (28.5ms)[0m  [1m[34mSELECT "students".* FROM "students" WHERE "students"."user_id" = $1 LIMIT $2[0m  [["user_id", 7], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (28.3ms)[0m  [1m[31mROLLBACK[0m
+Completed 422 Unprocessable Entity in 498ms (ActiveRecord: 148.4ms | Allocations: 8168)
+
+
+  
+ActiveRecord::RecordNotSaved (Failed to remove the existing associated student. The record failed to save after its foreign key was set to nil.):
+  
+activerecord (7.1.3) lib/active_record/associations/has_one_association.rb:110:in `remove_target!'
+activerecord (7.1.3) lib/active_record/associations/has_one_association.rb:69:in `block in replace'
+activerecord (7.1.3) lib/active_record/associations/has_one_association.rb:129:in `transaction_if'
+activerecord (7.1.3) lib/active_record/associations/has_one_association.rb:68:in `replace'
+activerecord (7.1.3) lib/active_record/associations/has_one_association.rb:92:in `set_new_record'
+activerecord (7.1.3) lib/active_record/associations/singular_association.rb:24:in `build'
+activerecord (7.1.3) lib/active_record/associations/builder/singular_association.rb:33:in `build_student'
+activerecord (7.1.3) lib/active_record/nested_attributes.rb:447:in `assign_nested_attributes_for_one_to_one_association'
+activerecord (7.1.3) lib/active_record/nested_attributes.rb:390:in `student_attributes='
+activemodel (7.1.3) lib/active_model/attribute_assignment.rb:49:in `public_send'
+activemodel (7.1.3) lib/active_model/attribute_assignment.rb:49:in `_assign_attribute'
+activerecord (7.1.3) lib/active_record/attribute_assignment.rb:29:in `block in assign_nested_parameter_attributes'
+activerecord (7.1.3) lib/active_record/attribute_assignment.rb:29:in `each'
+activerecord (7.1.3) lib/active_record/attribute_assignment.rb:29:in `assign_nested_parameter_attributes'
+activerecord (7.1.3) lib/active_record/attribute_assignment.rb:23:in `_assign_attributes'
+activemodel (7.1.3) lib/active_model/attribute_assignment.rb:34:in `assign_attributes'
+activerecord (7.1.3) lib/active_record/persistence.rb:894:in `block in update'
+activerecord (7.1.3) lib/active_record/transactions.rb:365:in `block in with_transaction_returning_status'
+activerecord (7.1.3) lib/active_record/connection_adapters/abstract/transaction.rb:535:in `block in within_new_transaction'
+activesupport (7.1.3) lib/active_support/concurrency/null_lock.rb:9:in `synchronize'
+activerecord (7.1.3) lib/active_record/connection_adapters/abstract/transaction.rb:532:in `within_new_transaction'
+activerecord (7.1.3) lib/active_record/connection_adapters/abstract/database_statements.rb:344:in `transaction'
+activerecord (7.1.3) lib/active_record/transactions.rb:361:in `with_transaction_returning_status'
+activerecord (7.1.3) lib/active_record/persistence.rb:893:in `update'
+devise (4.9.3) lib/devise/models/database_authenticatable.rb:105:in `update_with_password'
+devise (4.9.3) app/controllers/devise/registrations_controller.rb:94:in `update_resource'
+devise (4.9.3) app/controllers/devise/registrations_controller.rb:50:in `update'
+actionpack (7.1.3) lib/action_controller/metal/basic_implicit_render.rb:6:in `send_action'
+actionpack (7.1.3) lib/abstract_controller/base.rb:224:in `process_action'
+actionpack (7.1.3) lib/action_controller/metal/rendering.rb:165:in `process_action'
+actionpack (7.1.3) lib/abstract_controller/callbacks.rb:259:in `block in process_action'
+activesupport (7.1.3) lib/active_support/callbacks.rb:121:in `block in run_callbacks'
+actiontext (7.1.3) lib/action_text/rendering.rb:23:in `with_renderer'
+actiontext (7.1.3) lib/action_text/engine.rb:69:in `block (4 levels) in <class:Engine>'
+activesupport (7.1.3) lib/active_support/callbacks.rb:130:in `instance_exec'
+activesupport (7.1.3) lib/active_support/callbacks.rb:130:in `block in run_callbacks'
+activesupport (7.1.3) lib/active_support/callbacks.rb:141:in `run_callbacks'
+actionpack (7.1.3) lib/abstract_controller/callbacks.rb:258:in `process_action'
+actionpack (7.1.3) lib/action_controller/metal/rescue.rb:25:in `process_action'
+actionpack (7.1.3) lib/action_controller/metal/instrumentation.rb:74:in `block in process_action'
+activesupport (7.1.3) lib/active_support/notifications.rb:206:in `block in instrument'
+activesupport (7.1.3) lib/active_support/notifications/instrumenter.rb:58:in `instrument'
+activesupport (7.1.3) lib/active_support/notifications.rb:206:in `instrument'
+actionpack (7.1.3) lib/action_controller/metal/instrumentation.rb:73:in `process_action'
+actionpack (7.1.3) lib/action_controller/metal/params_wrapper.rb:261:in `process_action'
+activerecord (7.1.3) lib/active_record/railties/controller_runtime.rb:32:in `process_action'
+actionpack (7.1.3) lib/abstract_controller/base.rb:160:in `process'
+actionview (7.1.3) lib/action_view/rendering.rb:40:in `process'
+actionpack (7.1.3) lib/action_controller/metal.rb:227:in `dispatch'
+actionpack (7.1.3) lib/action_controller/metal.rb:309:in `dispatch'
+actionpack (7.1.3) lib/action_dispatch/routing/route_set.rb:49:in `dispatch'
+actionpack (7.1.3) lib/action_dispatch/routing/route_set.rb:32:in `serve'
+actionpack (7.1.3) lib/action_dispatch/routing/mapper.rb:21:in `block in <class:Constraints>'
+actionpack (7.1.3) lib/action_dispatch/routing/mapper.rb:51:in `serve'
+actionpack (7.1.3) lib/action_dispatch/journey/router.rb:51:in `block in serve'
+actionpack (7.1.3) lib/action_dispatch/journey/router.rb:131:in `block in find_routes'
+actionpack (7.1.3) lib/action_dispatch/journey/router.rb:124:in `each'
+actionpack (7.1.3) lib/action_dispatch/journey/router.rb:124:in `find_routes'
+actionpack (7.1.3) lib/action_dispatch/journey/router.rb:32:in `serve'
+actionpack (7.1.3) lib/action_dispatch/routing/route_set.rb:882:in `call'
+warden (1.2.9) lib/warden/manager.rb:36:in `block in call'
+warden (1.2.9) lib/warden/manager.rb:34:in `catch'
+warden (1.2.9) lib/warden/manager.rb:34:in `call'
+rack (3.0.9) lib/rack/tempfile_reaper.rb:20:in `call'
+rack (3.0.9) lib/rack/etag.rb:29:in `call'
+rack (3.0.9) lib/rack/conditional_get.rb:43:in `call'
+rack (3.0.9) lib/rack/head.rb:15:in `call'
+actionpack (7.1.3) lib/action_dispatch/http/permissions_policy.rb:36:in `call'
+actionpack (7.1.3) lib/action_dispatch/http/content_security_policy.rb:33:in `call'
+rack-session (2.0.0) lib/rack/session/abstract/id.rb:272:in `context'
+rack-session (2.0.0) lib/rack/session/abstract/id.rb:266:in `call'
+actionpack (7.1.3) lib/action_dispatch/middleware/cookies.rb:689:in `call'
+activerecord (7.1.3) lib/active_record/migration.rb:655:in `call'
+actionpack (7.1.3) lib/action_dispatch/middleware/callbacks.rb:29:in `block in call'
+activesupport (7.1.3) lib/active_support/callbacks.rb:101:in `run_callbacks'
+actionpack (7.1.3) lib/action_dispatch/middleware/callbacks.rb:28:in `call'
+actionpack (7.1.3) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (7.1.3) lib/action_dispatch/middleware/actionable_exceptions.rb:16:in `call'
+actionpack (7.1.3) lib/action_dispatch/middleware/debug_exceptions.rb:29:in `call'
+web-console (4.2.1) lib/web_console/middleware.rb:132:in `call_app'
+web-console (4.2.1) lib/web_console/middleware.rb:28:in `block in call'
+web-console (4.2.1) lib/web_console/middleware.rb:17:in `catch'
+web-console (4.2.1) lib/web_console/middleware.rb:17:in `call'
+actionpack (7.1.3) lib/action_dispatch/middleware/show_exceptions.rb:31:in `call'
+railties (7.1.3) lib/rails/rack/logger.rb:37:in `call_app'
+railties (7.1.3) lib/rails/rack/logger.rb:24:in `block in call'
+activesupport (7.1.3) lib/active_support/tagged_logging.rb:135:in `block in tagged'
+activesupport (7.1.3) lib/active_support/tagged_logging.rb:39:in `tagged'
+activesupport (7.1.3) lib/active_support/tagged_logging.rb:135:in `tagged'
+activesupport (7.1.3) lib/active_support/broadcast_logger.rb:240:in `method_missing'
+railties (7.1.3) lib/rails/rack/logger.rb:24:in `call'
+sprockets-rails (3.4.2) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+actionpack (7.1.3) lib/action_dispatch/middleware/remote_ip.rb:92:in `call'
+actionpack (7.1.3) lib/action_dispatch/middleware/request_id.rb:28:in `call'
+rack (3.0.9) lib/rack/method_override.rb:28:in `call'
+rack (3.0.9) lib/rack/runtime.rb:24:in `call'
+activesupport (7.1.3) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (7.1.3) lib/action_dispatch/middleware/server_timing.rb:59:in `block in call'
+actionpack (7.1.3) lib/action_dispatch/middleware/server_timing.rb:24:in `collect_events'
+actionpack (7.1.3) lib/action_dispatch/middleware/server_timing.rb:58:in `call'
+actionpack (7.1.3) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (7.1.3) lib/action_dispatch/middleware/static.rb:25:in `call'
+rack (3.0.9) lib/rack/sendfile.rb:114:in `call'
+actionpack (7.1.3) lib/action_dispatch/middleware/host_authorization.rb:141:in `call'
+railties (7.1.3) lib/rails/engine.rb:536:in `call'
+puma (6.4.2) lib/puma/configuration.rb:272:in `call'
+puma (6.4.2) lib/puma/request.rb:100:in `block in handle_request'
+puma (6.4.2) lib/puma/thread_pool.rb:378:in `with_force_shutdown'
+puma (6.4.2) lib/puma/request.rb:99:in `handle_request'
+puma (6.4.2) lib/puma/server.rb:464:in `process_client'
+puma (6.4.2) lib/puma/server.rb:245:in `block in run'
+puma (6.4.2) lib/puma/thread_pool.rb:155:in `block in spawn_thread'
+  [1m[36mStudent Load (27.5ms)[0m  [1m[34mSELECT "students".* FROM "students" ORDER BY "students"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+Started GET "/users/edit" for ::1 at 2024-03-17 07:32:03 -0400
+Processing by Users::RegistrationsController#edit as HTML
+  [1m[36mUser Load (28.7ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 7], ["LIMIT", 1]]
+  Rendering layout layouts/application.html.erb
+  Rendering devise/registrations/edit.html.erb within layouts/application
+  Rendered devise/shared/_error_messages.html.erb (Duration: 0.6ms | Allocations: 199)
+  [1m[36mStudent Load (29.0ms)[0m  [1m[34mSELECT "students".* FROM "students" WHERE "students"."user_id" = $1 LIMIT $2[0m  [["user_id", 7], ["LIMIT", 1]]
+  ↳ app/views/devise/registrations/edit.html.erb:15
+  Rendered devise/registrations/edit.html.erb within layouts/application (Duration: 119.1ms | Allocations: 9983)
+  Rendered layout layouts/application.html.erb (Duration: 123.9ms | Allocations: 11277)
+Completed 200 OK in 311ms (Views: 43.5ms | ActiveRecord: 249.5ms | Allocations: 19428)
+
+
+Started PUT "/users" for ::1 at 2024-03-17 07:32:06 -0400
+Processing by Users::RegistrationsController#update as HTML
+  Parameters: {"authenticity_token"=>"[FILTERED]", "user"=>{"email"=>"11@a.com", "student_attributes"=>{"major"=>"a", "is_undergraduate"=>"0", "id"=>"2"}, "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "current_password"=>"[FILTERED]"}, "commit"=>"Update"}
+  [1m[36mUser Load (33.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 7], ["LIMIT", 1]]
+  [1m[36mUser Load (36.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 7], ["LIMIT", 1]]
+[31mUnpermitted parameter: :id. Context: { controller: Users::RegistrationsController, action: update, request: #<ActionDispatch::Request:0x000000011468d160>, params: {"_method"=>"put", "authenticity_token"=>"[FILTERED]", "user"=>{"email"=>"11@a.com", "student_attributes"=>{"major"=>"a", "is_undergraduate"=>"0", "id"=>"2"}, "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "current_password"=>"[FILTERED]"}, "commit"=>"Update", "controller"=>"users/registrations", "action"=>"update"} }[0m
+  [1m[36mTRANSACTION (29.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mStudent Load (29.7ms)[0m  [1m[34mSELECT "students".* FROM "students" WHERE "students"."user_id" = $1 LIMIT $2[0m  [["user_id", 7], ["LIMIT", 1]]
+  [1m[36mStudent Destroy (27.7ms)[0m  [1m[31mDELETE FROM "students" WHERE "students"."id" = $1[0m  [["id", 2]]
+  [1m[36mStudent Create (27.9ms)[0m  [1m[32mINSERT INTO "students" ("major", "is_undergraduate", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["major", "a"], ["is_undergraduate", false], ["user_id", 7], ["created_at", "2024-03-17 11:32:07.254748"], ["updated_at", "2024-03-17 11:32:07.254748"]]
+  [1m[36mTRANSACTION (28.9ms)[0m  [1m[35mCOMMIT[0m
+[31mUnpermitted parameter: :id. Context: { controller: Users::RegistrationsController, action: update, request: #<ActionDispatch::Request:0x000000011468d160>, params: {"_method"=>"put", "authenticity_token"=>"[FILTERED]", "user"=>{"email"=>"11@a.com", "student_attributes"=>{"major"=>"a", "is_undergraduate"=>"0", "id"=>"2"}, "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "current_password"=>"[FILTERED]"}, "commit"=>"Update", "controller"=>"users/registrations", "action"=>"update"} }[0m
+[31mUnpermitted parameter: :id. Context: { controller: Users::RegistrationsController, action: update, request: #<ActionDispatch::Request:0x000000011468d160>, params: {"_method"=>"put", "authenticity_token"=>"[FILTERED]", "user"=>{"email"=>"11@a.com", "student_attributes"=>{"major"=>"a", "is_undergraduate"=>"0", "id"=>"2"}, "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "current_password"=>"[FILTERED]"}, "commit"=>"Update", "controller"=>"users/registrations", "action"=>"update"} }[0m
+[31mUnpermitted parameter: :id. Context: { controller: Users::RegistrationsController, action: update, request: #<ActionDispatch::Request:0x000000011468d160>, params: {"_method"=>"put", "authenticity_token"=>"[FILTERED]", "user"=>{"email"=>"11@a.com", "student_attributes"=>{"major"=>"a", "is_undergraduate"=>"0", "id"=>"2"}, "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "current_password"=>"[FILTERED]"}, "commit"=>"Update", "controller"=>"users/registrations", "action"=>"update"} }[0m
+Redirected to http://localhost:3000/
+Completed 303 See Other in 816ms (ActiveRecord: 212.6ms | Allocations: 12432)
+
+
+Started GET "/" for ::1 at 2024-03-17 07:32:07 -0400
+Processing by Rails::WelcomeController#index as HTML
+  Rendering /Users/apple/.rbenv/versions/3.1.2/lib/ruby/gems/3.1.0/gems/railties-7.1.3/lib/rails/templates/rails/welcome/index.html.erb
+  Rendered /Users/apple/.rbenv/versions/3.1.2/lib/ruby/gems/3.1.0/gems/railties-7.1.3/lib/rails/templates/rails/welcome/index.html.erb (Duration: 0.9ms | Allocations: 285)
+Completed 200 OK in 5ms (Views: 3.1ms | ActiveRecord: 0.0ms | Allocations: 961)
+
+
+Started GET "/users/sign_up" for ::1 at 2024-03-17 07:32:11 -0400
+Processing by Users::RegistrationsController#new as HTML
+  [1m[36mUser Load (31.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 7], ["LIMIT", 1]]
+Redirected to http://localhost:3000/
+Filter chain halted as :require_no_authentication rendered or redirected
+Completed 302 Found in 65ms (ActiveRecord: 31.0ms | Allocations: 1942)
+
+
+Started GET "/" for ::1 at 2024-03-17 07:32:11 -0400
+Processing by Rails::WelcomeController#index as HTML
+  Rendering /Users/apple/.rbenv/versions/3.1.2/lib/ruby/gems/3.1.0/gems/railties-7.1.3/lib/rails/templates/rails/welcome/index.html.erb
+  Rendered /Users/apple/.rbenv/versions/3.1.2/lib/ruby/gems/3.1.0/gems/railties-7.1.3/lib/rails/templates/rails/welcome/index.html.erb (Duration: 0.1ms | Allocations: 15)
+Completed 200 OK in 6ms (Views: 1.9ms | ActiveRecord: 0.0ms | Allocations: 229)
+
+
+Started GET "/users/edit" for ::1 at 2024-03-17 07:32:15 -0400
+Processing by Users::RegistrationsController#edit as HTML
+  [1m[36mUser Load (29.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 7], ["LIMIT", 1]]
+  Rendering layout layouts/application.html.erb
+  Rendering devise/registrations/edit.html.erb within layouts/application
+  Rendered devise/shared/_error_messages.html.erb (Duration: 0.1ms | Allocations: 14)
+  [1m[36mStudent Load (26.5ms)[0m  [1m[34mSELECT "students".* FROM "students" WHERE "students"."user_id" = $1 LIMIT $2[0m  [["user_id", 7], ["LIMIT", 1]]
+  ↳ app/views/devise/registrations/edit.html.erb:15
+  Rendered devise/registrations/edit.html.erb within layouts/application (Duration: 56.5ms | Allocations: 2521)
+  Rendered layout layouts/application.html.erb (Duration: 59.0ms | Allocations: 3562)
+Completed 200 OK in 133ms (Views: 35.9ms | ActiveRecord: 55.5ms | Allocations: 5368)
+
+
+Started PUT "/users" for ::1 at 2024-03-17 07:32:28 -0400
+Processing by Users::RegistrationsController#update as HTML
+  Parameters: {"authenticity_token"=>"[FILTERED]", "user"=>{"email"=>"11@a.com", "student_attributes"=>{"major"=>"a", "is_undergraduate"=>"0", "id"=>"3"}, "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "current_password"=>"[FILTERED]"}, "commit"=>"Update"}
+  [1m[36mUser Load (31.8ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 7], ["LIMIT", 1]]
+  [1m[36mUser Load (31.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 7], ["LIMIT", 1]]
+[31mUnpermitted parameter: :id. Context: { controller: Users::RegistrationsController, action: update, request: #<ActionDispatch::Request:0x0000000110721f58>, params: {"_method"=>"put", "authenticity_token"=>"[FILTERED]", "user"=>{"email"=>"11@a.com", "student_attributes"=>{"major"=>"a", "is_undergraduate"=>"0", "id"=>"3"}, "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "current_password"=>"[FILTERED]"}, "commit"=>"Update", "controller"=>"users/registrations", "action"=>"update"} }[0m
+  [1m[36mTRANSACTION (26.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mStudent Load (28.9ms)[0m  [1m[34mSELECT "students".* FROM "students" WHERE "students"."user_id" = $1 LIMIT $2[0m  [["user_id", 7], ["LIMIT", 1]]
+  [1m[36mStudent Destroy (26.4ms)[0m  [1m[31mDELETE FROM "students" WHERE "students"."id" = $1[0m  [["id", 3]]
+  [1m[36mStudent Create (42.1ms)[0m  [1m[32mINSERT INTO "students" ("major", "is_undergraduate", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["major", "a"], ["is_undergraduate", false], ["user_id", 7], ["created_at", "2024-03-17 11:32:29.850318"], ["updated_at", "2024-03-17 11:32:29.850318"]]
+  [1m[36mTRANSACTION (28.1ms)[0m  [1m[35mCOMMIT[0m
+[31mUnpermitted parameter: :id. Context: { controller: Users::RegistrationsController, action: update, request: #<ActionDispatch::Request:0x0000000110721f58>, params: {"_method"=>"put", "authenticity_token"=>"[FILTERED]", "user"=>{"email"=>"11@a.com", "student_attributes"=>{"major"=>"a", "is_undergraduate"=>"0", "id"=>"3"}, "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "current_password"=>"[FILTERED]"}, "commit"=>"Update", "controller"=>"users/registrations", "action"=>"update"} }[0m
+[31mUnpermitted parameter: :id. Context: { controller: Users::RegistrationsController, action: update, request: #<ActionDispatch::Request:0x0000000110721f58>, params: {"_method"=>"put", "authenticity_token"=>"[FILTERED]", "user"=>{"email"=>"11@a.com", "student_attributes"=>{"major"=>"a", "is_undergraduate"=>"0", "id"=>"3"}, "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "current_password"=>"[FILTERED]"}, "commit"=>"Update", "controller"=>"users/registrations", "action"=>"update"} }[0m
+[31mUnpermitted parameter: :id. Context: { controller: Users::RegistrationsController, action: update, request: #<ActionDispatch::Request:0x0000000110721f58>, params: {"_method"=>"put", "authenticity_token"=>"[FILTERED]", "user"=>{"email"=>"11@a.com", "student_attributes"=>{"major"=>"a", "is_undergraduate"=>"0", "id"=>"3"}, "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "current_password"=>"[FILTERED]"}, "commit"=>"Update", "controller"=>"users/registrations", "action"=>"update"} }[0m
+Redirected to http://localhost:3000/
+Completed 303 See Other in 1501ms (ActiveRecord: 214.8ms | Allocations: 10555)
+
+
+Started GET "/" for ::1 at 2024-03-17 07:32:29 -0400
+Processing by Rails::WelcomeController#index as HTML
+  Rendering /Users/apple/.rbenv/versions/3.1.2/lib/ruby/gems/3.1.0/gems/railties-7.1.3/lib/rails/templates/rails/welcome/index.html.erb
+  Rendered /Users/apple/.rbenv/versions/3.1.2/lib/ruby/gems/3.1.0/gems/railties-7.1.3/lib/rails/templates/rails/welcome/index.html.erb (Duration: 0.1ms | Allocations: 15)
+Completed 200 OK in 3ms (Views: 1.9ms | ActiveRecord: 0.0ms | Allocations: 207)
+
+
+  [1m[36mStudent Load (31.5ms)[0m  [1m[34mSELECT "students".* FROM "students" /* loading for pp */ LIMIT $1[0m  [["LIMIT", 11]]
+Started GET "/users/sign_up" for ::1 at 2024-03-17 07:33:14 -0400
+Processing by Users::RegistrationsController#new as HTML
+  [1m[36mUser Load (28.9ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 7], ["LIMIT", 1]]
+Redirected to http://localhost:3000/
+Filter chain halted as :require_no_authentication rendered or redirected
+Completed 302 Found in 69ms (ActiveRecord: 28.9ms | Allocations: 1623)
+
+
+Started GET "/" for ::1 at 2024-03-17 07:33:14 -0400
+Processing by Rails::WelcomeController#index as HTML
+  Rendering /Users/apple/.rbenv/versions/3.1.2/lib/ruby/gems/3.1.0/gems/railties-7.1.3/lib/rails/templates/rails/welcome/index.html.erb
+  Rendered /Users/apple/.rbenv/versions/3.1.2/lib/ruby/gems/3.1.0/gems/railties-7.1.3/lib/rails/templates/rails/welcome/index.html.erb (Duration: 0.0ms | Allocations: 15)
+Completed 200 OK in 1ms (Views: 0.4ms | ActiveRecord: 0.0ms | Allocations: 207)
+
+
+Started GET "/users/edit" for ::1 at 2024-03-17 07:33:18 -0400
+Processing by Users::RegistrationsController#edit as HTML
+  [1m[36mUser Load (31.7ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 7], ["LIMIT", 1]]
+  Rendering layout layouts/application.html.erb
+  Rendering devise/registrations/edit.html.erb within layouts/application
+  Rendered devise/shared/_error_messages.html.erb (Duration: 0.0ms | Allocations: 13)
+  [1m[36mStudent Load (27.0ms)[0m  [1m[34mSELECT "students".* FROM "students" WHERE "students"."user_id" = $1 LIMIT $2[0m  [["user_id", 7], ["LIMIT", 1]]
+  ↳ app/views/devise/registrations/edit.html.erb:15
+  Rendered devise/registrations/edit.html.erb within layouts/application (Duration: 34.9ms | Allocations: 2406)
+  Rendered layout layouts/application.html.erb (Duration: 42.2ms | Allocations: 3339)
+Completed 200 OK in 106ms (Views: 16.2ms | ActiveRecord: 58.6ms | Allocations: 5150)
+
+
+Started PUT "/users" for ::1 at 2024-03-17 07:33:28 -0400
+Processing by Users::RegistrationsController#update as HTML
+  Parameters: {"authenticity_token"=>"[FILTERED]", "user"=>{"email"=>"11@a.com", "student_attributes"=>{"major"=>"abcde", "is_undergraduate"=>"1", "id"=>"4"}, "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "current_password"=>"[FILTERED]"}, "commit"=>"Update"}
+  [1m[36mUser Load (32.9ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 7], ["LIMIT", 1]]
+  [1m[36mUser Load (31.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 7], ["LIMIT", 1]]
+[31mUnpermitted parameter: :id. Context: { controller: Users::RegistrationsController, action: update, request: #<ActionDispatch::Request:0x00000001140bfcd8>, params: {"_method"=>"put", "authenticity_token"=>"[FILTERED]", "user"=>{"email"=>"11@a.com", "student_attributes"=>{"major"=>"abcde", "is_undergraduate"=>"1", "id"=>"4"}, "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "current_password"=>"[FILTERED]"}, "commit"=>"Update", "controller"=>"users/registrations", "action"=>"update"} }[0m
+  [1m[36mTRANSACTION (28.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mStudent Load (26.4ms)[0m  [1m[34mSELECT "students".* FROM "students" WHERE "students"."user_id" = $1 LIMIT $2[0m  [["user_id", 7], ["LIMIT", 1]]
+  [1m[36mStudent Destroy (27.8ms)[0m  [1m[31mDELETE FROM "students" WHERE "students"."id" = $1[0m  [["id", 4]]
+  [1m[36mStudent Create (27.8ms)[0m  [1m[32mINSERT INTO "students" ("major", "is_undergraduate", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["major", "abcde"], ["is_undergraduate", true], ["user_id", 7], ["created_at", "2024-03-17 11:33:28.932212"], ["updated_at", "2024-03-17 11:33:28.932212"]]
+  [1m[36mTRANSACTION (46.9ms)[0m  [1m[35mCOMMIT[0m
+[31mUnpermitted parameter: :id. Context: { controller: Users::RegistrationsController, action: update, request: #<ActionDispatch::Request:0x00000001140bfcd8>, params: {"_method"=>"put", "authenticity_token"=>"[FILTERED]", "user"=>{"email"=>"11@a.com", "student_attributes"=>{"major"=>"abcde", "is_undergraduate"=>"1", "id"=>"4"}, "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "current_password"=>"[FILTERED]"}, "commit"=>"Update", "controller"=>"users/registrations", "action"=>"update"} }[0m
+[31mUnpermitted parameter: :id. Context: { controller: Users::RegistrationsController, action: update, request: #<ActionDispatch::Request:0x00000001140bfcd8>, params: {"_method"=>"put", "authenticity_token"=>"[FILTERED]", "user"=>{"email"=>"11@a.com", "student_attributes"=>{"major"=>"abcde", "is_undergraduate"=>"1", "id"=>"4"}, "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "current_password"=>"[FILTERED]"}, "commit"=>"Update", "controller"=>"users/registrations", "action"=>"update"} }[0m
+[31mUnpermitted parameter: :id. Context: { controller: Users::RegistrationsController, action: update, request: #<ActionDispatch::Request:0x00000001140bfcd8>, params: {"_method"=>"put", "authenticity_token"=>"[FILTERED]", "user"=>{"email"=>"11@a.com", "student_attributes"=>{"major"=>"abcde", "is_undergraduate"=>"1", "id"=>"4"}, "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "current_password"=>"[FILTERED]"}, "commit"=>"Update", "controller"=>"users/registrations", "action"=>"update"} }[0m
+Redirected to http://localhost:3000/
+Completed 303 See Other in 570ms (ActiveRecord: 221.4ms | Allocations: 10401)
+
+
+Started GET "/" for ::1 at 2024-03-17 07:33:29 -0400
+Processing by Rails::WelcomeController#index as HTML
+  Rendering /Users/apple/.rbenv/versions/3.1.2/lib/ruby/gems/3.1.0/gems/railties-7.1.3/lib/rails/templates/rails/welcome/index.html.erb
+  Rendered /Users/apple/.rbenv/versions/3.1.2/lib/ruby/gems/3.1.0/gems/railties-7.1.3/lib/rails/templates/rails/welcome/index.html.erb (Duration: 0.1ms | Allocations: 15)
+Completed 200 OK in 1ms (Views: 0.7ms | ActiveRecord: 0.0ms | Allocations: 207)
+
+
+Started GET "/users/sign_up" for ::1 at 2024-03-17 07:33:34 -0400
+Processing by Users::RegistrationsController#new as HTML
+  [1m[36mUser Load (26.8ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 7], ["LIMIT", 1]]
+Redirected to http://localhost:3000/
+Filter chain halted as :require_no_authentication rendered or redirected
+Completed 302 Found in 63ms (ActiveRecord: 26.8ms | Allocations: 1638)
+
+
+Started GET "/" for ::1 at 2024-03-17 07:33:34 -0400
+Processing by Rails::WelcomeController#index as HTML
+  Rendering /Users/apple/.rbenv/versions/3.1.2/lib/ruby/gems/3.1.0/gems/railties-7.1.3/lib/rails/templates/rails/welcome/index.html.erb
+  Rendered /Users/apple/.rbenv/versions/3.1.2/lib/ruby/gems/3.1.0/gems/railties-7.1.3/lib/rails/templates/rails/welcome/index.html.erb (Duration: 0.2ms | Allocations: 15)
+Completed 200 OK in 2ms (Views: 1.2ms | ActiveRecord: 0.0ms | Allocations: 207)
+
+
+Started GET "/users/edit" for ::1 at 2024-03-17 07:33:40 -0400
+Processing by Users::RegistrationsController#edit as HTML
+  [1m[36mUser Load (31.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 7], ["LIMIT", 1]]
+  Rendering layout layouts/application.html.erb
+  Rendering devise/registrations/edit.html.erb within layouts/application
+  Rendered devise/shared/_error_messages.html.erb (Duration: 0.1ms | Allocations: 13)
+  [1m[36mStudent Load (26.6ms)[0m  [1m[34mSELECT "students".* FROM "students" WHERE "students"."user_id" = $1 LIMIT $2[0m  [["user_id", 7], ["LIMIT", 1]]
+  ↳ app/views/devise/registrations/edit.html.erb:15
+  Rendered devise/registrations/edit.html.erb within layouts/application (Duration: 37.0ms | Allocations: 2406)
+  Rendered layout layouts/application.html.erb (Duration: 42.8ms | Allocations: 3339)
+Completed 200 OK in 108ms (Views: 17.0ms | ActiveRecord: 57.8ms | Allocations: 5130)
+
+
+Started GET "/users/edit" for ::1 at 2024-03-17 07:34:02 -0400
+Processing by Users::RegistrationsController#edit as HTML
+  [1m[36mUser Load (37.7ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 7], ["LIMIT", 1]]
+  Rendering layout layouts/application.html.erb
+  Rendering devise/registrations/edit.html.erb within layouts/application
+  Rendered devise/shared/_error_messages.html.erb (Duration: 0.9ms | Allocations: 199)
+  [1m[36mStudent Load (29.2ms)[0m  [1m[34mSELECT "students".* FROM "students" WHERE "students"."user_id" = $1 LIMIT $2[0m  [["user_id", 7], ["LIMIT", 1]]
+  ↳ app/views/devise/registrations/edit.html.erb:15
+  Rendered devise/registrations/edit.html.erb within layouts/application (Duration: 128.2ms | Allocations: 9988)
+  Rendered layout layouts/application.html.erb (Duration: 131.3ms | Allocations: 11282)
+Completed 200 OK in 484ms (Views: 52.2ms | ActiveRecord: 244.5ms | Allocations: 19467)
+
+
+Started GET "/users/edit" for ::1 at 2024-03-17 07:34:05 -0400
+Processing by Users::RegistrationsController#edit as HTML
+  [1m[36mUser Load (31.7ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 7], ["LIMIT", 1]]
+  Rendering layout layouts/application.html.erb
+  Rendering devise/registrations/edit.html.erb within layouts/application
+  Rendered devise/shared/_error_messages.html.erb (Duration: 0.0ms | Allocations: 13)
+  [1m[36mStudent Load (27.0ms)[0m  [1m[34mSELECT "students".* FROM "students" WHERE "students"."user_id" = $1 LIMIT $2[0m  [["user_id", 7], ["LIMIT", 1]]
+  ↳ app/views/devise/registrations/edit.html.erb:15
+  Rendered devise/registrations/edit.html.erb within layouts/application (Duration: 36.7ms | Allocations: 2419)
+  Rendered layout layouts/application.html.erb (Duration: 42.6ms | Allocations: 3353)
+Completed 200 OK in 108ms (Views: 16.7ms | ActiveRecord: 58.7ms | Allocations: 5265)
+
+
+Started PUT "/users" for ::1 at 2024-03-17 07:34:18 -0400
+Processing by Users::RegistrationsController#update as HTML
+  Parameters: {"authenticity_token"=>"[FILTERED]", "user"=>{"email"=>"11@a.com", "student_attributes"=>{"major"=>"abcde", "is_undergraduate"=>"0", "id"=>"5"}, "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "current_password"=>"[FILTERED]"}, "commit"=>"Update"}
+  [1m[36mUser Load (33.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 7], ["LIMIT", 1]]
+  [1m[36mUser Load (26.9ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 7], ["LIMIT", 1]]
+[31mUnpermitted parameter: :id. Context: { controller: Users::RegistrationsController, action: update, request: #<ActionDispatch::Request:0x000000011420d9f0>, params: {"_method"=>"put", "authenticity_token"=>"[FILTERED]", "user"=>{"email"=>"11@a.com", "student_attributes"=>{"major"=>"abcde", "is_undergraduate"=>"0", "id"=>"5"}, "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "current_password"=>"[FILTERED]"}, "commit"=>"Update", "controller"=>"users/registrations", "action"=>"update"} }[0m
+  [1m[36mTRANSACTION (28.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mStudent Load (27.6ms)[0m  [1m[34mSELECT "students".* FROM "students" WHERE "students"."user_id" = $1 LIMIT $2[0m  [["user_id", 7], ["LIMIT", 1]]
+  [1m[36mStudent Destroy (27.3ms)[0m  [1m[31mDELETE FROM "students" WHERE "students"."id" = $1[0m  [["id", 5]]
+  [1m[36mStudent Create (27.2ms)[0m  [1m[32mINSERT INTO "students" ("major", "is_undergraduate", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["major", "abcde"], ["is_undergraduate", false], ["user_id", 7], ["created_at", "2024-03-17 11:34:19.058601"], ["updated_at", "2024-03-17 11:34:19.058601"]]
+  [1m[36mTRANSACTION (27.2ms)[0m  [1m[35mCOMMIT[0m
+[31mUnpermitted parameter: :id. Context: { controller: Users::RegistrationsController, action: update, request: #<ActionDispatch::Request:0x000000011420d9f0>, params: {"_method"=>"put", "authenticity_token"=>"[FILTERED]", "user"=>{"email"=>"11@a.com", "student_attributes"=>{"major"=>"abcde", "is_undergraduate"=>"0", "id"=>"5"}, "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "current_password"=>"[FILTERED]"}, "commit"=>"Update", "controller"=>"users/registrations", "action"=>"update"} }[0m
+[31mUnpermitted parameter: :id. Context: { controller: Users::RegistrationsController, action: update, request: #<ActionDispatch::Request:0x000000011420d9f0>, params: {"_method"=>"put", "authenticity_token"=>"[FILTERED]", "user"=>{"email"=>"11@a.com", "student_attributes"=>{"major"=>"abcde", "is_undergraduate"=>"0", "id"=>"5"}, "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "current_password"=>"[FILTERED]"}, "commit"=>"Update", "controller"=>"users/registrations", "action"=>"update"} }[0m
+[31mUnpermitted parameter: :id. Context: { controller: Users::RegistrationsController, action: update, request: #<ActionDispatch::Request:0x000000011420d9f0>, params: {"_method"=>"put", "authenticity_token"=>"[FILTERED]", "user"=>{"email"=>"11@a.com", "student_attributes"=>{"major"=>"abcde", "is_undergraduate"=>"0", "id"=>"5"}, "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "current_password"=>"[FILTERED]"}, "commit"=>"Update", "controller"=>"users/registrations", "action"=>"update"} }[0m
+Redirected to http://localhost:3000/
+Completed 303 See Other in 832ms (ActiveRecord: 197.8ms | Allocations: 12222)
+
+
+Started GET "/" for ::1 at 2024-03-17 07:34:19 -0400
+Processing by Rails::WelcomeController#index as HTML
+  Rendering /Users/apple/.rbenv/versions/3.1.2/lib/ruby/gems/3.1.0/gems/railties-7.1.3/lib/rails/templates/rails/welcome/index.html.erb
+  Rendered /Users/apple/.rbenv/versions/3.1.2/lib/ruby/gems/3.1.0/gems/railties-7.1.3/lib/rails/templates/rails/welcome/index.html.erb (Duration: 3.3ms | Allocations: 285)
+Completed 200 OK in 15ms (Views: 5.8ms | ActiveRecord: 0.0ms | Allocations: 960)
+
+
+Started GET "/users/edit" for ::1 at 2024-03-17 07:34:24 -0400
+Processing by Users::RegistrationsController#edit as HTML
+  [1m[36mUser Load (27.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 7], ["LIMIT", 1]]
+  Rendering layout layouts/application.html.erb
+  Rendering devise/registrations/edit.html.erb within layouts/application
+  Rendered devise/shared/_error_messages.html.erb (Duration: 0.1ms | Allocations: 14)
+  [1m[36mStudent Load (26.9ms)[0m  [1m[34mSELECT "students".* FROM "students" WHERE "students"."user_id" = $1 LIMIT $2[0m  [["user_id", 7], ["LIMIT", 1]]
+  ↳ app/views/devise/registrations/edit.html.erb:15
+  Rendered devise/registrations/edit.html.erb within layouts/application (Duration: 41.4ms | Allocations: 2557)
+  Rendered layout layouts/application.html.erb (Duration: 47.9ms | Allocations: 3593)
+Completed 200 OK in 108ms (Views: 22.3ms | ActiveRecord: 54.2ms | Allocations: 5638)
+
+
+  [1m[36mUser Load (27.7ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" DESC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[36mStudent Load (31.4ms)[0m  [1m[34mSELECT "students".* FROM "students" WHERE "students"."user_id" = $1 LIMIT $2[0m  [["user_id", 7], ["LIMIT", 1]]
+  [1m[36mInstructor Load (27.5ms)[0m  [1m[34mSELECT "instructors".* FROM "instructors" WHERE "instructors"."user_id" = $1 LIMIT $2[0m  [["user_id", 7], ["LIMIT", 1]]
+Started GET "/users/edit" for ::1 at 2024-03-17 07:41:05 -0400
+Processing by Users::RegistrationsController#edit as HTML
+  [1m[36mUser Load (27.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 7], ["LIMIT", 1]]
+  Rendering layout layouts/application.html.erb
+  Rendering devise/registrations/edit.html.erb within layouts/application
+  Rendered devise/shared/_error_messages.html.erb (Duration: 2.3ms | Allocations: 199)
+  [1m[36mStudent Load (28.9ms)[0m  [1m[34mSELECT "students".* FROM "students" WHERE "students"."user_id" = $1 LIMIT $2[0m  [["user_id", 7], ["LIMIT", 1]]
+  ↳ app/models/user.rb:13:in `student?'
+  Rendered devise/registrations/edit.html.erb within layouts/application (Duration: 82.2ms | Allocations: 9890)
+  Rendered layout layouts/application.html.erb (Duration: 87.4ms | Allocations: 11184)
+Completed 200 OK in 887ms (Views: 66.4ms | ActiveRecord: 329.6ms | Allocations: 21854)
+
+
