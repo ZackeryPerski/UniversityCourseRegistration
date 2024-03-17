@@ -43,7 +43,7 @@
   <%= f.fields_for :student_attributes do |student_form| %>
     <div class="field">
       <%= student_form.label :major %><br />
-      <%= student_form.text_field :major %>
+      <%= student_form.select :major, Student.majors.keys.map { |major| [major.titleize, major] }, { prompt: "Select a major"}, { class: "custom-select" } %>
     </div>
 
     <div class="field">

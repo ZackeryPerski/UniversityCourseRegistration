@@ -1,12 +1,12 @@
 <div id="<%= dom_id section %>">
   <p>
     <strong>Course:</strong>
-    <%= section.course_id %>
+    <%= section.course.full_course_title %>
   </p>
 
   <p>
     <strong>Instructor:</strong>
-    <%= section.instructor_id %>
+    <%= section.instructor.full_name %>
   </p>
 
   <p>
@@ -31,12 +31,12 @@
 
   <p>
     <strong>Start time:</strong>
-    <%= section.start_time %>
+    <%= section.start_time.strftime('%H:%M') if section.start_time.present? %>
   </p>
 
   <p>
     <strong>End time:</strong>
-    <%= section.end_time %>
+    <%= section.end_time.strftime('%H:%M') if section.end_time.present? %>
   </p>
 
 </div>
