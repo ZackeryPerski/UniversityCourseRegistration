@@ -23,7 +23,7 @@
 
   <div>
     <%= form.label :department_id, style: "display: block" %>
-    <%= form.text_field :department_id %>
+    <%= form.collection_select :department_id, Department.all, :id, :name, { prompt: "Select a Department" } %>
   </div>
 
   <div>

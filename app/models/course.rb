@@ -7,4 +7,9 @@ class Course < ApplicationRecord
 
   has_many :prerequisite_for_courses, class_name: 'Prerequisite', foreign_key: 'prerequisite_course_id'
   has_many :courses, through: :prerequisite_for_courses, source: :course
+
+  def full_course_title
+    "#{department.code} #{code}: #{title}"
+  end
+
 end
