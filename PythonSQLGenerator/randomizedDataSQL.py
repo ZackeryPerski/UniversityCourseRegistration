@@ -1,39 +1,38 @@
-from random_address import real_random_address
-import names, random
+import names, random, json
 
-f = open("testDataInsert.sql","w")
+f = open("DataInsert.sql","w")
+with open('courses.json', 'r') as courses_file:
+   coursesComponents = json.load(courses_file)
+with open('departments.json', 'r') as departments_file:
+   departmentsComponents = json.load(departments_file)
+
 emailEnders = ["@gmail.com","@outlook.com","@hotmail.com","@yahoo.com","@protonmail.com","@msn.com"]
 
 #Hard coded status inserts
-statusInsert = "insert into status(status_type) values ('pending'),('approved'),('denied');"
+#statusInsert = "insert into status(status_type) values ('pending'),('approved'),('denied');"
 
-
-usersInsert = "insert into users (address, email, first_name, last_name, user_password, user_name) values ('{address}','{email}','{first_name}','{last_name}','{user_password}','{user_name}');"
-accountsInsert = "insert into accounts(amount,account_type_id,user_id) values ({amount:.2f},{account_type_id},{user_id});"
-
+usersInsert = "insert into users(email, encrypted_password, first_name, last_name, university_id) values ('{email}','{encrypted_password}','{first_name}','{last_name}','{university_id}')"
+studentsInsert = "insert into students(major, is_undergraduate, user_id) values ('{department_name}',{is_undergrad},{user_id})"
+instructorsInsert = "insert into instructors(ssn, phone_number, department_id, user_id) values ('{ssn}','{phone_number}',{department_id},{user_id})"
+departmentsInsert = "insert into departments(name, code, department_head_id) values ('{department_name}','{department_code}',{department_head_id})"
+coursesInsert = "insert into courses(title, description, department_id, code, credits) values ('{title}','{description}',{department_id},'{code}', {credits})"
+prereqsInsert = "insert into prerequisites(course_id, prerequisite_course_id) values ({course_id},{prerequisite_course_id})"
+sectionsInsert = "insert into sections(course_id, instructor_id, capacity, semester, year, days, start_time, end_time) values ({course_id}, {instructor_id}, {capacity}, '{semester}', {year}, '{days}', '{start_time}', '{end_time}')"
+sectionsStudentsInsert = "insert into sections_students(section_id, student_id, grade) values ({section_id}, {student_id}, {grade})"
 #boilerplate entries to clear the db for demo.
-f.write("delete from status cascade;\n")
-f.write("delete from account_type cascade;\n")
-f.write("delete from transaction_types cascade;\n")
-f.write("delete from users;\n")
-f.write("\n\n")
-#boilerplate entries to initialize helper tables.
-f.write("insert into status(status_type) values ('pending'),('approved'),('denied');\n")
-f.write("insert into account_type(account_type_name) values ('checking'),('savings');\n")
-f.write("insert into transaction_types(transaction_types_name) values ('expense'),('income');\n\n\n")
 
+#boilerplate entries to initialize helper tables.
+
+#start with generating 100 users that are students.
 i = 0
-while i<50:
-   output = usersInsert
-   accountSQL = accountsInsert
-   fName = names.get_first_name()
-   lName = names.get_last_name()
-   emailTemp = fName+"."+lName+str(random.randint(1,9999))+random.choice(emailEnders)
-   userPasswordTemp = str(random.choice(random.choice(emailEnders)))+str(random.randrange(0,100))+str(random.choice(random.choice(emailEnders)))+random.choice(['!',"_","@","#","$","^","&","*","(",")","-","=","+"])
-   userNameTemp = random.choice([fName,lName])+str(random.randint(1,9999))
-   addressDictionary = real_random_address()
-   addressTemp = addressDictionary['address1']+", "+addressDictionary['city']+', '+addressDictionary['state']+', ' + addressDictionary['postalCode']
-   output = output.format(address=addressTemp,email=emailTemp,first_name=fName,last_name=lName,user_password=userPasswordTemp,user_name=userNameTemp)
+while i<100:
+   firstName = names.get_first_name()
+   lastName = names.get_last_name()
+   email = firstName[0]+lastName+str(random.randint(1,9999))+random.choice(emailEnders)
+   userPassword = str(random.choice(random.choice(emailEnders)))+str(random.randrange(0,100))+str(random.choice(random.choice(emailEnders)))+random.choice(['!',"_","@","#","$","^","&","*","(",")","-","=","+"])
+   universityId = "S"+(":09".format(i))
+   {email}','{encrypted_password}','{first_name}','{last_name}','{university_id}
+   userOutput = usersInsert.format(email=email,encrypted,first_name=fName,last_name=lName,user_password=userPasswordTemp,user_name=userNameTemp)
    
    accountSQL = accountSQL.format(amount=random.random()*1000,account_type_id=random.randint(1,2),user_id=i+1)
    if random.randint(0,1)==1:
