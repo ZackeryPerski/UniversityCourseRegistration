@@ -1,0 +1,1 @@
+The sample provided here is a smaller glimpse of what is happening in the main instantiator module. This sample is written for only a few tables, where-as the instantiator module in the other folder is what you would need to run to generate test data SQL for our P3 demo.
