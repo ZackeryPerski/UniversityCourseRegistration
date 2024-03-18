@@ -42,3 +42,7 @@ while i<100:
    i+=1
 
 f.close()
+
+
+#ruby reset code for later, drops all tables, recreates, migrates, then seeds.
+#rails db:drop db:create db:migrate db:seed
