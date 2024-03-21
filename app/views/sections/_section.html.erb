@@ -1,42 +1,19 @@
-<div id="<%= dom_id section %>">
-  <p>
-    <strong>Course:</strong>
-    <%= section.course.full_course_title %>
-  </p>
-
-  <p>
-    <strong>Instructor:</strong>
-    <%= section.instructor.full_name %>
-  </p>
-
-  <p>
-    <strong>Capacity:</strong>
-    <%= section.capacity %>
-  </p>
-
-  <p>
-    <strong>Semester:</strong>
-    <%= section.semester %>
-  </p>
-
-  <p>
-    <strong>Year:</strong>
-    <%= section.year %>
-  </p>
-
-  <p>
-    <strong>Days:</strong>
-    <%= section.days %>
-  </p>
-
-  <p>
-    <strong>Start time:</strong>
-    <%= section.start_time.strftime('%H:%M') if section.start_time.present? %>
-  </p>
-
-  <p>
-    <strong>End time:</strong>
-    <%= section.end_time.strftime('%H:%M') if section.end_time.present? %>
-  </p>
-
+<div class="card p-3 mb-2 bg-black text-white" style="width: 50rem;">
+  <div class="card-body">
+    <h2 class="card-title"><strong><%= section.course.full_course_title %></strong></h2>
+    <!--<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>-->
+  </div>
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item bg-dark bg-gradient w-100 p-2 text-light"><strong>Instructor: </strong><%= section.instructor.full_name %></li>
+    <li class="list-group-item bg-dark bg-gradient w-100 p-2 text-light"><strong>Capacity: </strong><%= section.capacity %></li>
+    <li class="list-group-item bg-dark bg-gradient w-100 p-2 text-light"><strong>Semester: </strong><%= section.semester %></li>
+    <li class="list-group-item bg-dark bg-gradient w-100 p-2 text-light"><strong>Year: </strong><%= section.year %></li>
+    <li class="list-group-item bg-dark bg-gradient w-100 p-2 text-light"><strong>Days: </strong><%= section.days %></li>
+    <li class="list-group-item bg-dark bg-gradient w-100 p-2 text-light"><strong>Start time: </strong><%= section.start_time.strftime('%H:%M') if section.start_time.present? %></li>
+    <li class="list-group-item bg-dark bg-gradient w-100 p-2 text-light"><strong>End time: </strong><%= section.end_time.strftime('%H:%M') if section.end_time.present? %></li>
+  </ul>
+  <div class="card-body">
+    <button type="button" class="btn btn-dark"><%= link_to "Show this section", section %></button>
+    <button type="button" class="btn btn-dark"><%= link_to "Delete this section", @section, method: :delete %></button>
+  </div>
 </div>

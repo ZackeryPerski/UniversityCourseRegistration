@@ -13,8 +13,7 @@
 
   <div class="card p-3 mb-2 bg-black text-white" style="width: 50rem;">
   <div class="card-body">
-    <h2 class="card-title"><strong>Editing <%= section.course.full_course_title %></strong></h2>
-    <!--<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>-->
+    <h2 class="card-title"><strong>Creating a new section</strong></h2>
   </div>
   <ul class="list-group list-group-flush">
     <li class="list-group-item bg-dark bg-gradient w-100 p-2 text-light"><%= form.label :course_id, style: "display: block" %><%= form.collection_select :course_id, Course.all, :id, :full_course_title, { prompt: "Select a Course" } %></li>
@@ -28,7 +27,6 @@
   </ul>
   <div class="card-body">
     <button type="button" class="btn btn-dark"><%= link_to "Show this section", section %></button>
-    <button type="button" class="btn btn-dark"><%= link_to "Back to sections", sections_path %></button>
     <button type="button" class="btn btn-dark"><%= form.submit %></button>
   </div>
 </div>

@@ -1,10 +1,11 @@
-<h1>Editing section</h1>
+<div class = bg-dark bg-gradient w-100 p-100 text-light>
+  <div class = "mx-auto" style="width: 20px;">
+    <div class = "text-white">
+      <h1>Editing section</h1>
+    </div>
+  </div>
 
-<%= render "form", section: @section %>
-
-<br>
-
-<div>
-  <%= link_to "Show this section", @section %> |
-  <%= link_to "Back to sections", sections_path %>
+  <div class = "mx-auto" style="width: 750px;">
+    <%= render "form", section: @section %>
+  </div>
 </div>
