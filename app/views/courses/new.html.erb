@@ -1,17 +1,17 @@
 <div class = "d-flex flex-column align-items-center justify-contents-center">
   
-  <div class="card" style="width: 18rem;">
+  <div class="card text-white bg-success mb-3" style="width: 18rem; margin-top: 1rem;">
+    <div class="card-header"><h1>New Course</h1></div>
     <div class="card-body">
-      <h5 class="card-title"><h1>New Course</h1></h5>
       <p class="card-text"><%= render "form", course: @course %></p>
     </div>
-    
-    <button type="button" class="btn btn-outline-danger">
+  </div>
+  
+  <button type="button" class="btn btn-outline-danger">
       <div>
         <%= link_to "Back to courses", courses_path %>
       </div>
     </button>
-  </div>
 
 </div>
 

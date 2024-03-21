@@ -1,6 +1,8 @@
 <p style="color: green"><%= notice %></p>
 <div class = "d-flex flex-column align-items-center justify-contents-center">
-<%= render @course %>
+  <div style = "width: 18rem;">
+    <%= render @course %>
+  </div>
 
   <div>
     <%= link_to "Edit this course", edit_course_path(@course), class: "btn btn-outline-success" %> |
