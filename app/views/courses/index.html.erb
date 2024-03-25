@@ -1,14 +1,23 @@
 <p style="color: green"><%= notice %></p>
 
-<h1>Courses</h1>
-
-<div id="courses">
-  <% @courses.each do |course| %>
-    <%= render course %>
-    <p>
-      <%= link_to "Show this course", course %>
-    </p>
-  <% end %>
+<div class="badge text-bg-success d-flex flex-column align-items-center justify-contents-center"
+      style = "margin-bottom: 1.5em;">
+  <h1>Courses</h1>
 </div>
-
-<%= link_to "New course", new_course_path %>
+  <div id="courses" class = "d-flex flex-column align-items-center justify-contents-center">
+    <div style = "width: 18rem;">
+    <% @courses.each do |course| %>
+      <%= render course %>
+      <div style = "margin-top: -0.8em; margin-bottom: 3em;">
+        <p>
+          <%= link_to "Show this course", course, class: "btn btn-outline-success" %>
+        </p>
+       </div> 
+    <% end %>
+    </div>
+    
+  </div>
+<div class = "d-flex flex-column align-items-center justify-contents-center"
+      style = "margin-bottom: 5em;">
+  <%= link_to "New course", new_course_path, class: "btn btn-outline-warning" %>
+</div>

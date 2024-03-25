@@ -1,27 +1,30 @@
 <div id="<%= dom_id course %>">
+</div>
+<div class="card text-bg-success mb-3" style="max-width: 18rem;" >
+  <div class="card-header">
   <p>
     <strong>Title:</strong>
     <%= course.title %>
+  
+  </div>
+  <div class="card-body">
   </p>
-
-  <p>
-    <strong>Description:</strong>
-    <%= course.description %>
-  </p>
-
-  <p>
+    <p>
     <strong>Department:</strong>
     <%= course.department.name %>
   </p>
-
-  <p>
+    <h5 class="card-title"><p>
     <strong>Code:</strong>
     <%= course.code %>
-  </p>
-
+  </p></h5>
+    <p class="card-text">  <p>
+    <strong>Description:</strong>
+    <%= course.description %>
+  </p></p>
   <p>
-    <strong>Credits:</strong>
-    <%= course.credits %>
+  <strong>Credits:</strong>
+  <%= course.credits %>
   </p>
-
+  </div>
 </div>
+
