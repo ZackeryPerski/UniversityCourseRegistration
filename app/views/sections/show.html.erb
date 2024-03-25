@@ -1,10 +1,12 @@
-<p style="color: green"><%= notice %></p>
+<div class = bg-dark bg-gradient w-100 p-100 text-light>
+  <div class = "mx-auto" style="width: 750px;">
+    <%= render @section %>
+  </div>
 
-<%= render @section %>
-
-<div>
-  <%= link_to "Edit this section", edit_section_path(@section) %> |
-  <%= link_to "Back to sections", sections_path %>
-
-  <%= button_to "Destroy this section", @section, method: :delete %>
+  <div>
+    <div class = "mx-auto" style="width: 200px;">
+      <button type="button" class="btn btn-black btn-lg"><%= link_to "Edit this section", edit_section_path(@section) %></button>
+      <button type="button" class="btn btn-black btn-lg"><%= link_to "Back to sections", sections_path %></button>
+    </div>
+  </div>
 </div>

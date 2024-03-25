@@ -1,9 +1,9 @@
-<h1>New section</h1>
+<div class = bg-dark bg-gradient w-100 p-100 text-light>
+  <div class = "mx-auto" style="width: 800px;">
+    <%= render "formnew", section: @section %>
+  </div>
 
-<%= render "form", section: @section %>
-
-<br>
-
-<div>
-  <%= link_to "Back to sections", sections_path %>
+  <div class = "mx-auto" style="width: 200px;">
+    <button type="button" class="btn btn-dark"><%= link_to "Back to sections", sections_path %></button>
+  </div>
 </div>
