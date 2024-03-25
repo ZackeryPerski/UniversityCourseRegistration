@@ -3069,3 +3069,436 @@ Processing by Users::RegistrationsController#edit as HTML
 Completed 200 OK in 887ms (Views: 66.4ms | ActiveRecord: 329.6ms | Allocations: 21854)
 
 
+DEPRECATION WARNING: `Rails.application.secrets` is deprecated in favor of `Rails.application.credentials` and will be removed in Rails 7.2. (called from <main> at /Users/apple/repos/UniversityCourseRegistration/config/environment.rb:5)
+Started GET "/users/edit" for ::1 at 2024-03-24 23:13:15 -0400
+  [1m[36mActiveRecord::SchemaMigration Load (30.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by Users::RegistrationsController#edit as HTML
+Completed 401 Unauthorized in 9ms (ActiveRecord: 0.0ms | Allocations: 698)
+
+
+Started GET "/users/sign_in" for ::1 at 2024-03-24 23:13:17 -0400
+Processing by Devise::SessionsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering devise/sessions/new.html.erb within layouts/application
+  Rendered devise/shared/_links.html.erb (Duration: 2.7ms | Allocations: 618)
+  Rendered devise/sessions/new.html.erb within layouts/application (Duration: 36.9ms | Allocations: 3368)
+  Rendered layout layouts/application.html.erb (Duration: 122.7ms | Allocations: 21514)
+Completed 200 OK in 1045ms (Views: 158.1ms | ActiveRecord: 485.7ms | Allocations: 45941)
+
+
+Started GET "/courses/new" for ::1 at 2024-03-24 23:13:28 -0400
+Processing by CoursesController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering courses/new.html.erb within layouts/application
+  [1m[36mDepartment Load (26.6ms)[0m  [1m[34mSELECT "departments".* FROM "departments"[0m
+  ↳ app/views/courses/_form.html.erb:26
+  Rendered courses/_form.html.erb (Duration: 158.3ms | Allocations: 10912)
+  Rendered courses/new.html.erb within layouts/application (Duration: 159.9ms | Allocations: 11269)
+  Rendered layout layouts/application.html.erb (Duration: 162.6ms | Allocations: 12378)
+Completed 200 OK in 322ms (Views: 83.2ms | ActiveRecord: 173.7ms | Allocations: 24357)
+
+
+Started GET "/courses" for ::1 at 2024-03-24 23:13:35 -0400
+Processing by CoursesController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering courses/index.html.erb within layouts/application
+  [1m[36mCourse Load (55.4ms)[0m  [1m[34mSELECT "courses".* FROM "courses"[0m
+  ↳ app/views/courses/index.html.erb:9
+  [1m[36mDepartment Load (30.3ms)[0m  [1m[34mSELECT "departments".* FROM "departments" WHERE "departments"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/courses/_course.html.erb:14
+  Rendered courses/_course.html.erb (Duration: 123.5ms | Allocations: 5419)
+  [1m[36mDepartment Load (31.5ms)[0m  [1m[34mSELECT "departments".* FROM "departments" WHERE "departments"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/views/courses/_course.html.erb:14
+  Rendered courses/_course.html.erb (Duration: 35.9ms | Allocations: 798)
+  [1m[36mCACHE Department Load (0.0ms)[0m  [1m[34mSELECT "departments".* FROM "departments" WHERE "departments"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/views/courses/_course.html.erb:14
+  Rendered courses/_course.html.erb (Duration: 2.2ms | Allocations: 697)
+  Rendered courses/index.html.erb within layouts/application (Duration: 230.7ms | Allocations: 9018)
+  Rendered layout layouts/application.html.erb (Duration: 233.2ms | Allocations: 10076)
+Completed 200 OK in 238ms (Views: 90.5ms | ActiveRecord: 144.3ms | Allocations: 10566)
+
+
+Started GET "/courses/1" for ::1 at 2024-03-24 23:13:41 -0400
+Processing by CoursesController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mCourse Load (30.1ms)[0m  [1m[34mSELECT "courses".* FROM "courses" WHERE "courses"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/courses_controller.rb:63:in `set_course'
+  Rendering layout layouts/application.html.erb
+  Rendering courses/show.html.erb within layouts/application
+  [1m[36mDepartment Load (32.0ms)[0m  [1m[34mSELECT "departments".* FROM "departments" WHERE "departments"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/courses/_course.html.erb:14
+  Rendered courses/_course.html.erb (Duration: 39.8ms | Allocations: 788)
+  Rendered courses/show.html.erb within layouts/application (Duration: 79.6ms | Allocations: 1658)
+  Rendered layout layouts/application.html.erb (Duration: 112.1ms | Allocations: 2589)
+Completed 200 OK in 214ms (Views: 83.4ms | ActiveRecord: 61.9ms | Allocations: 4210)
+
+
+Started GET "/courses" for ::1 at 2024-03-24 23:13:44 -0400
+Processing by CoursesController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering courses/index.html.erb within layouts/application
+  [1m[36mCourse Load (91.1ms)[0m  [1m[34mSELECT "courses".* FROM "courses"[0m
+  ↳ app/views/courses/index.html.erb:9
+  [1m[36mDepartment Load (26.6ms)[0m  [1m[34mSELECT "departments".* FROM "departments" WHERE "departments"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/courses/_course.html.erb:14
+  Rendered courses/_course.html.erb (Duration: 35.7ms | Allocations: 790)
+  [1m[36mDepartment Load (27.7ms)[0m  [1m[34mSELECT "departments".* FROM "departments" WHERE "departments"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/views/courses/_course.html.erb:14
+  Rendered courses/_course.html.erb (Duration: 39.3ms | Allocations: 786)
+  [1m[36mCACHE Department Load (0.0ms)[0m  [1m[34mSELECT "departments".* FROM "departments" WHERE "departments"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/views/courses/_course.html.erb:14
+  Rendered courses/_course.html.erb (Duration: 13.4ms | Allocations: 686)
+  Rendered courses/index.html.erb within layouts/application (Duration: 200.0ms | Allocations: 3532)
+  Rendered layout layouts/application.html.erb (Duration: 215.1ms | Allocations: 4466)
+Completed 200 OK in 217ms (Views: 70.6ms | ActiveRecord: 145.4ms | Allocations: 4725)
+
+
+Started GET "/courses/new" for ::1 at 2024-03-24 23:13:47 -0400
+Processing by CoursesController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering courses/new.html.erb within layouts/application
+  [1m[36mDepartment Load (60.5ms)[0m  [1m[34mSELECT "departments".* FROM "departments"[0m
+  ↳ app/views/courses/_form.html.erb:26
+  Rendered courses/_form.html.erb (Duration: 69.6ms | Allocations: 2185)
+  Rendered courses/new.html.erb within layouts/application (Duration: 70.2ms | Allocations: 2265)
+  Rendered layout layouts/application.html.erb (Duration: 73.3ms | Allocations: 3198)
+Completed 200 OK in 75ms (Views: 14.2ms | ActiveRecord: 60.5ms | Allocations: 3474)
+
+
+Started GET "/courses" for ::1 at 2024-03-24 23:13:48 -0400
+Processing by CoursesController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering courses/index.html.erb within layouts/application
+  [1m[36mCourse Load (60.4ms)[0m  [1m[34mSELECT "courses".* FROM "courses"[0m
+  ↳ app/views/courses/index.html.erb:9
+  [1m[36mDepartment Load (37.9ms)[0m  [1m[34mSELECT "departments".* FROM "departments" WHERE "departments"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/courses/_course.html.erb:14
+  Rendered courses/_course.html.erb (Duration: 60.3ms | Allocations: 787)
+  [1m[36mDepartment Load (34.8ms)[0m  [1m[34mSELECT "departments".* FROM "departments" WHERE "departments"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/views/courses/_course.html.erb:14
+  Rendered courses/_course.html.erb (Duration: 39.9ms | Allocations: 787)
+  [1m[36mCACHE Department Load (0.3ms)[0m  [1m[34mSELECT "departments".* FROM "departments" WHERE "departments"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/views/courses/_course.html.erb:14
+  Rendered courses/_course.html.erb (Duration: 7.7ms | Allocations: 686)
+  Rendered courses/index.html.erb within layouts/application (Duration: 223.0ms | Allocations: 3538)
+  Rendered layout layouts/application.html.erb (Duration: 236.5ms | Allocations: 4472)
+Completed 200 OK in 240ms (Views: 106.2ms | ActiveRecord: 133.1ms | Allocations: 4729)
+
+
+Started GET "/courses/1" for ::1 at 2024-03-24 23:13:50 -0400
+Processing by CoursesController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mCourse Load (26.7ms)[0m  [1m[34mSELECT "courses".* FROM "courses" WHERE "courses"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/courses_controller.rb:63:in `set_course'
+  Rendering layout layouts/application.html.erb
+  Rendering courses/show.html.erb within layouts/application
+  [1m[36mDepartment Load (27.9ms)[0m  [1m[34mSELECT "departments".* FROM "departments" WHERE "departments"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/courses/_course.html.erb:14
+  Rendered courses/_course.html.erb (Duration: 30.8ms | Allocations: 784)
+  Rendered courses/show.html.erb within layouts/application (Duration: 33.3ms | Allocations: 1351)
+  Rendered layout layouts/application.html.erb (Duration: 37.2ms | Allocations: 2280)
+Completed 200 OK in 96ms (Views: 10.3ms | ActiveRecord: 54.4ms | Allocations: 3101)
+
+
+Started GET "/courses/1/edit" for ::1 at 2024-03-24 23:13:51 -0400
+Processing by CoursesController#edit as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mCourse Load (30.7ms)[0m  [1m[34mSELECT "courses".* FROM "courses" WHERE "courses"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/courses_controller.rb:63:in `set_course'
+  Rendering layout layouts/application.html.erb
+  Rendering courses/edit.html.erb within layouts/application
+  [1m[36mDepartment Load (27.2ms)[0m  [1m[34mSELECT "departments".* FROM "departments"[0m
+  ↳ app/views/courses/_form.html.erb:26
+  Rendered courses/_form.html.erb (Duration: 32.6ms | Allocations: 2167)
+  Rendered courses/edit.html.erb within layouts/application (Duration: 33.9ms | Allocations: 2437)
+  Rendered layout layouts/application.html.erb (Duration: 37.4ms | Allocations: 3366)
+Completed 200 OK in 101ms (Views: 11.1ms | ActiveRecord: 57.8ms | Allocations: 4246)
+
+
+Started GET "/courses" for ::1 at 2024-03-24 23:13:53 -0400
+Processing by CoursesController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering courses/index.html.erb within layouts/application
+  [1m[36mCourse Load (55.3ms)[0m  [1m[34mSELECT "courses".* FROM "courses"[0m
+  ↳ app/views/courses/index.html.erb:9
+  [1m[36mDepartment Load (30.7ms)[0m  [1m[34mSELECT "departments".* FROM "departments" WHERE "departments"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/courses/_course.html.erb:14
+  Rendered courses/_course.html.erb (Duration: 33.2ms | Allocations: 790)
+  [1m[36mDepartment Load (27.6ms)[0m  [1m[34mSELECT "departments".* FROM "departments" WHERE "departments"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/views/courses/_course.html.erb:14
+  Rendered courses/_course.html.erb (Duration: 30.4ms | Allocations: 786)
+  [1m[36mCACHE Department Load (0.0ms)[0m  [1m[34mSELECT "departments".* FROM "departments" WHERE "departments"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/views/courses/_course.html.erb:14
+  Rendered courses/_course.html.erb (Duration: 2.2ms | Allocations: 686)
+  Rendered courses/index.html.erb within layouts/application (Duration: 128.5ms | Allocations: 3528)
+  Rendered layout layouts/application.html.erb (Duration: 131.3ms | Allocations: 4462)
+Completed 200 OK in 133ms (Views: 18.9ms | ActiveRecord: 113.4ms | Allocations: 4719)
+
+
+DEPRECATION WARNING: `Rails.application.secrets` is deprecated in favor of `Rails.application.credentials` and will be removed in Rails 7.2. (called from <main> at /Users/apple/repos/UniversityCourseRegistration/config/environment.rb:5)
+Started GET "/sections/new" for ::1 at 2024-03-24 23:17:29 -0400
+  [1m[36mActiveRecord::SchemaMigration Load (31.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by SectionsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering sections/new.html.erb within layouts/application
+  [1m[36mCourse Load (29.7ms)[0m  [1m[34mSELECT "courses".* FROM "courses"[0m
+  ↳ app/views/sections/_formnew.html.erb:19
+  [1m[36mDepartment Load (28.8ms)[0m  [1m[34mSELECT "departments".* FROM "departments" WHERE "departments"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/models/course.rb:12:in `full_course_title'
+  [1m[36mDepartment Load (30.0ms)[0m  [1m[34mSELECT "departments".* FROM "departments" WHERE "departments"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/models/course.rb:12:in `full_course_title'
+  [1m[36mCACHE Department Load (0.0ms)[0m  [1m[34mSELECT "departments".* FROM "departments" WHERE "departments"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/models/course.rb:12:in `full_course_title'
+  [1m[36mInstructor Load (27.4ms)[0m  [1m[34mSELECT "instructors".* FROM "instructors"[0m
+  ↳ app/views/sections/_formnew.html.erb:20
+  [1m[36mUser Load (29.8ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/models/instructor.rb:10:in `full_name'
+  Rendered sections/_formnew.html.erb (Duration: 879.3ms | Allocations: 54585)
+  Rendered sections/new.html.erb within layouts/application (Duration: 882.9ms | Allocations: 55034)
+  Rendered layout layouts/application.html.erb (Duration: 974.3ms | Allocations: 72690)
+Completed 200 OK in 1971ms (Views: 567.2ms | ActiveRecord: 807.5ms | Allocations: 98354)
+
+
+Started GET "/sections" for ::1 at 2024-03-24 23:17:35 -0400
+Processing by SectionsController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering sections/index.html.erb within layouts/application
+  [1m[36mSection Load (59.1ms)[0m  [1m[34mSELECT "sections".* FROM "sections"[0m
+  ↳ app/views/sections/index.html.erb:9
+  [1m[36mCourse Load (37.9ms)[0m  [1m[34mSELECT "courses".* FROM "courses" WHERE "courses"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/sections/_section.html.erb:3
+  [1m[36mDepartment Load (28.6ms)[0m  [1m[34mSELECT "departments".* FROM "departments" WHERE "departments"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/models/course.rb:12:in `full_course_title'
+  [1m[36mInstructor Load (27.0ms)[0m  [1m[34mSELECT "instructors".* FROM "instructors" WHERE "instructors"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/sections/_section.html.erb:7
+  [1m[36mUser Load (30.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/models/instructor.rb:10:in `full_name'
+  Rendered sections/_section.html.erb (Duration: 278.3ms | Allocations: 7461)
+  [1m[36mCACHE Course Load (0.0ms)[0m  [1m[34mSELECT "courses".* FROM "courses" WHERE "courses"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/sections/_section.html.erb:3
+  [1m[36mCACHE Department Load (0.0ms)[0m  [1m[34mSELECT "departments".* FROM "departments" WHERE "departments"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/models/course.rb:12:in `full_course_title'
+  [1m[36mCACHE Instructor Load (0.0ms)[0m  [1m[34mSELECT "instructors".* FROM "instructors" WHERE "instructors"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/sections/_section.html.erb:7
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/models/instructor.rb:10:in `full_name'
+  Rendered sections/_section.html.erb (Duration: 64.6ms | Allocations: 2825)
+  Rendered sections/index.html.erb within layouts/application (Duration: 443.8ms | Allocations: 12145)
+  Rendered layout layouts/application.html.erb (Duration: 451.1ms | Allocations: 13201)
+Completed 200 OK in 473ms (Views: 287.9ms | ActiveRecord: 182.8ms | Allocations: 13701)
+
+
+Started GET "/sections" for ::1 at 2024-03-24 23:17:42 -0400
+Processing by SectionsController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering sections/index.html.erb within layouts/application
+  [1m[36mSection Load (51.8ms)[0m  [1m[34mSELECT "sections".* FROM "sections"[0m
+  ↳ app/views/sections/index.html.erb:9
+  [1m[36mCourse Load (28.0ms)[0m  [1m[34mSELECT "courses".* FROM "courses" WHERE "courses"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/sections/_section.html.erb:3
+  [1m[36mDepartment Load (26.4ms)[0m  [1m[34mSELECT "departments".* FROM "departments" WHERE "departments"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/models/course.rb:12:in `full_course_title'
+  [1m[36mInstructor Load (27.7ms)[0m  [1m[34mSELECT "instructors".* FROM "instructors" WHERE "instructors"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/sections/_section.html.erb:7
+  [1m[36mUser Load (27.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/models/instructor.rb:10:in `full_name'
+  Rendered sections/_section.html.erb (Duration: 129.5ms | Allocations: 3265)
+  [1m[36mCACHE Course Load (0.0ms)[0m  [1m[34mSELECT "courses".* FROM "courses" WHERE "courses"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/sections/_section.html.erb:3
+  [1m[36mCACHE Department Load (0.0ms)[0m  [1m[34mSELECT "departments".* FROM "departments" WHERE "departments"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/models/course.rb:12:in `full_course_title'
+  [1m[36mCACHE Instructor Load (0.0ms)[0m  [1m[34mSELECT "instructors".* FROM "instructors" WHERE "instructors"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/sections/_section.html.erb:7
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/models/instructor.rb:10:in `full_name'
+  Rendered sections/_section.html.erb (Duration: 13.4ms | Allocations: 2824)
+  Rendered sections/index.html.erb within layouts/application (Duration: 203.3ms | Allocations: 7263)
+  Rendered layout layouts/application.html.erb (Duration: 207.8ms | Allocations: 8198)
+Completed 200 OK in 210ms (Views: 48.4ms | ActiveRecord: 160.8ms | Allocations: 8498)
+
+
+Started GET "/sections/3" for ::1 at 2024-03-24 23:17:52 -0400
+Processing by SectionsController#show as HTML
+  Parameters: {"id"=>"3"}
+  [1m[36mSection Load (27.3ms)[0m  [1m[34mSELECT "sections".* FROM "sections" WHERE "sections"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/sections_controller.rb:63:in `set_section'
+  Rendering layout layouts/application.html.erb
+  Rendering sections/show.html.erb within layouts/application
+  [1m[36mCourse Load (29.1ms)[0m  [1m[34mSELECT "courses".* FROM "courses" WHERE "courses"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/sections/_section.html.erb:3
+  [1m[36mDepartment Load (26.4ms)[0m  [1m[34mSELECT "departments".* FROM "departments" WHERE "departments"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/models/course.rb:12:in `full_course_title'
+  [1m[36mInstructor Load (26.9ms)[0m  [1m[34mSELECT "instructors".* FROM "instructors" WHERE "instructors"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/sections/_section.html.erb:7
+  [1m[36mUser Load (29.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/models/instructor.rb:10:in `full_name'
+  Rendered sections/_section.html.erb (Duration: 125.6ms | Allocations: 3213)
+  Rendered sections/show.html.erb within layouts/application (Duration: 128.0ms | Allocations: 3475)
+  Rendered layout layouts/application.html.erb (Duration: 134.6ms | Allocations: 4669)
+Completed 200 OK in 231ms (Views: 24.2ms | ActiveRecord: 139.0ms | Allocations: 6238)
+
+
+Started GET "/sections" for ::1 at 2024-03-24 23:17:59 -0400
+Processing by SectionsController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering sections/index.html.erb within layouts/application
+  [1m[36mSection Load (56.0ms)[0m  [1m[34mSELECT "sections".* FROM "sections"[0m
+  ↳ app/views/sections/index.html.erb:9
+  [1m[36mCourse Load (29.9ms)[0m  [1m[34mSELECT "courses".* FROM "courses" WHERE "courses"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/sections/_section.html.erb:3
+  [1m[36mDepartment Load (25.4ms)[0m  [1m[34mSELECT "departments".* FROM "departments" WHERE "departments"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/models/course.rb:12:in `full_course_title'
+  [1m[36mInstructor Load (27.3ms)[0m  [1m[34mSELECT "instructors".* FROM "instructors" WHERE "instructors"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/sections/_section.html.erb:7
+  [1m[36mUser Load (24.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/models/instructor.rb:10:in `full_name'
+  Rendered sections/_section.html.erb (Duration: 168.1ms | Allocations: 3262)
+  [1m[36mCACHE Course Load (0.0ms)[0m  [1m[34mSELECT "courses".* FROM "courses" WHERE "courses"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/sections/_section.html.erb:3
+  [1m[36mCACHE Department Load (0.0ms)[0m  [1m[34mSELECT "departments".* FROM "departments" WHERE "departments"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/models/course.rb:12:in `full_course_title'
+  [1m[36mCACHE Instructor Load (0.0ms)[0m  [1m[34mSELECT "instructors".* FROM "instructors" WHERE "instructors"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/sections/_section.html.erb:7
+  [1m[36mCACHE User Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/models/instructor.rb:10:in `full_name'
+  Rendered sections/_section.html.erb (Duration: 31.2ms | Allocations: 2824)
+  Rendered sections/index.html.erb within layouts/application (Duration: 261.3ms | Allocations: 7165)
+  Rendered layout layouts/application.html.erb (Duration: 266.2ms | Allocations: 8099)
+Completed 200 OK in 271ms (Views: 107.9ms | ActiveRecord: 162.7ms | Allocations: 8356)
+
+
+Started GET "/sections/new" for ::1 at 2024-03-24 23:18:01 -0400
+Processing by SectionsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering sections/new.html.erb within layouts/application
+  [1m[36mCourse Load (59.1ms)[0m  [1m[34mSELECT "courses".* FROM "courses"[0m
+  ↳ app/views/sections/_formnew.html.erb:19
+  [1m[36mDepartment Load (26.2ms)[0m  [1m[34mSELECT "departments".* FROM "departments" WHERE "departments"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/models/course.rb:12:in `full_course_title'
+  [1m[36mDepartment Load (26.0ms)[0m  [1m[34mSELECT "departments".* FROM "departments" WHERE "departments"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/models/course.rb:12:in `full_course_title'
+  [1m[36mCACHE Department Load (0.3ms)[0m  [1m[34mSELECT "departments".* FROM "departments" WHERE "departments"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/models/course.rb:12:in `full_course_title'
+  [1m[36mInstructor Load (26.3ms)[0m  [1m[34mSELECT "instructors".* FROM "instructors"[0m
+  ↳ app/views/sections/_formnew.html.erb:20
+  [1m[36mUser Load (29.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/models/instructor.rb:10:in `full_name'
+  Rendered sections/_formnew.html.erb (Duration: 250.3ms | Allocations: 6494)
+  Rendered sections/new.html.erb within layouts/application (Duration: 251.2ms | Allocations: 6574)
+  Rendered layout layouts/application.html.erb (Duration: 266.3ms | Allocations: 7507)
+Completed 200 OK in 268ms (Views: 100.5ms | ActiveRecord: 167.1ms | Allocations: 7776)
+
+
+Started POST "/sections" for ::1 at 2024-03-24 23:18:05 -0400
+Processing by SectionsController#create as HTML
+  Parameters: {"authenticity_token"=>"[FILTERED]", "section"=>{"course_id"=>"", "instructor_id"=>"", "capacity"=>"", "semester"=>"", "year"=>"", "days"=>"", "start_time"=>"", "end_time"=>""}, "commit"=>"Create Section"}
+  Rendering layout layouts/application.html.erb
+  Rendering sections/new.html.erb within layouts/application
+  [1m[36mCourse Load (54.5ms)[0m  [1m[34mSELECT "courses".* FROM "courses"[0m
+  ↳ app/views/sections/_formnew.html.erb:19
+  [1m[36mDepartment Load (25.6ms)[0m  [1m[34mSELECT "departments".* FROM "departments" WHERE "departments"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/models/course.rb:12:in `full_course_title'
+  [1m[36mDepartment Load (24.9ms)[0m  [1m[34mSELECT "departments".* FROM "departments" WHERE "departments"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/models/course.rb:12:in `full_course_title'
+  [1m[36mCACHE Department Load (0.2ms)[0m  [1m[34mSELECT "departments".* FROM "departments" WHERE "departments"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/models/course.rb:12:in `full_course_title'
+  [1m[36mInstructor Load (32.2ms)[0m  [1m[34mSELECT "instructors".* FROM "instructors"[0m
+  ↳ app/views/sections/_formnew.html.erb:20
+  [1m[36mUser Load (34.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/models/instructor.rb:10:in `full_name'
+  Rendered sections/_formnew.html.erb (Duration: 220.0ms | Allocations: 7177)
+  Rendered sections/new.html.erb within layouts/application (Duration: 220.3ms | Allocations: 7263)
+  Rendered layout layouts/application.html.erb (Duration: 229.5ms | Allocations: 8293)
+Completed 422 Unprocessable Entity in 236ms (Views: 59.5ms | ActiveRecord: 171.4ms | Allocations: 10161)
+
+
+Started GET "/sections" for ::1 at 2024-03-24 23:18:09 -0400
+Processing by SectionsController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering sections/index.html.erb within layouts/application
+  [1m[36mSection Load (52.0ms)[0m  [1m[34mSELECT "sections".* FROM "sections"[0m
+  ↳ app/views/sections/index.html.erb:9
+  [1m[36mCourse Load (31.9ms)[0m  [1m[34mSELECT "courses".* FROM "courses" WHERE "courses"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/sections/_section.html.erb:3
+  [1m[36mDepartment Load (35.9ms)[0m  [1m[34mSELECT "departments".* FROM "departments" WHERE "departments"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/models/course.rb:12:in `full_course_title'
+  [1m[36mInstructor Load (34.9ms)[0m  [1m[34mSELECT "instructors".* FROM "instructors" WHERE "instructors"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/sections/_section.html.erb:7
+  [1m[36mUser Load (26.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/models/instructor.rb:10:in `full_name'
+  Rendered sections/_section.html.erb (Duration: 410.3ms | Allocations: 3289)
+  [1m[36mCACHE Course Load (0.0ms)[0m  [1m[34mSELECT "courses".* FROM "courses" WHERE "courses"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/sections/_section.html.erb:3
+  [1m[36mCACHE Department Load (0.0ms)[0m  [1m[34mSELECT "departments".* FROM "departments" WHERE "departments"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/models/course.rb:12:in `full_course_title'
+  [1m[36mCACHE Instructor Load (0.0ms)[0m  [1m[34mSELECT "instructors".* FROM "instructors" WHERE "instructors"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/sections/_section.html.erb:7
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/models/instructor.rb:10:in `full_name'
+  Rendered sections/_section.html.erb (Duration: 23.6ms | Allocations: 2824)
+  Rendered sections/index.html.erb within layouts/application (Duration: 495.8ms | Allocations: 7203)
+  Rendered layout layouts/application.html.erb (Duration: 503.0ms | Allocations: 8144)
+Completed 200 OK in 506ms (Views: 324.3ms | ActiveRecord: 180.7ms | Allocations: 8403)
+
+
+DEPRECATION WARNING: `Rails.application.secrets` is deprecated in favor of `Rails.application.credentials` and will be removed in Rails 7.2. (called from <main> at /Users/apple/repos/UniversityCourseRegistration/config/environment.rb:5)
+DEPRECATION WARNING: `Rails.application.secrets` is deprecated in favor of `Rails.application.credentials` and will be removed in Rails 7.2. (called from <main> at /Users/apple/repos/UniversityCourseRegistration/config/environment.rb:5)
+Started GET "/" for ::1 at 2024-03-25 14:36:35 -0400
+  [1m[36mActiveRecord::SchemaMigration Load (16.8ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by Rails::WelcomeController#index as HTML
+  Rendering /Users/apple/.rbenv/versions/3.1.2/lib/ruby/gems/3.1.0/gems/railties-7.1.3/lib/rails/templates/rails/welcome/index.html.erb
+  Rendered /Users/apple/.rbenv/versions/3.1.2/lib/ruby/gems/3.1.0/gems/railties-7.1.3/lib/rails/templates/rails/welcome/index.html.erb (Duration: 2.7ms | Allocations: 381)
+Completed 200 OK in 55ms (Views: 14.3ms | ActiveRecord: 0.0ms | Allocations: 4745)
+
+
+Started GET "/" for ::1 at 2024-03-25 14:36:41 -0400
+Processing by Rails::WelcomeController#index as HTML
+  Rendering /Users/apple/.rbenv/versions/3.1.2/lib/ruby/gems/3.1.0/gems/railties-7.1.3/lib/rails/templates/rails/welcome/index.html.erb
+  Rendered /Users/apple/.rbenv/versions/3.1.2/lib/ruby/gems/3.1.0/gems/railties-7.1.3/lib/rails/templates/rails/welcome/index.html.erb (Duration: 0.1ms | Allocations: 24)
+Completed 200 OK in 1ms (Views: 0.8ms | ActiveRecord: 0.0ms | Allocations: 288)
+
+
+Started GET "/" for ::1 at 2024-03-25 14:36:44 -0400
+Processing by Rails::WelcomeController#index as HTML
+  Rendering /Users/apple/.rbenv/versions/3.1.2/lib/ruby/gems/3.1.0/gems/railties-7.1.3/lib/rails/templates/rails/welcome/index.html.erb
+  Rendered /Users/apple/.rbenv/versions/3.1.2/lib/ruby/gems/3.1.0/gems/railties-7.1.3/lib/rails/templates/rails/welcome/index.html.erb (Duration: 0.2ms | Allocations: 15)
+Completed 200 OK in 3ms (Views: 1.9ms | ActiveRecord: 0.0ms | Allocations: 213)
+
+
+Started GET "/main_site/" for ::1 at 2024-03-25 14:36:52 -0400
+  
+ActionController::RoutingError (No route matches [GET] "/main_site"):
+  
+Started GET "//main_site/my_courses" for ::1 at 2024-03-25 14:37:10 -0400
+Processing by MainSiteController#my_courses as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering main_site/my_courses.html.erb within layouts/application
+  [1m[36mCourse Load (32.6ms)[0m  [1m[34mSELECT "courses".* FROM "courses"[0m
+  ↳ app/views/main_site/my_courses.html.erb:4
+  Rendered main_site/my_courses.html.erb within layouts/application (Duration: 515.4ms | Allocations: 16157)
+  Rendered layout layouts/application.html.erb (Duration: 626.6ms | Allocations: 34472)
+Completed 200 OK in 679ms (Views: 392.3ms | ActiveRecord: 240.0ms | Allocations: 39706)
+
+
+Started GET "//main_site/my_courses" for ::1 at 2024-03-25 14:37:28 -0400
+Processing by MainSiteController#my_courses as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering main_site/my_courses.html.erb within layouts/application
+  [1m[36mCourse Load (33.3ms)[0m  [1m[34mSELECT "courses".* FROM "courses"[0m
+  ↳ app/views/main_site/my_courses.html.erb:4
+  Rendered main_site/my_courses.html.erb within layouts/application (Duration: 98.9ms | Allocations: 4431)
+  Rendered layout layouts/application.html.erb (Duration: 117.6ms | Allocations: 6943)
+Completed 200 OK in 132ms (Views: 37.1ms | ActiveRecord: 84.7ms | Allocations: 10503)
+
+
+Started GET "//main_site/my_courses" for ::1 at 2024-03-25 14:37:43 -0400
+Processing by MainSiteController#my_courses as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering main_site/my_courses.html.erb within layouts/application
+  [1m[36mCourse Load (33.9ms)[0m  [1m[34mSELECT "courses".* FROM "courses"[0m
+  ↳ app/views/main_site/my_courses.html.erb:4
+  Rendered main_site/my_courses.html.erb within layouts/application (Duration: 99.8ms | Allocations: 4854)
+  Rendered layout layouts/application.html.erb (Duration: 108.8ms | Allocations: 6435)
+Completed 200 OK in 123ms (Views: 28.2ms | ActiveRecord: 84.5ms | Allocations: 10039)
+
+

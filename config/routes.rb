@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'main_site/index'
+  get 'main_site/my_courses'
   resources :sections
   resources :courses
   devise_for :users, controllers: { registrations: 'users/registrations' }
