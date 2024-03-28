@@ -27,4 +27,14 @@ class MainSiteController < ApplicationController
     section_student.destroy if section_student.present?
     redirect_to main_site_my_courses_path, notice: "Successfully unregistered from #{course_name}."
   end
+
+  def change_grade
+    @user = Instructor.find(1).user
+    section_id, student_id, grade = params[:section_id], params[:student_id],  params[:grade]
+    section_student = SectionsStudent.find_by(section_id: section_id, student_id: student_id)
+    course_name = section_student.section.course.full_course_title
+    student_name = section_student.student.full_name
+    section_student.update(grade: grade) if section_student.present?
+    redirect_to main_site_my_courses_path, notice: "Successfully changed grade for #{student_name} in #{course_name}."
+  end
 end
