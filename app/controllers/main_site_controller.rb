@@ -30,10 +30,15 @@ class MainSiteController < ApplicationController
 
   def register
     @user = Student.find(6).user
+    student = @user.student
     section_id = params[:section_id]
     section = Section.find(section_id)
     if SectionsStudent.where(section_id: section_id, student_id: @user.student.id).any?
-      redirect_to sections_path, notice: 'You are already registered for this course'
+      redirect_to sections_path, notice: 'Error: You are already registered for this section'
+    elsif student.sections.where(course: section.course).any?
+      redirect_to sections_path, notice: 'Error: You are already for this course under another section.'
+    elsif section.sections_students.count >= section.capacity
+      redirect_to sections_path, notice: 'Error: Cannot register for this section, already at full capacity'
     else
       @user.student.sections_students.create(section_id: section_id)
       course_name = section.course.full_course_title
