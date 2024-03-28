@@ -1,6 +1,9 @@
 <div class="card p-3 mb-2 bg-black text-white" style="width: 50rem;">
-  <div class="card-body">
+  <div class="card-body  d-flex flex-row justify-content-between">
     <h2 class="card-title"><strong><%= section.course.full_course_title %></strong></h2>
+    <%= form_with url: register_main_site_path(section_id: section.id), method: :post do |form| %>
+      <%= form.submit "Register" %>
+    <% end %>
     <!--<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>-->
   </div>
   <ul class="list-group list-group-flush">
@@ -12,8 +15,4 @@
     <li class="list-group-item bg-dark bg-gradient w-100 p-2 text-light"><strong>Start time: </strong><%= section.start_time.strftime('%H:%M') if section.start_time.present? %></li>
     <li class="list-group-item bg-dark bg-gradient w-100 p-2 text-light"><strong>End time: </strong><%= section.end_time.strftime('%H:%M') if section.end_time.present? %></li>
   </ul>
-  <div class="card-body">
-    <button type="button" class="btn btn-dark"><%= link_to "Show this section", section %></button>
-    <button type="button" class="btn btn-dark"><%= link_to "Delete this section", @section, method: :delete %></button>
-  </div>
 </div>

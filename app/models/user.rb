@@ -18,8 +18,8 @@ class User < ApplicationRecord
   end
 
   def person
-    return student if is_student?
-    return instructor if is_instructor?
+    return student if student?
+    return instructor if instructor?
 
     nil
   end

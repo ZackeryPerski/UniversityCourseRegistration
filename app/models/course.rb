@@ -11,5 +11,4 @@ class Course < ApplicationRecord
   def full_course_title
     "#{department.code} #{code}: #{title}"
   end
-
 end
