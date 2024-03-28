@@ -4763,3 +4763,753 @@ Processing by MainSiteController#my_courses as HTML
 Completed 200 OK in 1032ms (Views: 70.9ms | ActiveRecord: 847.9ms | Allocations: 55724)
 
 
+Started GET "/main_site/my_courses" for ::1 at 2024-03-27 22:13:54 -0400
+Processing by MainSiteController#my_courses as HTML
+  [1m[36mStudent Load (30.8ms)[0m  [1m[34mSELECT "students".* FROM "students" WHERE "students"."id" = $1 LIMIT $2[0m  [["id", 7], ["LIMIT", 1]]
+  ↳ app/controllers/main_site_controller.rb:6:in `my_courses'
+Completed 404 Not Found in 203ms (ActiveRecord: 159.1ms | Allocations: 4184)
+
+
+  
+ActiveRecord::RecordNotFound (Couldn't find Student with 'id'=7):
+  
+app/controllers/main_site_controller.rb:6:in `my_courses'
+Started GET "/main_site/my_courses" for ::1 at 2024-03-27 22:14:12 -0400
+Processing by MainSiteController#my_courses as HTML
+  [1m[36mStudent Load (29.8ms)[0m  [1m[34mSELECT "students".* FROM "students" WHERE "students"."id" = $1 LIMIT $2[0m  [["id", 6], ["LIMIT", 1]]
+  ↳ app/controllers/main_site_controller.rb:6:in `my_courses'
+  [1m[36mUser Load (28.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 7], ["LIMIT", 1]]
+  ↳ app/controllers/main_site_controller.rb:6:in `my_courses'
+  [1m[36mInstructor Load (28.7ms)[0m  [1m[34mSELECT "instructors".* FROM "instructors" WHERE "instructors"."user_id" = $1 LIMIT $2[0m  [["user_id", 7], ["LIMIT", 1]]
+  ↳ app/models/user.rb:17:in `instructor?'
+  [1m[36mSection Load (31.9ms)[0m  [1m[34mSELECT "sections".* FROM "sections" INNER JOIN "sections_students" ON "sections"."id" = "sections_students"."section_id" WHERE "sections_students"."student_id" = $1 AND NOT ("sections"."semester" = $2 AND "sections"."year" = $3)[0m  [["student_id", 6], ["semester", "Winter"], ["year", 2024]]
+  ↳ app/controllers/main_site_controller.rb:18:in `sort_by'
+  [1m[36mCourse Load (32.4ms)[0m  [1m[34mSELECT "courses".* FROM "courses" WHERE "courses"."id" = $1[0m  [["id", 1]]
+  ↳ app/controllers/main_site_controller.rb:18:in `sort_by'
+  Rendering layout layouts/application.html.erb
+  Rendering main_site/my_courses.html.erb within layouts/application
+  [1m[36mSection Load (31.6ms)[0m  [1m[34mSELECT "sections".* FROM "sections" INNER JOIN "sections_students" ON "sections"."id" = "sections_students"."section_id" WHERE "sections_students"."student_id" = $1 AND "sections"."semester" = $2 AND "sections"."year" = $3[0m  [["student_id", 6], ["semester", "Winter"], ["year", 2024]]
+  ↳ app/views/main_site/my_courses.html.erb:19
+  [1m[36mCourse Load (32.1ms)[0m  [1m[34mSELECT "courses".* FROM "courses" WHERE "courses"."id" = $1[0m  [["id", 2]]
+  ↳ app/views/main_site/my_courses.html.erb:19
+  [1m[36mDepartment Load (37.5ms)[0m  [1m[34mSELECT "departments".* FROM "departments" WHERE "departments"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/models/course.rb:12:in `full_course_title'
+  [1m[36mInstructor Load (29.6ms)[0m  [1m[34mSELECT "instructors".* FROM "instructors" WHERE "instructors"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/main_site/my_courses.html.erb:23
+  [1m[36mUser Load (36.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/models/instructor.rb:10:in `full_name'
+  [1m[36mSectionsStudent Load (34.1ms)[0m  [1m[34mSELECT "sections_students".* FROM "sections_students" WHERE "sections_students"."section_id" = $1 AND "sections_students"."student_id" = $2 LIMIT $3[0m  [["section_id", 4], ["student_id", 6], ["LIMIT", 1]]
+  ↳ app/views/main_site/my_courses.html.erb:26
+  [1m[36mDepartment Load (34.4ms)[0m  [1m[34mSELECT "departments".* FROM "departments" WHERE "departments"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/models/course.rb:12:in `full_course_title'
+  [1m[36mCACHE Instructor Load (0.0ms)[0m  [1m[34mSELECT "instructors".* FROM "instructors" WHERE "instructors"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/main_site/my_courses.html.erb:51
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/models/instructor.rb:10:in `full_name'
+  [1m[36mSectionsStudent Load (28.8ms)[0m  [1m[34mSELECT "sections_students".* FROM "sections_students" WHERE "sections_students"."section_id" = $1 AND "sections_students"."student_id" = $2 LIMIT $3[0m  [["section_id", 3], ["student_id", 6], ["LIMIT", 1]]
+  ↳ app/views/main_site/my_courses.html.erb:52
+  [1m[36mCACHE Instructor Load (0.0ms)[0m  [1m[34mSELECT "instructors".* FROM "instructors" WHERE "instructors"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/main_site/my_courses.html.erb:51
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/models/instructor.rb:10:in `full_name'
+  [1m[36mSectionsStudent Load (31.2ms)[0m  [1m[34mSELECT "sections_students".* FROM "sections_students" WHERE "sections_students"."section_id" = $1 AND "sections_students"."student_id" = $2 LIMIT $3[0m  [["section_id", 1], ["student_id", 6], ["LIMIT", 1]]
+  ↳ app/views/main_site/my_courses.html.erb:52
+  Rendered main_site/my_courses.html.erb within layouts/application (Duration: 521.7ms | Allocations: 22984)
+  Rendered layout layouts/application.html.erb (Duration: 526.4ms | Allocations: 24577)
+Completed 200 OK in 1263ms (Views: 126.9ms | ActiveRecord: 969.9ms | Allocations: 60699)
+
+
+  [1m[36mSectionsStudent Load (29.6ms)[0m  [1m[34mSELECT "sections_students".* FROM "sections_students" /* loading for pp */ LIMIT $1[0m  [["LIMIT", 11]]
+Started GET "/main_site/my_courses" for ::1 at 2024-03-27 22:36:22 -0400
+  
+ArgumentError (Missing :controller key on routes definition, please check your routes.):
+  
+config/routes.rb:4:in `block in <main>'
+config/routes.rb:1:in `<main>'
+Started GET "/main_site/my_courses" for ::1 at 2024-03-27 22:37:32 -0400
+Processing by MainSiteController#my_courses as HTML
+  [1m[36mStudent Load (31.6ms)[0m  [1m[34mSELECT "students".* FROM "students" WHERE "students"."id" = $1 LIMIT $2[0m  [["id", 6], ["LIMIT", 1]]
+  ↳ app/controllers/main_site_controller.rb:6:in `my_courses'
+  [1m[36mUser Load (33.9ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 7], ["LIMIT", 1]]
+  ↳ app/controllers/main_site_controller.rb:6:in `my_courses'
+  [1m[36mInstructor Load (36.6ms)[0m  [1m[34mSELECT "instructors".* FROM "instructors" WHERE "instructors"."user_id" = $1 LIMIT $2[0m  [["user_id", 7], ["LIMIT", 1]]
+  ↳ app/models/user.rb:17:in `instructor?'
+  [1m[36mSection Load (32.1ms)[0m  [1m[34mSELECT "sections".* FROM "sections" INNER JOIN "sections_students" ON "sections"."id" = "sections_students"."section_id" WHERE "sections_students"."student_id" = $1 AND NOT ("sections"."semester" = $2 AND "sections"."year" = $3)[0m  [["student_id", 6], ["semester", "Winter"], ["year", 2024]]
+  ↳ app/controllers/main_site_controller.rb:18:in `sort_by'
+  [1m[36mCourse Load (29.0ms)[0m  [1m[34mSELECT "courses".* FROM "courses" WHERE "courses"."id" = $1[0m  [["id", 1]]
+  ↳ app/controllers/main_site_controller.rb:18:in `sort_by'
+  Rendering layout layouts/application.html.erb
+  Rendering main_site/my_courses.html.erb within layouts/application
+  [1m[36mSection Load (32.3ms)[0m  [1m[34mSELECT "sections".* FROM "sections" INNER JOIN "sections_students" ON "sections"."id" = "sections_students"."section_id" WHERE "sections_students"."student_id" = $1 AND "sections"."semester" = $2 AND "sections"."year" = $3[0m  [["student_id", 6], ["semester", "Winter"], ["year", 2024]]
+  ↳ app/views/main_site/my_courses.html.erb:20
+  [1m[36mCourse Load (31.0ms)[0m  [1m[34mSELECT "courses".* FROM "courses" WHERE "courses"."id" = $1[0m  [["id", 2]]
+  ↳ app/views/main_site/my_courses.html.erb:20
+  [1m[36mDepartment Load (32.9ms)[0m  [1m[34mSELECT "departments".* FROM "departments" WHERE "departments"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/models/course.rb:12:in `full_course_title'
+  [1m[36mInstructor Load (30.7ms)[0m  [1m[34mSELECT "instructors".* FROM "instructors" WHERE "instructors"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/main_site/my_courses.html.erb:24
+  [1m[36mUser Load (31.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/models/instructor.rb:10:in `full_name'
+  [1m[36mSectionsStudent Load (35.1ms)[0m  [1m[34mSELECT "sections_students".* FROM "sections_students" WHERE "sections_students"."section_id" = $1 AND "sections_students"."student_id" = $2 LIMIT $3[0m  [["section_id", 4], ["student_id", 6], ["LIMIT", 1]]
+  ↳ app/views/main_site/my_courses.html.erb:27
+  [1m[36mDepartment Load (361.9ms)[0m  [1m[34mSELECT "departments".* FROM "departments" WHERE "departments"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/models/course.rb:12:in `full_course_title'
+  [1m[36mCACHE Instructor Load (0.0ms)[0m  [1m[34mSELECT "instructors".* FROM "instructors" WHERE "instructors"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/main_site/my_courses.html.erb:53
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/models/instructor.rb:10:in `full_name'
+  [1m[36mSectionsStudent Load (35.2ms)[0m  [1m[34mSELECT "sections_students".* FROM "sections_students" WHERE "sections_students"."section_id" = $1 AND "sections_students"."student_id" = $2 LIMIT $3[0m  [["section_id", 3], ["student_id", 6], ["LIMIT", 1]]
+  ↳ app/views/main_site/my_courses.html.erb:54
+  [1m[36mCACHE Instructor Load (0.0ms)[0m  [1m[34mSELECT "instructors".* FROM "instructors" WHERE "instructors"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/main_site/my_courses.html.erb:53
+  [1m[36mCACHE User Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/models/instructor.rb:10:in `full_name'
+  [1m[36mSectionsStudent Load (29.3ms)[0m  [1m[34mSELECT "sections_students".* FROM "sections_students" WHERE "sections_students"."section_id" = $1 AND "sections_students"."student_id" = $2 LIMIT $3[0m  [["section_id", 1], ["student_id", 6], ["LIMIT", 1]]
+  ↳ app/views/main_site/my_courses.html.erb:54
+  Rendered main_site/my_courses.html.erb within layouts/application (Duration: 794.1ms | Allocations: 23516)
+  Rendered layout layouts/application.html.erb (Duration: 798.2ms | Allocations: 24811)
+Completed 200 OK in 1977ms (Views: 183.7ms | ActiveRecord: 1066.9ms | Allocations: 62047)
+
+
+Started GET "/main_site/my_courses" for ::1 at 2024-03-27 22:38:16 -0400
+Processing by MainSiteController#my_courses as HTML
+  [1m[36mStudent Load (29.8ms)[0m  [1m[34mSELECT "students".* FROM "students" WHERE "students"."id" = $1 LIMIT $2[0m  [["id", 6], ["LIMIT", 1]]
+  ↳ app/controllers/main_site_controller.rb:6:in `my_courses'
+  [1m[36mUser Load (28.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 7], ["LIMIT", 1]]
+  ↳ app/controllers/main_site_controller.rb:6:in `my_courses'
+  [1m[36mInstructor Load (29.2ms)[0m  [1m[34mSELECT "instructors".* FROM "instructors" WHERE "instructors"."user_id" = $1 LIMIT $2[0m  [["user_id", 7], ["LIMIT", 1]]
+  ↳ app/models/user.rb:17:in `instructor?'
+  [1m[36mSection Load (31.3ms)[0m  [1m[34mSELECT "sections".* FROM "sections" INNER JOIN "sections_students" ON "sections"."id" = "sections_students"."section_id" WHERE "sections_students"."student_id" = $1 AND NOT ("sections"."semester" = $2 AND "sections"."year" = $3)[0m  [["student_id", 6], ["semester", "Winter"], ["year", 2024]]
+  ↳ app/controllers/main_site_controller.rb:18:in `sort_by'
+  [1m[36mCourse Load (26.6ms)[0m  [1m[34mSELECT "courses".* FROM "courses" WHERE "courses"."id" = $1[0m  [["id", 1]]
+  ↳ app/controllers/main_site_controller.rb:18:in `sort_by'
+  Rendering layout layouts/application.html.erb
+  Rendering main_site/my_courses.html.erb within layouts/application
+  [1m[36mSection Load (26.6ms)[0m  [1m[34mSELECT "sections".* FROM "sections" INNER JOIN "sections_students" ON "sections"."id" = "sections_students"."section_id" WHERE "sections_students"."student_id" = $1 AND "sections"."semester" = $2 AND "sections"."year" = $3[0m  [["student_id", 6], ["semester", "Winter"], ["year", 2024]]
+  ↳ app/views/main_site/my_courses.html.erb:21
+  [1m[36mCourse Load (28.1ms)[0m  [1m[34mSELECT "courses".* FROM "courses" WHERE "courses"."id" = $1[0m  [["id", 2]]
+  ↳ app/views/main_site/my_courses.html.erb:21
+  [1m[36mDepartment Load (29.8ms)[0m  [1m[34mSELECT "departments".* FROM "departments" WHERE "departments"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/models/course.rb:12:in `full_course_title'
+  [1m[36mInstructor Load (27.0ms)[0m  [1m[34mSELECT "instructors".* FROM "instructors" WHERE "instructors"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/main_site/my_courses.html.erb:25
+  [1m[36mUser Load (30.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/models/instructor.rb:10:in `full_name'
+  [1m[36mSectionsStudent Load (30.2ms)[0m  [1m[34mSELECT "sections_students".* FROM "sections_students" WHERE "sections_students"."section_id" = $1 AND "sections_students"."student_id" = $2 LIMIT $3[0m  [["section_id", 4], ["student_id", 6], ["LIMIT", 1]]
+  ↳ app/views/main_site/my_courses.html.erb:28
+  [1m[36mDepartment Load (27.9ms)[0m  [1m[34mSELECT "departments".* FROM "departments" WHERE "departments"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/models/course.rb:12:in `full_course_title'
+  [1m[36mCACHE Instructor Load (0.0ms)[0m  [1m[34mSELECT "instructors".* FROM "instructors" WHERE "instructors"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/main_site/my_courses.html.erb:58
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/models/instructor.rb:10:in `full_name'
+  [1m[36mSectionsStudent Load (29.7ms)[0m  [1m[34mSELECT "sections_students".* FROM "sections_students" WHERE "sections_students"."section_id" = $1 AND "sections_students"."student_id" = $2 LIMIT $3[0m  [["section_id", 3], ["student_id", 6], ["LIMIT", 1]]
+  ↳ app/views/main_site/my_courses.html.erb:59
+  [1m[36mCACHE Instructor Load (0.0ms)[0m  [1m[34mSELECT "instructors".* FROM "instructors" WHERE "instructors"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/main_site/my_courses.html.erb:58
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/models/instructor.rb:10:in `full_name'
+  [1m[36mSectionsStudent Load (28.9ms)[0m  [1m[34mSELECT "sections_students".* FROM "sections_students" WHERE "sections_students"."section_id" = $1 AND "sections_students"."student_id" = $2 LIMIT $3[0m  [["section_id", 1], ["student_id", 6], ["LIMIT", 1]]
+  ↳ app/views/main_site/my_courses.html.erb:59
+  Rendered main_site/my_courses.html.erb within layouts/application (Duration: 436.1ms | Allocations: 23609)
+  Rendered layout layouts/application.html.erb (Duration: 441.1ms | Allocations: 24897)
+Completed 200 OK in 1141ms (Views: 96.4ms | ActiveRecord: 927.8ms | Allocations: 60828)
+
+
+  [1m[36mSectionsStudent Load (26.6ms)[0m  [1m[34mSELECT "sections_students".* FROM "sections_students" ORDER BY "sections_students"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+Started POST "/main_site/deregister/4" for ::1 at 2024-03-27 22:41:31 -0400
+  
+AbstractController::ActionNotFound (The action 'deregister' could not be found for MainSiteController):
+  
+actionpack (7.1.3) lib/abstract_controller/base.rb:155:in `process'
+actionview (7.1.3) lib/action_view/rendering.rb:40:in `process'
+actionpack (7.1.3) lib/action_controller/metal.rb:227:in `dispatch'
+actionpack (7.1.3) lib/action_controller/metal.rb:309:in `dispatch'
+actionpack (7.1.3) lib/action_dispatch/routing/route_set.rb:49:in `dispatch'
+actionpack (7.1.3) lib/action_dispatch/routing/route_set.rb:32:in `serve'
+actionpack (7.1.3) lib/action_dispatch/journey/router.rb:51:in `block in serve'
+actionpack (7.1.3) lib/action_dispatch/journey/router.rb:131:in `block in find_routes'
+actionpack (7.1.3) lib/action_dispatch/journey/router.rb:124:in `each'
+actionpack (7.1.3) lib/action_dispatch/journey/router.rb:124:in `find_routes'
+actionpack (7.1.3) lib/action_dispatch/journey/router.rb:32:in `serve'
+actionpack (7.1.3) lib/action_dispatch/routing/route_set.rb:882:in `call'
+warden (1.2.9) lib/warden/manager.rb:36:in `block in call'
+warden (1.2.9) lib/warden/manager.rb:34:in `catch'
+warden (1.2.9) lib/warden/manager.rb:34:in `call'
+rack (3.0.9) lib/rack/tempfile_reaper.rb:20:in `call'
+rack (3.0.9) lib/rack/etag.rb:29:in `call'
+rack (3.0.9) lib/rack/conditional_get.rb:43:in `call'
+rack (3.0.9) lib/rack/head.rb:15:in `call'
+actionpack (7.1.3) lib/action_dispatch/http/permissions_policy.rb:36:in `call'
+actionpack (7.1.3) lib/action_dispatch/http/content_security_policy.rb:33:in `call'
+rack-session (2.0.0) lib/rack/session/abstract/id.rb:272:in `context'
+rack-session (2.0.0) lib/rack/session/abstract/id.rb:266:in `call'
+actionpack (7.1.3) lib/action_dispatch/middleware/cookies.rb:689:in `call'
+activerecord (7.1.3) lib/active_record/migration.rb:655:in `call'
+actionpack (7.1.3) lib/action_dispatch/middleware/callbacks.rb:29:in `block in call'
+activesupport (7.1.3) lib/active_support/callbacks.rb:101:in `run_callbacks'
+actionpack (7.1.3) lib/action_dispatch/middleware/callbacks.rb:28:in `call'
+actionpack (7.1.3) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (7.1.3) lib/action_dispatch/middleware/actionable_exceptions.rb:16:in `call'
+actionpack (7.1.3) lib/action_dispatch/middleware/debug_exceptions.rb:29:in `call'
+web-console (4.2.1) lib/web_console/middleware.rb:132:in `call_app'
+web-console (4.2.1) lib/web_console/middleware.rb:28:in `block in call'
+web-console (4.2.1) lib/web_console/middleware.rb:17:in `catch'
+web-console (4.2.1) lib/web_console/middleware.rb:17:in `call'
+actionpack (7.1.3) lib/action_dispatch/middleware/show_exceptions.rb:31:in `call'
+railties (7.1.3) lib/rails/rack/logger.rb:37:in `call_app'
+railties (7.1.3) lib/rails/rack/logger.rb:24:in `block in call'
+activesupport (7.1.3) lib/active_support/tagged_logging.rb:135:in `block in tagged'
+activesupport (7.1.3) lib/active_support/tagged_logging.rb:39:in `tagged'
+activesupport (7.1.3) lib/active_support/tagged_logging.rb:135:in `tagged'
+activesupport (7.1.3) lib/active_support/broadcast_logger.rb:240:in `method_missing'
+railties (7.1.3) lib/rails/rack/logger.rb:24:in `call'
+sprockets-rails (3.4.2) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+actionpack (7.1.3) lib/action_dispatch/middleware/remote_ip.rb:92:in `call'
+actionpack (7.1.3) lib/action_dispatch/middleware/request_id.rb:28:in `call'
+rack (3.0.9) lib/rack/method_override.rb:28:in `call'
+rack (3.0.9) lib/rack/runtime.rb:24:in `call'
+activesupport (7.1.3) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (7.1.3) lib/action_dispatch/middleware/server_timing.rb:59:in `block in call'
+actionpack (7.1.3) lib/action_dispatch/middleware/server_timing.rb:24:in `collect_events'
+actionpack (7.1.3) lib/action_dispatch/middleware/server_timing.rb:58:in `call'
+actionpack (7.1.3) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (7.1.3) lib/action_dispatch/middleware/static.rb:25:in `call'
+rack (3.0.9) lib/rack/sendfile.rb:114:in `call'
+actionpack (7.1.3) lib/action_dispatch/middleware/host_authorization.rb:141:in `call'
+railties (7.1.3) lib/rails/engine.rb:536:in `call'
+puma (6.4.2) lib/puma/configuration.rb:272:in `call'
+puma (6.4.2) lib/puma/request.rb:100:in `block in handle_request'
+puma (6.4.2) lib/puma/thread_pool.rb:378:in `with_force_shutdown'
+puma (6.4.2) lib/puma/request.rb:99:in `handle_request'
+puma (6.4.2) lib/puma/server.rb:464:in `process_client'
+puma (6.4.2) lib/puma/server.rb:245:in `block in run'
+puma (6.4.2) lib/puma/thread_pool.rb:155:in `block in spawn_thread'
+Started GET "/main_site/my_courses" for ::1 at 2024-03-27 22:42:27 -0400
+Processing by MainSiteController#my_courses as HTML
+  [1m[36mStudent Load (29.3ms)[0m  [1m[34mSELECT "students".* FROM "students" WHERE "students"."id" = $1 LIMIT $2[0m  [["id", 6], ["LIMIT", 1]]
+  ↳ app/controllers/main_site_controller.rb:6:in `my_courses'
+  [1m[36mUser Load (31.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 7], ["LIMIT", 1]]
+  ↳ app/controllers/main_site_controller.rb:6:in `my_courses'
+  [1m[36mInstructor Load (28.9ms)[0m  [1m[34mSELECT "instructors".* FROM "instructors" WHERE "instructors"."user_id" = $1 LIMIT $2[0m  [["user_id", 7], ["LIMIT", 1]]
+  ↳ app/models/user.rb:17:in `instructor?'
+  [1m[36mSection Load (30.2ms)[0m  [1m[34mSELECT "sections".* FROM "sections" INNER JOIN "sections_students" ON "sections"."id" = "sections_students"."section_id" WHERE "sections_students"."student_id" = $1 AND NOT ("sections"."semester" = $2 AND "sections"."year" = $3)[0m  [["student_id", 6], ["semester", "Winter"], ["year", 2024]]
+  ↳ app/controllers/main_site_controller.rb:18:in `sort_by'
+  [1m[36mCourse Load (30.8ms)[0m  [1m[34mSELECT "courses".* FROM "courses" WHERE "courses"."id" = $1[0m  [["id", 1]]
+  ↳ app/controllers/main_site_controller.rb:18:in `sort_by'
+  Rendering layout layouts/application.html.erb
+  Rendering main_site/my_courses.html.erb within layouts/application
+  [1m[36mSection Load (29.5ms)[0m  [1m[34mSELECT "sections".* FROM "sections" INNER JOIN "sections_students" ON "sections"."id" = "sections_students"."section_id" WHERE "sections_students"."student_id" = $1 AND "sections"."semester" = $2 AND "sections"."year" = $3[0m  [["student_id", 6], ["semester", "Winter"], ["year", 2024]]
+  ↳ app/views/main_site/my_courses.html.erb:21
+  [1m[36mCourse Load (36.5ms)[0m  [1m[34mSELECT "courses".* FROM "courses" WHERE "courses"."id" = $1[0m  [["id", 2]]
+  ↳ app/views/main_site/my_courses.html.erb:21
+  [1m[36mDepartment Load (31.0ms)[0m  [1m[34mSELECT "departments".* FROM "departments" WHERE "departments"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/models/course.rb:12:in `full_course_title'
+  [1m[36mInstructor Load (29.6ms)[0m  [1m[34mSELECT "instructors".* FROM "instructors" WHERE "instructors"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/main_site/my_courses.html.erb:25
+  [1m[36mUser Load (28.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/models/instructor.rb:10:in `full_name'
+  [1m[36mSectionsStudent Load (26.8ms)[0m  [1m[34mSELECT "sections_students".* FROM "sections_students" WHERE "sections_students"."section_id" = $1 AND "sections_students"."student_id" = $2 LIMIT $3[0m  [["section_id", 4], ["student_id", 6], ["LIMIT", 1]]
+  ↳ app/views/main_site/my_courses.html.erb:28
+  [1m[36mDepartment Load (28.2ms)[0m  [1m[34mSELECT "departments".* FROM "departments" WHERE "departments"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/models/course.rb:12:in `full_course_title'
+  [1m[36mCACHE Instructor Load (0.0ms)[0m  [1m[34mSELECT "instructors".* FROM "instructors" WHERE "instructors"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/main_site/my_courses.html.erb:58
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/models/instructor.rb:10:in `full_name'
+  [1m[36mSectionsStudent Load (28.5ms)[0m  [1m[34mSELECT "sections_students".* FROM "sections_students" WHERE "sections_students"."section_id" = $1 AND "sections_students"."student_id" = $2 LIMIT $3[0m  [["section_id", 3], ["student_id", 6], ["LIMIT", 1]]
+  ↳ app/views/main_site/my_courses.html.erb:59
+  [1m[36mCACHE Instructor Load (0.0ms)[0m  [1m[34mSELECT "instructors".* FROM "instructors" WHERE "instructors"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/main_site/my_courses.html.erb:58
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/models/instructor.rb:10:in `full_name'
+  [1m[36mSectionsStudent Load (31.1ms)[0m  [1m[34mSELECT "sections_students".* FROM "sections_students" WHERE "sections_students"."section_id" = $1 AND "sections_students"."student_id" = $2 LIMIT $3[0m  [["section_id", 1], ["student_id", 6], ["LIMIT", 1]]
+  ↳ app/views/main_site/my_courses.html.erb:59
+  Rendered main_site/my_courses.html.erb within layouts/application (Duration: 491.5ms | Allocations: 23612)
+  Rendered layout layouts/application.html.erb (Duration: 495.7ms | Allocations: 24907)
+Completed 200 OK in 1194ms (Views: 68.8ms | ActiveRecord: 1028.2ms | Allocations: 60983)
+
+
+Started POST "/main_site/unregister/4" for ::1 at 2024-03-27 22:42:30 -0400
+Processing by MainSiteController#unregister as HTML
+  Parameters: {"authenticity_token"=>"[FILTERED]", "commit"=>"Unregister", "section_id"=>"4"}
+Completed 500 Internal Server Error in 3ms (ActiveRecord: 0.0ms | Allocations: 1714)
+
+
+  
+NoMethodError (undefined method `student' for nil:NilClass
+
+    section_student = @user.student.section_student.find_by(section_id: section_id)
+                           ^^^^^^^^):
+  
+app/controllers/main_site_controller.rb:24:in `unregister'
+Started GET "/main_site/my_courses" for ::1 at 2024-03-27 22:42:57 -0400
+Processing by MainSiteController#my_courses as HTML
+  [1m[36mStudent Load (35.8ms)[0m  [1m[34mSELECT "students".* FROM "students" WHERE "students"."id" = $1 LIMIT $2[0m  [["id", 6], ["LIMIT", 1]]
+  ↳ app/controllers/main_site_controller.rb:6:in `my_courses'
+  [1m[36mUser Load (29.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 7], ["LIMIT", 1]]
+  ↳ app/controllers/main_site_controller.rb:6:in `my_courses'
+  [1m[36mInstructor Load (29.2ms)[0m  [1m[34mSELECT "instructors".* FROM "instructors" WHERE "instructors"."user_id" = $1 LIMIT $2[0m  [["user_id", 7], ["LIMIT", 1]]
+  ↳ app/models/user.rb:17:in `instructor?'
+  [1m[36mSection Load (26.7ms)[0m  [1m[34mSELECT "sections".* FROM "sections" INNER JOIN "sections_students" ON "sections"."id" = "sections_students"."section_id" WHERE "sections_students"."student_id" = $1 AND NOT ("sections"."semester" = $2 AND "sections"."year" = $3)[0m  [["student_id", 6], ["semester", "Winter"], ["year", 2024]]
+  ↳ app/controllers/main_site_controller.rb:18:in `sort_by'
+  [1m[36mCourse Load (29.3ms)[0m  [1m[34mSELECT "courses".* FROM "courses" WHERE "courses"."id" = $1[0m  [["id", 1]]
+  ↳ app/controllers/main_site_controller.rb:18:in `sort_by'
+  Rendering layout layouts/application.html.erb
+  Rendering main_site/my_courses.html.erb within layouts/application
+  [1m[36mSection Load (31.6ms)[0m  [1m[34mSELECT "sections".* FROM "sections" INNER JOIN "sections_students" ON "sections"."id" = "sections_students"."section_id" WHERE "sections_students"."student_id" = $1 AND "sections"."semester" = $2 AND "sections"."year" = $3[0m  [["student_id", 6], ["semester", "Winter"], ["year", 2024]]
+  ↳ app/views/main_site/my_courses.html.erb:21
+  [1m[36mCourse Load (39.3ms)[0m  [1m[34mSELECT "courses".* FROM "courses" WHERE "courses"."id" = $1[0m  [["id", 2]]
+  ↳ app/views/main_site/my_courses.html.erb:21
+  [1m[36mDepartment Load (28.6ms)[0m  [1m[34mSELECT "departments".* FROM "departments" WHERE "departments"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/models/course.rb:12:in `full_course_title'
+  [1m[36mInstructor Load (30.7ms)[0m  [1m[34mSELECT "instructors".* FROM "instructors" WHERE "instructors"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/main_site/my_courses.html.erb:25
+  [1m[36mUser Load (29.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/models/instructor.rb:10:in `full_name'
+  [1m[36mSectionsStudent Load (30.6ms)[0m  [1m[34mSELECT "sections_students".* FROM "sections_students" WHERE "sections_students"."section_id" = $1 AND "sections_students"."student_id" = $2 LIMIT $3[0m  [["section_id", 4], ["student_id", 6], ["LIMIT", 1]]
+  ↳ app/views/main_site/my_courses.html.erb:28
+  [1m[36mDepartment Load (31.2ms)[0m  [1m[34mSELECT "departments".* FROM "departments" WHERE "departments"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/models/course.rb:12:in `full_course_title'
+  [1m[36mCACHE Instructor Load (0.0ms)[0m  [1m[34mSELECT "instructors".* FROM "instructors" WHERE "instructors"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/main_site/my_courses.html.erb:58
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/models/instructor.rb:10:in `full_name'
+  [1m[36mSectionsStudent Load (29.5ms)[0m  [1m[34mSELECT "sections_students".* FROM "sections_students" WHERE "sections_students"."section_id" = $1 AND "sections_students"."student_id" = $2 LIMIT $3[0m  [["section_id", 3], ["student_id", 6], ["LIMIT", 1]]
+  ↳ app/views/main_site/my_courses.html.erb:59
+  [1m[36mCACHE Instructor Load (0.0ms)[0m  [1m[34mSELECT "instructors".* FROM "instructors" WHERE "instructors"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/main_site/my_courses.html.erb:58
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/models/instructor.rb:10:in `full_name'
+  [1m[36mSectionsStudent Load (33.5ms)[0m  [1m[34mSELECT "sections_students".* FROM "sections_students" WHERE "sections_students"."section_id" = $1 AND "sections_students"."student_id" = $2 LIMIT $3[0m  [["section_id", 1], ["student_id", 6], ["LIMIT", 1]]
+  ↳ app/views/main_site/my_courses.html.erb:59
+  Rendered main_site/my_courses.html.erb within layouts/application (Duration: 456.3ms | Allocations: 23623)
+  Rendered layout layouts/application.html.erb (Duration: 459.3ms | Allocations: 24918)
+Completed 200 OK in 1155ms (Views: 80.3ms | ActiveRecord: 969.9ms | Allocations: 63349)
+
+
+Started POST "/main_site/unregister/4" for ::1 at 2024-03-27 22:43:02 -0400
+Processing by MainSiteController#unregister as HTML
+  Parameters: {"authenticity_token"=>"[FILTERED]", "commit"=>"Unregister", "section_id"=>"4"}
+  [1m[36mStudent Load (30.6ms)[0m  [1m[34mSELECT "students".* FROM "students" WHERE "students"."id" = $1 LIMIT $2[0m  [["id", 6], ["LIMIT", 1]]
+  ↳ app/controllers/main_site_controller.rb:23:in `unregister'
+  [1m[36mUser Load (32.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 7], ["LIMIT", 1]]
+  ↳ app/controllers/main_site_controller.rb:23:in `unregister'
+Completed 500 Internal Server Error in 127ms (ActiveRecord: 62.4ms | Allocations: 7147)
+
+
+  
+NoMethodError (undefined method `section_student' for #<Student id: 6, major: nil, is_undergraduate: false, user_id: 7, created_at: "2024-03-17 11:34:19.058601000 +0000", updated_at: "2024-03-17 11:34:19.058601000 +0000">
+Did you mean?  sections_students
+               sections_students=):
+  
+app/controllers/main_site_controller.rb:25:in `unregister'
+Started GET "/main_site/my_courses" for ::1 at 2024-03-27 22:45:26 -0400
+Processing by MainSiteController#my_courses as HTML
+  [1m[36mStudent Load (43.2ms)[0m  [1m[34mSELECT "students".* FROM "students" WHERE "students"."id" = $1 LIMIT $2[0m  [["id", 6], ["LIMIT", 1]]
+  ↳ app/controllers/main_site_controller.rb:6:in `my_courses'
+  [1m[36mUser Load (37.7ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 7], ["LIMIT", 1]]
+  ↳ app/controllers/main_site_controller.rb:6:in `my_courses'
+  [1m[36mInstructor Load (31.2ms)[0m  [1m[34mSELECT "instructors".* FROM "instructors" WHERE "instructors"."user_id" = $1 LIMIT $2[0m  [["user_id", 7], ["LIMIT", 1]]
+  ↳ app/models/user.rb:17:in `instructor?'
+  [1m[36mSection Load (29.8ms)[0m  [1m[34mSELECT "sections".* FROM "sections" INNER JOIN "sections_students" ON "sections"."id" = "sections_students"."section_id" WHERE "sections_students"."student_id" = $1 AND NOT ("sections"."semester" = $2 AND "sections"."year" = $3)[0m  [["student_id", 6], ["semester", "Winter"], ["year", 2024]]
+  ↳ app/controllers/main_site_controller.rb:18:in `sort_by'
+  [1m[36mCourse Load (31.3ms)[0m  [1m[34mSELECT "courses".* FROM "courses" WHERE "courses"."id" = $1[0m  [["id", 1]]
+  ↳ app/controllers/main_site_controller.rb:18:in `sort_by'
+  Rendering layout layouts/application.html.erb
+  Rendering main_site/my_courses.html.erb within layouts/application
+  [1m[36mSection Load (26.3ms)[0m  [1m[34mSELECT "sections".* FROM "sections" INNER JOIN "sections_students" ON "sections"."id" = "sections_students"."section_id" WHERE "sections_students"."student_id" = $1 AND "sections"."semester" = $2 AND "sections"."year" = $3[0m  [["student_id", 6], ["semester", "Winter"], ["year", 2024]]
+  ↳ app/views/main_site/my_courses.html.erb:21
+  [1m[36mCourse Load (27.3ms)[0m  [1m[34mSELECT "courses".* FROM "courses" WHERE "courses"."id" = $1[0m  [["id", 2]]
+  ↳ app/views/main_site/my_courses.html.erb:21
+  [1m[36mDepartment Load (31.3ms)[0m  [1m[34mSELECT "departments".* FROM "departments" WHERE "departments"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/models/course.rb:12:in `full_course_title'
+  [1m[36mInstructor Load (33.7ms)[0m  [1m[34mSELECT "instructors".* FROM "instructors" WHERE "instructors"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/main_site/my_courses.html.erb:25
+  [1m[36mUser Load (30.7ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/models/instructor.rb:10:in `full_name'
+  [1m[36mSectionsStudent Load (29.6ms)[0m  [1m[34mSELECT "sections_students".* FROM "sections_students" WHERE "sections_students"."section_id" = $1 AND "sections_students"."student_id" = $2 LIMIT $3[0m  [["section_id", 4], ["student_id", 6], ["LIMIT", 1]]
+  ↳ app/views/main_site/my_courses.html.erb:28
+  [1m[36mDepartment Load (28.9ms)[0m  [1m[34mSELECT "departments".* FROM "departments" WHERE "departments"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/models/course.rb:12:in `full_course_title'
+  [1m[36mCACHE Instructor Load (0.0ms)[0m  [1m[34mSELECT "instructors".* FROM "instructors" WHERE "instructors"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/main_site/my_courses.html.erb:58
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/models/instructor.rb:10:in `full_name'
+  [1m[36mSectionsStudent Load (30.5ms)[0m  [1m[34mSELECT "sections_students".* FROM "sections_students" WHERE "sections_students"."section_id" = $1 AND "sections_students"."student_id" = $2 LIMIT $3[0m  [["section_id", 3], ["student_id", 6], ["LIMIT", 1]]
+  ↳ app/views/main_site/my_courses.html.erb:59
+  [1m[36mCACHE Instructor Load (0.1ms)[0m  [1m[34mSELECT "instructors".* FROM "instructors" WHERE "instructors"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/main_site/my_courses.html.erb:58
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/models/instructor.rb:10:in `full_name'
+  [1m[36mSectionsStudent Load (30.0ms)[0m  [1m[34mSELECT "sections_students".* FROM "sections_students" WHERE "sections_students"."section_id" = $1 AND "sections_students"."student_id" = $2 LIMIT $3[0m  [["section_id", 1], ["student_id", 6], ["LIMIT", 1]]
+  ↳ app/views/main_site/my_courses.html.erb:59
+  Rendered main_site/my_courses.html.erb within layouts/application (Duration: 446.6ms | Allocations: 23631)
+  Rendered layout layouts/application.html.erb (Duration: 450.7ms | Allocations: 24926)
+Completed 200 OK in 1191ms (Views: 91.3ms | ActiveRecord: 978.6ms | Allocations: 61002)
+
+
+Started POST "/main_site/unregister/4" for ::1 at 2024-03-27 22:45:28 -0400
+Processing by MainSiteController#unregister as HTML
+  Parameters: {"authenticity_token"=>"[FILTERED]", "commit"=>"Unregister", "section_id"=>"4"}
+  [1m[36mStudent Load (29.9ms)[0m  [1m[34mSELECT "students".* FROM "students" WHERE "students"."id" = $1 LIMIT $2[0m  [["id", 6], ["LIMIT", 1]]
+  ↳ app/controllers/main_site_controller.rb:23:in `unregister'
+  [1m[36mUser Load (33.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 7], ["LIMIT", 1]]
+  ↳ app/controllers/main_site_controller.rb:23:in `unregister'
+Completed 500 Internal Server Error in 121ms (ActiveRecord: 63.1ms | Allocations: 7112)
+
+
+  
+NoMethodError (undefined method `section_students' for #<Student id: 6, major: nil, is_undergraduate: false, user_id: 7, created_at: "2024-03-17 11:34:19.058601000 +0000", updated_at: "2024-03-17 11:34:19.058601000 +0000">
+Did you mean?  sections_students
+               sections_students=
+               sections_student_ids):
+  
+app/controllers/main_site_controller.rb:25:in `unregister'
+  [1m[36mStudent Load (46.5ms)[0m  [1m[34mSELECT "students".* FROM "students" ORDER BY "students"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[36mSectionsStudent Load (42.0ms)[0m  [1m[34mSELECT "sections_students".* FROM "sections_students" WHERE "sections_students"."student_id" = $1 /* loading for pp */ LIMIT $2[0m  [["student_id", 6], ["LIMIT", 11]]
+Started POST "/main_site/unregister/4" for ::1 at 2024-03-27 22:46:24 -0400
+Processing by MainSiteController#unregister as HTML
+  Parameters: {"authenticity_token"=>"[FILTERED]", "commit"=>"Unregister", "section_id"=>"4"}
+  [1m[36mStudent Load (55.3ms)[0m  [1m[34mSELECT "students".* FROM "students" WHERE "students"."id" = $1 LIMIT $2[0m  [["id", 6], ["LIMIT", 1]]
+  ↳ app/controllers/main_site_controller.rb:23:in `unregister'
+  [1m[36mUser Load (77.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 7], ["LIMIT", 1]]
+  ↳ app/controllers/main_site_controller.rb:23:in `unregister'
+  [1m[36mSectionsStudent Load (50.9ms)[0m  [1m[34mSELECT "sections_students".* FROM "sections_students" WHERE "sections_students"."student_id" = $1 AND "sections_students"."section_id" = $2 LIMIT $3[0m  [["student_id", 6], ["section_id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/main_site_controller.rb:25:in `unregister'
+  [1m[36mSection Load (53.7ms)[0m  [1m[34mSELECT "sections".* FROM "sections" WHERE "sections"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/main_site_controller.rb:26:in `unregister'
+  [1m[36mCourse Load (36.5ms)[0m  [1m[34mSELECT "courses".* FROM "courses" WHERE "courses"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/main_site_controller.rb:26:in `unregister'
+  [1m[36mDepartment Load (29.6ms)[0m  [1m[34mSELECT "departments".* FROM "departments" WHERE "departments"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/models/course.rb:12:in `full_course_title'
+  [1m[36mTRANSACTION (33.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/main_site_controller.rb:27:in `unregister'
+  [1m[36mSectionsStudent Destroy (76.8ms)[0m  [1m[31mDELETE FROM "sections_students" WHERE "sections_students"."id" = $1[0m  [["id", 1]]
+  ↳ app/controllers/main_site_controller.rb:27:in `unregister'
+  [1m[36mTRANSACTION (50.5ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/main_site_controller.rb:27:in `unregister'
+Completed 500 Internal Server Error in 1575ms (ActiveRecord: 1300.4ms | Allocations: 45574)
+
+
+  
+NameError (undefined local variable or method `my_courses_path' for #<MainSiteController:0x000000000c26f0>
+
+    redirect_to my_courses_path, notice: "Successfully unregistered from #{course_name}."
+                ^^^^^^^^^^^^^^^
+Did you mean?  new_course_path):
+  
+app/controllers/main_site_controller.rb:28:in `unregister'
+Started GET "/main_site/my_courses" for ::1 at 2024-03-27 22:46:39 -0400
+Processing by MainSiteController#my_courses as HTML
+  [1m[36mStudent Load (60.0ms)[0m  [1m[34mSELECT "students".* FROM "students" WHERE "students"."id" = $1 LIMIT $2[0m  [["id", 6], ["LIMIT", 1]]
+  ↳ app/controllers/main_site_controller.rb:6:in `my_courses'
+  [1m[36mUser Load (50.7ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 7], ["LIMIT", 1]]
+  ↳ app/controllers/main_site_controller.rb:6:in `my_courses'
+  [1m[36mInstructor Load (48.8ms)[0m  [1m[34mSELECT "instructors".* FROM "instructors" WHERE "instructors"."user_id" = $1 LIMIT $2[0m  [["user_id", 7], ["LIMIT", 1]]
+  ↳ app/models/user.rb:17:in `instructor?'
+  [1m[36mSection Load (41.6ms)[0m  [1m[34mSELECT "sections".* FROM "sections" INNER JOIN "sections_students" ON "sections"."id" = "sections_students"."section_id" WHERE "sections_students"."student_id" = $1 AND NOT ("sections"."semester" = $2 AND "sections"."year" = $3)[0m  [["student_id", 6], ["semester", "Winter"], ["year", 2024]]
+  ↳ app/controllers/main_site_controller.rb:18:in `sort_by'
+  [1m[36mCourse Load (29.3ms)[0m  [1m[34mSELECT "courses".* FROM "courses" WHERE "courses"."id" = $1[0m  [["id", 1]]
+  ↳ app/controllers/main_site_controller.rb:18:in `sort_by'
+  Rendering layout layouts/application.html.erb
+  Rendering main_site/my_courses.html.erb within layouts/application
+  [1m[36mSection Load (43.3ms)[0m  [1m[34mSELECT "sections".* FROM "sections" INNER JOIN "sections_students" ON "sections"."id" = "sections_students"."section_id" WHERE "sections_students"."student_id" = $1 AND "sections"."semester" = $2 AND "sections"."year" = $3[0m  [["student_id", 6], ["semester", "Winter"], ["year", 2024]]
+  ↳ app/views/main_site/my_courses.html.erb:21
+  [1m[36mDepartment Load (40.6ms)[0m  [1m[34mSELECT "departments".* FROM "departments" WHERE "departments"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/models/course.rb:12:in `full_course_title'
+  [1m[36mInstructor Load (46.8ms)[0m  [1m[34mSELECT "instructors".* FROM "instructors" WHERE "instructors"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/main_site/my_courses.html.erb:58
+  [1m[36mUser Load (38.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/models/instructor.rb:10:in `full_name'
+  [1m[36mSectionsStudent Load (45.9ms)[0m  [1m[34mSELECT "sections_students".* FROM "sections_students" WHERE "sections_students"."section_id" = $1 AND "sections_students"."student_id" = $2 LIMIT $3[0m  [["section_id", 3], ["student_id", 6], ["LIMIT", 1]]
+  ↳ app/views/main_site/my_courses.html.erb:59
+  [1m[36mCACHE Instructor Load (0.0ms)[0m  [1m[34mSELECT "instructors".* FROM "instructors" WHERE "instructors"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/main_site/my_courses.html.erb:58
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/models/instructor.rb:10:in `full_name'
+  [1m[36mSectionsStudent Load (49.8ms)[0m  [1m[34mSELECT "sections_students".* FROM "sections_students" WHERE "sections_students"."section_id" = $1 AND "sections_students"."student_id" = $2 LIMIT $3[0m  [["section_id", 1], ["student_id", 6], ["LIMIT", 1]]
+  ↳ app/views/main_site/my_courses.html.erb:59
+  Rendered main_site/my_courses.html.erb within layouts/application (Duration: 316.8ms | Allocations: 12327)
+  Rendered layout layouts/application.html.erb (Duration: 324.5ms | Allocations: 13626)
+Completed 200 OK in 842ms (Views: 68.1ms | ActiveRecord: 668.0ms | Allocations: 23303)
+
+
+  [1m[36mTRANSACTION (37.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mSection Load (33.6ms)[0m  [1m[34mSELECT "sections".* FROM "sections" WHERE "sections"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[36mStudent Load (31.3ms)[0m  [1m[34mSELECT "students".* FROM "students" WHERE "students"."id" = $1 LIMIT $2[0m  [["id", 6], ["LIMIT", 1]]
+  [1m[36mSectionsStudent Create (28.8ms)[0m  [1m[32mINSERT INTO "sections_students" ("section_id", "student_id", "grade") VALUES ($1, $2, $3) RETURNING "id"[0m  [["section_id", 4], ["student_id", 6], ["grade", "C"]]
+  [1m[36mTRANSACTION (36.5ms)[0m  [1m[35mCOMMIT[0m
+Started GET "/main_site/my_courses" for ::1 at 2024-03-27 22:46:51 -0400
+Processing by MainSiteController#my_courses as HTML
+  [1m[36mStudent Load (31.3ms)[0m  [1m[34mSELECT "students".* FROM "students" WHERE "students"."id" = $1 LIMIT $2[0m  [["id", 6], ["LIMIT", 1]]
+  ↳ app/controllers/main_site_controller.rb:6:in `my_courses'
+  [1m[36mUser Load (33.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 7], ["LIMIT", 1]]
+  ↳ app/controllers/main_site_controller.rb:6:in `my_courses'
+  [1m[36mInstructor Load (28.3ms)[0m  [1m[34mSELECT "instructors".* FROM "instructors" WHERE "instructors"."user_id" = $1 LIMIT $2[0m  [["user_id", 7], ["LIMIT", 1]]
+  ↳ app/models/user.rb:17:in `instructor?'
+  [1m[36mSection Load (31.8ms)[0m  [1m[34mSELECT "sections".* FROM "sections" INNER JOIN "sections_students" ON "sections"."id" = "sections_students"."section_id" WHERE "sections_students"."student_id" = $1 AND NOT ("sections"."semester" = $2 AND "sections"."year" = $3)[0m  [["student_id", 6], ["semester", "Winter"], ["year", 2024]]
+  ↳ app/controllers/main_site_controller.rb:18:in `sort_by'
+  [1m[36mCourse Load (28.8ms)[0m  [1m[34mSELECT "courses".* FROM "courses" WHERE "courses"."id" = $1[0m  [["id", 1]]
+  ↳ app/controllers/main_site_controller.rb:18:in `sort_by'
+  Rendering layout layouts/application.html.erb
+  Rendering main_site/my_courses.html.erb within layouts/application
+  [1m[36mSection Load (33.4ms)[0m  [1m[34mSELECT "sections".* FROM "sections" INNER JOIN "sections_students" ON "sections"."id" = "sections_students"."section_id" WHERE "sections_students"."student_id" = $1 AND "sections"."semester" = $2 AND "sections"."year" = $3[0m  [["student_id", 6], ["semester", "Winter"], ["year", 2024]]
+  ↳ app/views/main_site/my_courses.html.erb:21
+  [1m[36mCourse Load (28.1ms)[0m  [1m[34mSELECT "courses".* FROM "courses" WHERE "courses"."id" = $1[0m  [["id", 2]]
+  ↳ app/views/main_site/my_courses.html.erb:21
+  [1m[36mDepartment Load (31.7ms)[0m  [1m[34mSELECT "departments".* FROM "departments" WHERE "departments"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/models/course.rb:12:in `full_course_title'
+  [1m[36mInstructor Load (31.2ms)[0m  [1m[34mSELECT "instructors".* FROM "instructors" WHERE "instructors"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/main_site/my_courses.html.erb:25
+  [1m[36mUser Load (35.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/models/instructor.rb:10:in `full_name'
+  [1m[36mSectionsStudent Load (37.1ms)[0m  [1m[34mSELECT "sections_students".* FROM "sections_students" WHERE "sections_students"."section_id" = $1 AND "sections_students"."student_id" = $2 LIMIT $3[0m  [["section_id", 4], ["student_id", 6], ["LIMIT", 1]]
+  ↳ app/views/main_site/my_courses.html.erb:28
+  [1m[36mDepartment Load (32.8ms)[0m  [1m[34mSELECT "departments".* FROM "departments" WHERE "departments"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/models/course.rb:12:in `full_course_title'
+  [1m[36mCACHE Instructor Load (0.0ms)[0m  [1m[34mSELECT "instructors".* FROM "instructors" WHERE "instructors"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/main_site/my_courses.html.erb:58
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/models/instructor.rb:10:in `full_name'
+  [1m[36mSectionsStudent Load (28.0ms)[0m  [1m[34mSELECT "sections_students".* FROM "sections_students" WHERE "sections_students"."section_id" = $1 AND "sections_students"."student_id" = $2 LIMIT $3[0m  [["section_id", 3], ["student_id", 6], ["LIMIT", 1]]
+  ↳ app/views/main_site/my_courses.html.erb:59
+  [1m[36mCACHE Instructor Load (0.0ms)[0m  [1m[34mSELECT "instructors".* FROM "instructors" WHERE "instructors"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/main_site/my_courses.html.erb:58
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/models/instructor.rb:10:in `full_name'
+  [1m[36mSectionsStudent Load (29.0ms)[0m  [1m[34mSELECT "sections_students".* FROM "sections_students" WHERE "sections_students"."section_id" = $1 AND "sections_students"."student_id" = $2 LIMIT $3[0m  [["section_id", 1], ["student_id", 6], ["LIMIT", 1]]
+  ↳ app/views/main_site/my_courses.html.erb:59
+  Rendered main_site/my_courses.html.erb within layouts/application (Duration: 329.4ms | Allocations: 10441)
+  Rendered layout layouts/application.html.erb (Duration: 331.6ms | Allocations: 11374)
+Completed 200 OK in 535ms (Views: 45.9ms | ActiveRecord: 440.0ms | Allocations: 15800)
+
+
+Started GET "/main_site/my_courses" for ::1 at 2024-03-27 22:48:36 -0400
+Processing by MainSiteController#my_courses as HTML
+  [1m[36mStudent Load (44.0ms)[0m  [1m[34mSELECT "students".* FROM "students" WHERE "students"."id" = $1 LIMIT $2[0m  [["id", 6], ["LIMIT", 1]]
+  ↳ app/controllers/main_site_controller.rb:6:in `my_courses'
+  [1m[36mUser Load (30.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 7], ["LIMIT", 1]]
+  ↳ app/controllers/main_site_controller.rb:6:in `my_courses'
+  [1m[36mInstructor Load (33.3ms)[0m  [1m[34mSELECT "instructors".* FROM "instructors" WHERE "instructors"."user_id" = $1 LIMIT $2[0m  [["user_id", 7], ["LIMIT", 1]]
+  ↳ app/models/user.rb:17:in `instructor?'
+  [1m[36mSection Load (31.3ms)[0m  [1m[34mSELECT "sections".* FROM "sections" INNER JOIN "sections_students" ON "sections"."id" = "sections_students"."section_id" WHERE "sections_students"."student_id" = $1 AND NOT ("sections"."semester" = $2 AND "sections"."year" = $3)[0m  [["student_id", 6], ["semester", "Winter"], ["year", 2024]]
+  ↳ app/controllers/main_site_controller.rb:18:in `sort_by'
+  [1m[36mCourse Load (39.1ms)[0m  [1m[34mSELECT "courses".* FROM "courses" WHERE "courses"."id" = $1[0m  [["id", 1]]
+  ↳ app/controllers/main_site_controller.rb:18:in `sort_by'
+  Rendering layout layouts/application.html.erb
+  Rendering main_site/my_courses.html.erb within layouts/application
+  [1m[36mSection Load (30.4ms)[0m  [1m[34mSELECT "sections".* FROM "sections" INNER JOIN "sections_students" ON "sections"."id" = "sections_students"."section_id" WHERE "sections_students"."student_id" = $1 AND "sections"."semester" = $2 AND "sections"."year" = $3[0m  [["student_id", 6], ["semester", "Winter"], ["year", 2024]]
+  ↳ app/views/main_site/my_courses.html.erb:21
+  [1m[36mCourse Load (28.8ms)[0m  [1m[34mSELECT "courses".* FROM "courses" WHERE "courses"."id" = $1[0m  [["id", 2]]
+  ↳ app/views/main_site/my_courses.html.erb:21
+  [1m[36mDepartment Load (32.4ms)[0m  [1m[34mSELECT "departments".* FROM "departments" WHERE "departments"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/models/course.rb:12:in `full_course_title'
+  [1m[36mInstructor Load (29.3ms)[0m  [1m[34mSELECT "instructors".* FROM "instructors" WHERE "instructors"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/main_site/my_courses.html.erb:25
+  [1m[36mUser Load (40.7ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/models/instructor.rb:10:in `full_name'
+  [1m[36mSectionsStudent Load (28.8ms)[0m  [1m[34mSELECT "sections_students".* FROM "sections_students" WHERE "sections_students"."section_id" = $1 AND "sections_students"."student_id" = $2 LIMIT $3[0m  [["section_id", 4], ["student_id", 6], ["LIMIT", 1]]
+  ↳ app/views/main_site/my_courses.html.erb:28
+  [1m[36mDepartment Load (29.8ms)[0m  [1m[34mSELECT "departments".* FROM "departments" WHERE "departments"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/models/course.rb:12:in `full_course_title'
+  [1m[36mCACHE Instructor Load (0.0ms)[0m  [1m[34mSELECT "instructors".* FROM "instructors" WHERE "instructors"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/main_site/my_courses.html.erb:58
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/models/instructor.rb:10:in `full_name'
+  [1m[36mSectionsStudent Load (56.7ms)[0m  [1m[34mSELECT "sections_students".* FROM "sections_students" WHERE "sections_students"."section_id" = $1 AND "sections_students"."student_id" = $2 LIMIT $3[0m  [["section_id", 3], ["student_id", 6], ["LIMIT", 1]]
+  ↳ app/views/main_site/my_courses.html.erb:59
+  [1m[36mCACHE Instructor Load (0.0ms)[0m  [1m[34mSELECT "instructors".* FROM "instructors" WHERE "instructors"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/main_site/my_courses.html.erb:58
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/models/instructor.rb:10:in `full_name'
+  [1m[36mSectionsStudent Load (29.0ms)[0m  [1m[34mSELECT "sections_students".* FROM "sections_students" WHERE "sections_students"."section_id" = $1 AND "sections_students"."student_id" = $2 LIMIT $3[0m  [["section_id", 1], ["student_id", 6], ["LIMIT", 1]]
+  ↳ app/views/main_site/my_courses.html.erb:59
+  Rendered main_site/my_courses.html.erb within layouts/application (Duration: 476.2ms | Allocations: 23608)
+  Rendered layout layouts/application.html.erb (Duration: 481.3ms | Allocations: 24896)
+Completed 200 OK in 1307ms (Views: 86.7ms | ActiveRecord: 1053.6ms | Allocations: 60893)
+
+
+Started POST "/main_site/unregister/4" for ::1 at 2024-03-27 22:48:40 -0400
+Processing by MainSiteController#unregister as HTML
+  Parameters: {"authenticity_token"=>"[FILTERED]", "commit"=>"Unregister", "section_id"=>"4"}
+  [1m[36mStudent Load (32.8ms)[0m  [1m[34mSELECT "students".* FROM "students" WHERE "students"."id" = $1 LIMIT $2[0m  [["id", 6], ["LIMIT", 1]]
+  ↳ app/controllers/main_site_controller.rb:23:in `unregister'
+  [1m[36mUser Load (28.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 7], ["LIMIT", 1]]
+  ↳ app/controllers/main_site_controller.rb:23:in `unregister'
+  [1m[36mSectionsStudent Load (30.4ms)[0m  [1m[34mSELECT "sections_students".* FROM "sections_students" WHERE "sections_students"."student_id" = $1 AND "sections_students"."section_id" = $2 LIMIT $3[0m  [["student_id", 6], ["section_id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/main_site_controller.rb:25:in `unregister'
+  [1m[36mSection Load (34.3ms)[0m  [1m[34mSELECT "sections".* FROM "sections" WHERE "sections"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/main_site_controller.rb:26:in `unregister'
+  [1m[36mCourse Load (29.9ms)[0m  [1m[34mSELECT "courses".* FROM "courses" WHERE "courses"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/main_site_controller.rb:26:in `unregister'
+  [1m[36mDepartment Load (33.9ms)[0m  [1m[34mSELECT "departments".* FROM "departments" WHERE "departments"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/models/course.rb:12:in `full_course_title'
+  [1m[36mTRANSACTION (26.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/main_site_controller.rb:27:in `unregister'
+  [1m[36mSectionsStudent Destroy (57.9ms)[0m  [1m[31mDELETE FROM "sections_students" WHERE "sections_students"."id" = $1[0m  [["id", 4]]
+  ↳ app/controllers/main_site_controller.rb:27:in `unregister'
+  [1m[36mTRANSACTION (31.3ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/main_site_controller.rb:27:in `unregister'
+Completed 500 Internal Server Error in 393ms (ActiveRecord: 304.4ms | Allocations: 11881)
+
+
+  
+NameError (undefined local variable or method `my_courses_main_site_path' for #<MainSiteController:0x000000000c8460>
+
+    redirect_to my_courses_main_site_path, notice: "Successfully unregistered from #{course_name}."
+                ^^^^^^^^^^^^^^^^^^^^^^^^^
+Did you mean?  main_site_my_courses_path):
+  
+app/controllers/main_site_controller.rb:28:in `unregister'
+Started GET "/main_site/my_courses" for ::1 at 2024-03-27 22:48:49 -0400
+Processing by MainSiteController#my_courses as HTML
+  [1m[36mStudent Load (28.7ms)[0m  [1m[34mSELECT "students".* FROM "students" WHERE "students"."id" = $1 LIMIT $2[0m  [["id", 6], ["LIMIT", 1]]
+  ↳ app/controllers/main_site_controller.rb:6:in `my_courses'
+  [1m[36mUser Load (32.7ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 7], ["LIMIT", 1]]
+  ↳ app/controllers/main_site_controller.rb:6:in `my_courses'
+  [1m[36mInstructor Load (30.4ms)[0m  [1m[34mSELECT "instructors".* FROM "instructors" WHERE "instructors"."user_id" = $1 LIMIT $2[0m  [["user_id", 7], ["LIMIT", 1]]
+  ↳ app/models/user.rb:17:in `instructor?'
+  [1m[36mSection Load (31.5ms)[0m  [1m[34mSELECT "sections".* FROM "sections" INNER JOIN "sections_students" ON "sections"."id" = "sections_students"."section_id" WHERE "sections_students"."student_id" = $1 AND NOT ("sections"."semester" = $2 AND "sections"."year" = $3)[0m  [["student_id", 6], ["semester", "Winter"], ["year", 2024]]
+  ↳ app/controllers/main_site_controller.rb:18:in `sort_by'
+  [1m[36mCourse Load (29.8ms)[0m  [1m[34mSELECT "courses".* FROM "courses" WHERE "courses"."id" = $1[0m  [["id", 1]]
+  ↳ app/controllers/main_site_controller.rb:18:in `sort_by'
+  Rendering layout layouts/application.html.erb
+  Rendering main_site/my_courses.html.erb within layouts/application
+  [1m[36mSection Load (28.5ms)[0m  [1m[34mSELECT "sections".* FROM "sections" INNER JOIN "sections_students" ON "sections"."id" = "sections_students"."section_id" WHERE "sections_students"."student_id" = $1 AND "sections"."semester" = $2 AND "sections"."year" = $3[0m  [["student_id", 6], ["semester", "Winter"], ["year", 2024]]
+  ↳ app/views/main_site/my_courses.html.erb:21
+  [1m[36mDepartment Load (26.4ms)[0m  [1m[34mSELECT "departments".* FROM "departments" WHERE "departments"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/models/course.rb:12:in `full_course_title'
+  [1m[36mInstructor Load (27.4ms)[0m  [1m[34mSELECT "instructors".* FROM "instructors" WHERE "instructors"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/main_site/my_courses.html.erb:58
+  [1m[36mUser Load (37.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/models/instructor.rb:10:in `full_name'
+  [1m[36mSectionsStudent Load (30.5ms)[0m  [1m[34mSELECT "sections_students".* FROM "sections_students" WHERE "sections_students"."section_id" = $1 AND "sections_students"."student_id" = $2 LIMIT $3[0m  [["section_id", 3], ["student_id", 6], ["LIMIT", 1]]
+  ↳ app/views/main_site/my_courses.html.erb:59
+  [1m[36mCACHE Instructor Load (0.0ms)[0m  [1m[34mSELECT "instructors".* FROM "instructors" WHERE "instructors"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/main_site/my_courses.html.erb:58
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/models/instructor.rb:10:in `full_name'
+  [1m[36mSectionsStudent Load (26.9ms)[0m  [1m[34mSELECT "sections_students".* FROM "sections_students" WHERE "sections_students"."section_id" = $1 AND "sections_students"."student_id" = $2 LIMIT $3[0m  [["section_id", 1], ["student_id", 6], ["LIMIT", 1]]
+  ↳ app/views/main_site/my_courses.html.erb:59
+  Rendered main_site/my_courses.html.erb within layouts/application (Duration: 208.4ms | Allocations: 6269)
+  Rendered layout layouts/application.html.erb (Duration: 212.5ms | Allocations: 7211)
+Completed 200 OK in 413ms (Views: 37.3ms | ActiveRecord: 329.5ms | Allocations: 11636)
+
+
+  [1m[36mTRANSACTION (26.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mSection Load (31.7ms)[0m  [1m[34mSELECT "sections".* FROM "sections" WHERE "sections"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[36mStudent Load (30.0ms)[0m  [1m[34mSELECT "students".* FROM "students" WHERE "students"."id" = $1 LIMIT $2[0m  [["id", 6], ["LIMIT", 1]]
+  [1m[36mSectionsStudent Create (30.1ms)[0m  [1m[32mINSERT INTO "sections_students" ("section_id", "student_id", "grade") VALUES ($1, $2, $3) RETURNING "id"[0m  [["section_id", 4], ["student_id", 6], ["grade", "C"]]
+  [1m[36mTRANSACTION (31.6ms)[0m  [1m[35mCOMMIT[0m
+DEPRECATION WARNING: `Rails.application.secrets` is deprecated in favor of `Rails.application.credentials` and will be removed in Rails 7.2. (called from <main> at /Users/apple/repos/UniversityCourseRegistration/config/environment.rb:5)
+Started GET "/main_site/my_courses" for ::1 at 2024-03-27 22:49:50 -0400
+Processing by MainSiteController#my_courses as HTML
+  [1m[36mStudent Load (30.4ms)[0m  [1m[34mSELECT "students".* FROM "students" WHERE "students"."id" = $1 LIMIT $2[0m  [["id", 6], ["LIMIT", 1]]
+  ↳ app/controllers/main_site_controller.rb:6:in `my_courses'
+  [1m[36mUser Load (31.8ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 7], ["LIMIT", 1]]
+  ↳ app/controllers/main_site_controller.rb:6:in `my_courses'
+  [1m[36mInstructor Load (29.7ms)[0m  [1m[34mSELECT "instructors".* FROM "instructors" WHERE "instructors"."user_id" = $1 LIMIT $2[0m  [["user_id", 7], ["LIMIT", 1]]
+  ↳ app/models/user.rb:17:in `instructor?'
+  [1m[36mSection Load (29.2ms)[0m  [1m[34mSELECT "sections".* FROM "sections" INNER JOIN "sections_students" ON "sections"."id" = "sections_students"."section_id" WHERE "sections_students"."student_id" = $1 AND NOT ("sections"."semester" = $2 AND "sections"."year" = $3)[0m  [["student_id", 6], ["semester", "Winter"], ["year", 2024]]
+  ↳ app/controllers/main_site_controller.rb:18:in `sort_by'
+  [1m[36mCourse Load (32.6ms)[0m  [1m[34mSELECT "courses".* FROM "courses" WHERE "courses"."id" = $1[0m  [["id", 1]]
+  ↳ app/controllers/main_site_controller.rb:18:in `sort_by'
+  Rendering layout layouts/application.html.erb
+  Rendering main_site/my_courses.html.erb within layouts/application
+  [1m[36mSection Load (26.3ms)[0m  [1m[34mSELECT "sections".* FROM "sections" INNER JOIN "sections_students" ON "sections"."id" = "sections_students"."section_id" WHERE "sections_students"."student_id" = $1 AND "sections"."semester" = $2 AND "sections"."year" = $3[0m  [["student_id", 6], ["semester", "Winter"], ["year", 2024]]
+  ↳ app/views/main_site/my_courses.html.erb:21
+  [1m[36mCourse Load (29.4ms)[0m  [1m[34mSELECT "courses".* FROM "courses" WHERE "courses"."id" = $1[0m  [["id", 2]]
+  ↳ app/views/main_site/my_courses.html.erb:21
+  [1m[36mDepartment Load (33.4ms)[0m  [1m[34mSELECT "departments".* FROM "departments" WHERE "departments"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/models/course.rb:12:in `full_course_title'
+  [1m[36mInstructor Load (27.5ms)[0m  [1m[34mSELECT "instructors".* FROM "instructors" WHERE "instructors"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/main_site/my_courses.html.erb:25
+  [1m[36mUser Load (28.8ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/models/instructor.rb:10:in `full_name'
+  [1m[36mSectionsStudent Load (32.5ms)[0m  [1m[34mSELECT "sections_students".* FROM "sections_students" WHERE "sections_students"."section_id" = $1 AND "sections_students"."student_id" = $2 LIMIT $3[0m  [["section_id", 4], ["student_id", 6], ["LIMIT", 1]]
+  ↳ app/views/main_site/my_courses.html.erb:28
+  [1m[36mDepartment Load (26.7ms)[0m  [1m[34mSELECT "departments".* FROM "departments" WHERE "departments"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/models/course.rb:12:in `full_course_title'
+  [1m[36mCACHE Instructor Load (0.0ms)[0m  [1m[34mSELECT "instructors".* FROM "instructors" WHERE "instructors"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/main_site/my_courses.html.erb:58
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/models/instructor.rb:10:in `full_name'
+  [1m[36mSectionsStudent Load (27.7ms)[0m  [1m[34mSELECT "sections_students".* FROM "sections_students" WHERE "sections_students"."section_id" = $1 AND "sections_students"."student_id" = $2 LIMIT $3[0m  [["section_id", 3], ["student_id", 6], ["LIMIT", 1]]
+  ↳ app/views/main_site/my_courses.html.erb:59
+  [1m[36mCACHE Instructor Load (0.0ms)[0m  [1m[34mSELECT "instructors".* FROM "instructors" WHERE "instructors"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/main_site/my_courses.html.erb:58
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/models/instructor.rb:10:in `full_name'
+  [1m[36mSectionsStudent Load (28.3ms)[0m  [1m[34mSELECT "sections_students".* FROM "sections_students" WHERE "sections_students"."section_id" = $1 AND "sections_students"."student_id" = $2 LIMIT $3[0m  [["section_id", 1], ["student_id", 6], ["LIMIT", 1]]
+  ↳ app/views/main_site/my_courses.html.erb:59
+  Rendered main_site/my_courses.html.erb within layouts/application (Duration: 426.2ms | Allocations: 23619)
+  Rendered layout layouts/application.html.erb (Duration: 429.2ms | Allocations: 24916)
+Completed 200 OK in 1104ms (Views: 79.1ms | ActiveRecord: 912.8ms | Allocations: 60987)
+
+
+Started POST "/main_site/unregister/4" for ::1 at 2024-03-27 22:49:53 -0400
+Processing by MainSiteController#unregister as HTML
+  Parameters: {"authenticity_token"=>"[FILTERED]", "commit"=>"Unregister", "section_id"=>"4"}
+  [1m[36mStudent Load (32.2ms)[0m  [1m[34mSELECT "students".* FROM "students" WHERE "students"."id" = $1 LIMIT $2[0m  [["id", 6], ["LIMIT", 1]]
+  ↳ app/controllers/main_site_controller.rb:23:in `unregister'
+  [1m[36mUser Load (28.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 7], ["LIMIT", 1]]
+  ↳ app/controllers/main_site_controller.rb:23:in `unregister'
+  [1m[36mSectionsStudent Load (28.7ms)[0m  [1m[34mSELECT "sections_students".* FROM "sections_students" WHERE "sections_students"."student_id" = $1 AND "sections_students"."section_id" = $2 LIMIT $3[0m  [["student_id", 6], ["section_id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/main_site_controller.rb:25:in `unregister'
+  [1m[36mSection Load (27.9ms)[0m  [1m[34mSELECT "sections".* FROM "sections" WHERE "sections"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/main_site_controller.rb:26:in `unregister'
+  [1m[36mCourse Load (27.6ms)[0m  [1m[34mSELECT "courses".* FROM "courses" WHERE "courses"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/main_site_controller.rb:26:in `unregister'
+  [1m[36mDepartment Load (27.7ms)[0m  [1m[34mSELECT "departments".* FROM "departments" WHERE "departments"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/models/course.rb:12:in `full_course_title'
+  [1m[36mTRANSACTION (29.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/main_site_controller.rb:27:in `unregister'
+  [1m[36mSectionsStudent Destroy (60.2ms)[0m  [1m[31mDELETE FROM "sections_students" WHERE "sections_students"."id" = $1[0m  [["id", 5]]
+  ↳ app/controllers/main_site_controller.rb:27:in `unregister'
+  [1m[36mTRANSACTION (39.6ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/main_site_controller.rb:27:in `unregister'
+Redirected to http://localhost:3000/main_site/my_courses
+Completed 302 Found in 383ms (ActiveRecord: 301.1ms | Allocations: 8176)
+
+
+Started GET "/main_site/my_courses" for ::1 at 2024-03-27 22:49:53 -0400
+Processing by MainSiteController#my_courses as HTML
+  [1m[36mStudent Load (29.3ms)[0m  [1m[34mSELECT "students".* FROM "students" WHERE "students"."id" = $1 LIMIT $2[0m  [["id", 6], ["LIMIT", 1]]
+  ↳ app/controllers/main_site_controller.rb:6:in `my_courses'
+  [1m[36mUser Load (29.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 7], ["LIMIT", 1]]
+  ↳ app/controllers/main_site_controller.rb:6:in `my_courses'
+  [1m[36mInstructor Load (29.4ms)[0m  [1m[34mSELECT "instructors".* FROM "instructors" WHERE "instructors"."user_id" = $1 LIMIT $2[0m  [["user_id", 7], ["LIMIT", 1]]
+  ↳ app/models/user.rb:17:in `instructor?'
+  [1m[36mSection Load (31.1ms)[0m  [1m[34mSELECT "sections".* FROM "sections" INNER JOIN "sections_students" ON "sections"."id" = "sections_students"."section_id" WHERE "sections_students"."student_id" = $1 AND NOT ("sections"."semester" = $2 AND "sections"."year" = $3)[0m  [["student_id", 6], ["semester", "Winter"], ["year", 2024]]
+  ↳ app/controllers/main_site_controller.rb:18:in `sort_by'
+  [1m[36mCourse Load (30.7ms)[0m  [1m[34mSELECT "courses".* FROM "courses" WHERE "courses"."id" = $1[0m  [["id", 1]]
+  ↳ app/controllers/main_site_controller.rb:18:in `sort_by'
+  Rendering layout layouts/application.html.erb
+  Rendering main_site/my_courses.html.erb within layouts/application
+  [1m[36mSection Load (29.5ms)[0m  [1m[34mSELECT "sections".* FROM "sections" INNER JOIN "sections_students" ON "sections"."id" = "sections_students"."section_id" WHERE "sections_students"."student_id" = $1 AND "sections"."semester" = $2 AND "sections"."year" = $3[0m  [["student_id", 6], ["semester", "Winter"], ["year", 2024]]
+  ↳ app/views/main_site/my_courses.html.erb:21
+  [1m[36mDepartment Load (28.2ms)[0m  [1m[34mSELECT "departments".* FROM "departments" WHERE "departments"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/models/course.rb:12:in `full_course_title'
+  [1m[36mInstructor Load (28.4ms)[0m  [1m[34mSELECT "instructors".* FROM "instructors" WHERE "instructors"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/main_site/my_courses.html.erb:58
+  [1m[36mUser Load (30.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/models/instructor.rb:10:in `full_name'
+  [1m[36mSectionsStudent Load (28.1ms)[0m  [1m[34mSELECT "sections_students".* FROM "sections_students" WHERE "sections_students"."section_id" = $1 AND "sections_students"."student_id" = $2 LIMIT $3[0m  [["section_id", 3], ["student_id", 6], ["LIMIT", 1]]
+  ↳ app/views/main_site/my_courses.html.erb:59
+  [1m[36mCACHE Instructor Load (0.0ms)[0m  [1m[34mSELECT "instructors".* FROM "instructors" WHERE "instructors"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/main_site/my_courses.html.erb:58
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/models/instructor.rb:10:in `full_name'
+  [1m[36mSectionsStudent Load (34.0ms)[0m  [1m[34mSELECT "sections_students".* FROM "sections_students" WHERE "sections_students"."section_id" = $1 AND "sections_students"."student_id" = $2 LIMIT $3[0m  [["section_id", 1], ["student_id", 6], ["LIMIT", 1]]
+  ↳ app/views/main_site/my_courses.html.erb:59
+  Rendered main_site/my_courses.html.erb within layouts/application (Duration: 199.2ms | Allocations: 6299)
+  Rendered layout layouts/application.html.erb (Duration: 202.2ms | Allocations: 7235)
+Completed 200 OK in 394ms (Views: 24.8ms | ActiveRecord: 327.7ms | Allocations: 11673)
+
+
+  [1m[36mTRANSACTION (30.8ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mSection Load (28.9ms)[0m  [1m[34mSELECT "sections".* FROM "sections" WHERE "sections"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[36mStudent Load (28.8ms)[0m  [1m[34mSELECT "students".* FROM "students" WHERE "students"."id" = $1 LIMIT $2[0m  [["id", 6], ["LIMIT", 1]]
+  [1m[36mSectionsStudent Create (28.1ms)[0m  [1m[32mINSERT INTO "sections_students" ("section_id", "student_id", "grade") VALUES ($1, $2, $3) RETURNING "id"[0m  [["section_id", 4], ["student_id", 6], ["grade", "C"]]
+  [1m[36mTRANSACTION (31.5ms)[0m  [1m[35mCOMMIT[0m

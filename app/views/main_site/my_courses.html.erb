@@ -1,5 +1,6 @@
+<p style="color: green"><%= notice %></p>
+
 <h1>MainSite#my_courses</h1>
-<p>Find me in app/views/main_site/my_courses.html.erb</p>
 
 <% if @user.student? %>
 
@@ -13,6 +14,7 @@
         <th scope="col">Days</th>
         <th scope="col">Timing</th>
         <th scope="col">Grade</th>
+        <th scope="col">Un-register?</th>
       </tr>
     </thead>
     <tbody>
@@ -24,6 +26,11 @@
           <td><%= section.days %></td>
           <td><%= "#{section.start_time.strftime("%H:%M")} - #{section.end_time.strftime("%H:%M")}" %></td>
           <td><%= section.sections_students.find_by(student_id: @person.id).grade %></td>
+          <td>
+            <%= form_with url: unregister_main_site_path(section_id: section.id), method: :post do |form| %>
+              <%= form.submit "Unregister" %>
+            <% end %>
+          </td>
         </tr>
       <% end %>
     </tbody>

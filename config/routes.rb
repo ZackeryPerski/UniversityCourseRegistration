@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   get 'main_site/index'
   get 'main_site/my_courses'
+  post 'main_site/unregister/:section_id', to: 'main_site#unregister', as: 'unregister_main_site'
   resources :sections
   resources :courses
   devise_for :users, controllers: { registrations: 'users/registrations' }
