@@ -15,8 +15,4 @@
     <li class="list-group-item bg-dark bg-gradient w-100 p-2 text-light"><strong>Start time: </strong><%= section.start_time.strftime('%H:%M') if section.start_time.present? %></li>
     <li class="list-group-item bg-dark bg-gradient w-100 p-2 text-light"><strong>End time: </strong><%= section.end_time.strftime('%H:%M') if section.end_time.present? %></li>
   </ul>
-  <div class="card-body">
-    <button type="button" class="btn btn-dark"><%= link_to "Show this section", section %></button>
-    <button type="button" class="btn btn-dark"><%= link_to "Delete this section", @section, method: :delete %></button>
-  </div>
 </div>

@@ -7,8 +7,9 @@
   </div>
   <div id="sections">
     <% @sections.each do |section| %>
-      <div class = "mx-auto" style="width: 800px;">
+      <div class = "mx-auto d-flex flex-column justify-content-center align-items-center" style="width: 800px;">
         <%= render section %> <!-- Grabs the _section html file and renders it as a seperate block-->
+        <div><button type="button" class="btn btn-dark"><%= link_to "Show this section", section %></button></div>
       </div>
       <hr class="border border-primary border-3 opacity-30">
     <% end %>

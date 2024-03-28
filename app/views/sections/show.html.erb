@@ -11,6 +11,7 @@
   <div>
     <div class = "mx-auto" style="width: 200px;">
       <button type="button" class="btn btn-black btn-lg"><%= link_to "Edit this section", edit_section_path(@section) %></button>
+      <button type="button" class="btn btn-black btn-lg"><%= link_to "Delete this section", @section, method: :delete %></button>
       <button type="button" class="btn btn-black btn-lg"><%= link_to "Back to sections", sections_path %></button>
     </div>
   </div>
