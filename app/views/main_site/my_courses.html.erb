@@ -1,8 +1,19 @@
 <h1>MainSite#my_courses</h1>
 <p>Find me in app/views/main_site/my_courses.html.erb</p>
 
-<% @courses.each do |course| %>
+<h2>Current Courses</h2>
+<% @current_sections.each do |section| %>
   <div>
-    <%= course.inspect %>
+    <%= section.inspect %>
+  </div>
+<% end %>
+
+<h2>Past Courses</h2>
+<% @past_sections.each do |(year, semester), sections| %>
+  <div>
+    <h3><%= "#{semester} #{year}" %></h3>
+    <% sections.each do |section| %>
+      <%= section.inspect %>
+    <% end %>
   </div>
 <% end %>

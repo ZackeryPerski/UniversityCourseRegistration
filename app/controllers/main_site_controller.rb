@@ -3,6 +3,15 @@ class MainSiteController < ApplicationController
   end
 
   def my_courses
-    @courses = Course.all
+    @user = Student.find(6).user
+    person = @user.person
+    current_semester_args = { semester: 'Winter', year: 2024 }
+    semester_sort_order = {'Winter' => 1, 'Summer' => 2, 'Fall' => 3}
+
+    @current_sections = person.sections.where(current_semester_args).includes(:course)
+
+    @past_sections = person.sections.where.not(current_semester_args).includes(:course)
+    @past_sections = @past_sections.sort_by { |s| [-s.year, semester_sort_order[s.semester]] }
+    @past_sections = @past_sections.group_by { |s| [s.year, s.semester] }
   end
 end
