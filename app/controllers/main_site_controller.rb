@@ -28,6 +28,19 @@ class MainSiteController < ApplicationController
     redirect_to main_site_my_courses_path, notice: "Successfully unregistered from #{course_name}."
   end
 
+  def register
+    @user = Student.find(6).user
+    section_id = params[:section_id]
+    section = Section.find(section_id)
+    if SectionsStudent.where(section_id: section_id, student_id: @user.student.id).any?
+      redirect_to sections_path, notice: 'You are already registered for this course'
+    else
+      @user.student.sections_students.create(section_id: section_id)
+      course_name = section.course.full_course_title
+      redirect_to main_site_my_courses_path, notice: "Successfully registered for #{course_name}."
+    end
+  end
+
   def change_grade
     @user = Instructor.find(1).user
     section_id, student_id, grade = params[:section_id], params[:student_id],  params[:grade]
