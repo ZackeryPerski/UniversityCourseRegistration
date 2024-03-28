@@ -2,18 +2,56 @@
 <p>Find me in app/views/main_site/my_courses.html.erb</p>
 
 <h2>Current Courses</h2>
-<% @current_sections.each do |section| %>
-  <div>
-    <%= section.inspect %>
-  </div>
-<% end %>
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th scope="col">Course</th>
+      <th scope="col">Credits</th>
+      <th scope="col">Instructor</th>
+      <th scope="col">Days</th>
+      <th scope="col">Timing</th>
+      <th scope="col">Grade</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @current_sections.each do |section| %>
+      <tr>
+        <td><%= section.course.full_course_title %></td>
+        <td><%= section.course.credits %></td>
+        <td><%= section.instructor.full_name %></td>
+        <td><%= section.days %></td>
+        <td><%= "#{section.start_time.strftime("%H:%M")} - #{section.end_time.strftime("%H:%M")}" %></td>
+        <td><%= section.sections_students.find_by(student_id: @person.id).grade %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
 
 <h2>Past Courses</h2>
-<% @past_sections.each do |(year, semester), sections| %>
-  <div>
-    <h3><%= "#{semester} #{year}" %></h3>
-    <% sections.each do |section| %>
-      <%= section.inspect %>
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th scope="col">Course</th>
+      <th scope="col">Credits</th>
+      <th scope="col">Instructor</th>
+      <th scope="col">Grade</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @past_sections.each do |(year, semester), sections| %>
+      <tr class="table-secondary ">
+        <td colspan="4"><%= "#{semester} #{year}" %></td>
+      </tr>
+      <% sections.each do |section| %>
+        <tr>
+          <td><%= section.course.full_course_title %></td>
+          <td><%= section.course.credits %></td>
+          <td><%= section.instructor.full_name %></td>
+          <td><%= section.sections_students.find_by(student_id: @person.id).grade %></td>
+        </tr>
+      <% end %>
     <% end %>
-  </div>
-<% end %>
+  </tbody>
+</table>
+
+
