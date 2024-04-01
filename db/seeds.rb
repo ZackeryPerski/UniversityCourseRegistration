@@ -8,6 +8,10 @@
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
 
+#TO USE EFFECTIVELY
+#First, run: rails db:drop db:create db:migrate  db:seed
+#Second, run: 
+
 STUDENT_COUNT = 100
 FACULTY_COUNT = 30
 SECTIONS_PER_CLASS = 3
@@ -46,7 +50,7 @@ while count <= STUDENT_COUNT
     uid = "%09d"%count #formatting input.
     uid = "S"+uid
     pw = fname+lname+"1"
-    maj = deparments["department_names"].sample()
+    maj = departments["department_names"].sample()
     under_status = [true, false].sample()
 
     User.create(email: email, password: pw, first_name: fname, last_name: lname, university_id: uid)
