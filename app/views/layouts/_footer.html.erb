@@ -1,0 +1,20 @@
+<% cache do %>
+  <div class="footer bg-dark text-white">
+    <div class="container">
+      <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-0 border-top">
+          <p class="col-md-4 mb-0">Copyright 2024, University K</p>
+          <a class="col-md-4 d-flex align-items-center justify-content-center mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
+            <%= image_tag "k_icon.png", height: 75, width: 75 %>
+          </a>
+          <ul class="nav col-md-4 justify-content-end">
+            <li class="nav-item">
+              <a href="/" class="nav-link px-2 text-white nav-underline">Home</a>
+            </li>
+            <li class="nav-item">
+              <a href="/courses/" class="nav-link px-2 text-white nav-underline">Courses</a>
+            </li>
+          </ul>
+      </footer>
+    </div>
+  </div>
+<% end %>
