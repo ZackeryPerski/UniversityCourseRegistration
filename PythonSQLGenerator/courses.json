@@ -1,5 +1,0 @@
-{
-    "title_starters": ["Intro to", "Fundamentals of", "Advanced", "Theoretical"],
-    "title_enders": ["I","II", "III","IV"],
-    "descriptions": ["Learning the fundamentals of {title}.","Mastering the path of {title}.","Recognizing patterns in {title}.","Advanced research methods of {title}"]
-}
