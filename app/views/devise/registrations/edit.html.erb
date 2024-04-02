@@ -1,75 +1,107 @@
-<h2>Edit <%= resource_name.to_s.humanize %></h2>
+<!--localhost:3000/users/edit-->
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
-  <%= render "devise/shared/error_messages", resource: resource %>
+<div class= "w-full d-flex flex-column justify-content-center align-items-center mb-2 bg-secondary text-white p-3">  
+  <h2>Edit <%= resource_name.to_s.humanize %></h2>
+  
+  <div class="card mb-2 bg-black text-white p-3" style="width: 50rem;">
+    <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+      <%= render "devise/shared/error_messages", resource: resource %>
+      
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item bg-dark w-100 p-2 text-light">
+          <div class="field">
+            <strong><%= f.label :email %><br /></strong>
+            <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+          </div>
+        </li>
 
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+          <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+            <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
+          <% end %>
+
+        <% if current_user.student? %>
+          <li class="list-group-item bg-dark w-100 p-2 text-light">
+            <%= f.fields_for :student do |student_form| %>
+              <div class="field">
+                <strong><%= student_form.label :major %><br /></strong>
+                <%= student_form.select :major, Student.majors.keys.map { |major| [major.titleize, major] }, {}, { class: "custom-select" } %>
+              </div>
+          </li>
+
+          <li class="list-group-item bg-dark w-100 p-2 text-light">
+            <div class="field">
+              <strong><%= student_form.label :is_undergraduate %><br /></strong>
+              <%= student_form.check_box :is_undergraduate %>
+            </div>
+          </li>
+
+            <% end %> 
+          <% elsif current_user.instructor? %>
+            <%= f.fields_for :instructor do |instructor_form| %>
+              <li class="list-group-item bg-dark w-100 p-2 text-light">
+                <div class="field">
+                  <strong><%= instructor_form.label :ssn %><br /></strong>
+                  <%= instructor_form.text_field :ssn %>
+                </div>
+              </li>
+
+              <li class="list-group-item bg-dark w-100 p-2 text-light">
+                <div class="field">
+                  <strong><%= instructor_form.label :phone_number %><br /></strong>
+                  <%= instructor_form.text_field :phone_number %>
+                </div>
+              </li>
+
+              <li class="list-group-item bg-dark w-100 p-2 text-light">
+                <div class="field">
+                  <strong><%= instructor_form.label :department_id %><br /></strong>
+                  <%= instructor_form.text_field :department_id %>
+                </div>
+              </li>
+            <% end %> 
+          <% end %>
+
+        <li class="list-group-item bg-dark w-100 p-2 text-light">
+          <div class="field">
+            <strong><%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br /></strong>
+            <%= f.password_field :password, autocomplete: "new-password" %>
+            <% if @minimum_password_length %>
+              <br />
+              <strong><em><%= @minimum_password_length %> characters minimum</em></strong>
+            <% end %>
+          </div>
+        </li>
+
+        <li class="list-group-item bg-dark w-100 p-2 text-light">
+          <div class="field">
+            <strong><%= f.label :password_confirmation %><br /></strong>
+            <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
+          </div>
+        </li>
+
+        <li class="list-group-item bg-dark w-100 p-2 text-light">
+          <div class="field">
+            <strong><%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br /></strong>
+            <%= f.password_field :current_password, autocomplete: "current-password" %>
+          </div>
+        </li>
+
+        <li class="list-group-item bg-dark w-100 p-2 text-light">
+          <div class="actions">
+           <strong><%= f.submit "Update" %></strong>
+          </div>
+        </li>
+        <% end %>
+
+      <li class="list-group-item bg-dark w-100 p-2 text-light">
+        <h3>Cancel my account</h3>
+
+        <strong><div>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?", turbo_confirm: "Are you sure?" }, method: :delete %></div></strong>
+
+
+        <strong><%= link_to "Back", :back %></strong>
+      
+      </li>
+    </ul>
   </div>
-
-  <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-    <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
-  <% end %>
-
-  <% if current_user.student? %>
-    <%= f.fields_for :student do |student_form| %>
-      <div class="field">
-        <%= student_form.label :major %><br />
-        <%= student_form.select :major, Student.majors.keys.map { |major| [major.titleize, major] }, {}, { class: "custom-select" } %>
-      </div>
-
-      <div class="field">
-        <%= student_form.label :is_undergraduate %><br />
-        <%= student_form.check_box :is_undergraduate %>
-      </div>
-    <% end %> 
-  <% elsif current_user.instructor? %>
-    <%= f.fields_for :instructor do |instructor_form| %>
-      <div class="field">
-        <%= instructor_form.label :ssn %><br />
-        <%= instructor_form.text_field :ssn %>
-      </div>
-
-      <div class="field">
-        <%= instructor_form.label :phone_number %><br />
-        <%= instructor_form.text_field :phone_number %>
-      </div>
-
-      <div class="field">
-        <%= instructor_form.label :department_id %><br />
-        <%= instructor_form.text_field :department_id %>
-      </div>
-    <% end %> 
-  <% end %>
-
-
-  <div class="field">
-    <%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
-    <%= f.password_field :password, autocomplete: "new-password" %>
-    <% if @minimum_password_length %>
-      <br />
-      <em><%= @minimum_password_length %> characters minimum</em>
-    <% end %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
-    <%= f.password_field :current_password, autocomplete: "current-password" %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit "Update" %>
-  </div>
-<% end %>
-
-<h3>Cancel my account</h3>
-
-<div>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?", turbo_confirm: "Are you sure?" }, method: :delete %></div>
-
-<%= link_to "Back", :back %>
+</div>
