@@ -1,5 +1,7 @@
 class SectionsController < ApplicationController
-  before_action :set_section, only: %i[ show edit update destroy ]
+  before_action :set_section, only: %i[ show edit update destroy]
+  before_action :authenticate_user!, only: [:new, :show, :edit, :update, :destroy]
+  before_action :require_instructor!, only: [:new, :edit, :update, :destroy]
 
   # GET /sections or /sections.json
   def index
@@ -66,5 +68,12 @@ class SectionsController < ApplicationController
     # Only allow a list of trusted parameters through.
     def section_params
       params.require(:section).permit(:course_id, :instructor_id, :capacity, :semester, :year, :days, :start_time, :end_time)
+    end
+
+    def require_instructor!
+      unless current_user.instructor?
+        flash[:alert] = "You must be an instructor to access this page."
+        redirect_to root_path
+      end
     end
 end
