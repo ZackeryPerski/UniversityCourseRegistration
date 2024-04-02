@@ -10,7 +10,6 @@
 
 #TO USE EFFECTIVELY
 #First, run: rails db:drop db:create db:migrate  db:seed
-#Second, run: 
 
 STUDENT_COUNT = 100
 FACULTY_COUNT = 30
@@ -67,7 +66,7 @@ for i in (0...departments["department_names"].size)
     result = Department.create(code: dcode, name: dname)
 end
 
-while count <= FACULTY_COUNT+STUDENT_COUNT
+while count <= (FACULTY_COUNT+STUDENT_COUNT)
     fname = names["first_names"].sample()
     lname = names["last_names"].sample()
     email = fname+"."+lname+emailEnders.sample()
