@@ -3,15 +3,22 @@
   <div style = "width: 18rem;">
     <%= render @course %>
   </div>
-
-  <div>
-    <%= link_to "Edit this course", edit_course_path(@course), class: "btn btn-outline-success" %> |
-    <%= link_to "Back to courses", courses_path, class: "btn btn-outline-success" %>
-  </div>
-    
-  <div class = "d-flex flex-column align-items-center justify-contents-center"
-        style = "margin-top: 0.5em;">
-    <%= button_to "Destroy this course", @course, method: :delete, class: "btn btn-outline-success" %>
-  </div>
+  
+  <% if current_user.instructor? %>
+    <div>
+      <%= link_to "Edit this course", edit_course_path(@course), class: "btn btn-outline-success" %> |
+      <%= link_to "Back to courses", courses_path, class: "btn btn-outline-success" %>
+    </div>
+      
+    <div class = "d-flex flex-column align-items-center justify-contents-center"
+          style = "margin-top: 0.5em;">
+      <%= button_to "Destroy this course", @course, method: :delete, class: "btn btn-outline-success" %>
+    </div>
+  <% else %>
+    <div class = "d-flex flex-column align-items-center justify-contents-center"
+          style = "margin-top: 0.5em;">
+      <%= link_to "Back to courses", courses_path, class: "btn btn-outline-success" %>
+    </div>
+  <% end %>
 
 </div>

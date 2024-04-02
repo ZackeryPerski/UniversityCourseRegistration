@@ -1,5 +1,7 @@
 class CoursesController < ApplicationController
   before_action :set_course, only: %i[ show edit update destroy ]
+  before_action :authenticate_user!, only: [:new, :show, :edit, :update, :destroy]
+  before_action :require_instructor!, only: [:new, :edit, :update, :destroy]
 
   # GET /courses or /courses.json
   def index
@@ -66,5 +68,12 @@ class CoursesController < ApplicationController
     # Only allow a list of trusted parameters through.
     def course_params
       params.require(:course).permit(:title, :description, :department_id, :code, :credits)
+    end
+
+    def require_instructor!
+      unless current_user.instructor?
+        flash[:alert] = "You must be an instructor to access this page."
+        redirect_to root_path
+      end
     end
 end

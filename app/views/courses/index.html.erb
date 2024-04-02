@@ -17,7 +17,10 @@
     </div>
     
   </div>
-<div class = "d-flex flex-column align-items-center justify-contents-center"
-      style = "margin-bottom: 5em;">
-  <%= link_to "New course", new_course_path, class: "btn btn-outline-warning" %>
-</div>
+
+<% if current_user.instructor? %>  
+  <div class = "d-flex flex-column align-items-center justify-contents-center"
+        style = "margin-bottom: 5em;">
+    <%= link_to "New course", new_course_path, class: "btn btn-outline-warning" %>
+  </div>
+<% end %>

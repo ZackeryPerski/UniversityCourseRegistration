@@ -48,12 +48,9 @@
             </div>
           </li>
 
-          <li class="list-group-item bg-dark w-100 p-2 text-light">
-            <div class="field">
-              <strong><%= f.label :university_id %><br /></strong>
-              <%= f.text_field :university_id %>
-            </div>
-          </li>
+          <div class="field">
+            <%= f.hidden_field  :university_id, value: "temp_id_#{SecureRandom.uuid}" %>
+          </div>
 
           <%= f.fields_for :student_attributes do |student_form| %>
           <li class="list-group-item bg-dark w-100 p-2 text-light">

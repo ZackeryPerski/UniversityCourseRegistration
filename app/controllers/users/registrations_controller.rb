@@ -6,6 +6,8 @@ class Users::RegistrationsController < Devise::RegistrationsController
     super do |resource|
       if resource.persisted?
         # update the University ID
+        university_id = "S" + "%09d" % resource.id 
+        resource.update(university_id: university_id )
       end
     end
   end
