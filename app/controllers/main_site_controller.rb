@@ -1,24 +1,27 @@
 class MainSiteController < ApplicationController
+  # GET /main_site/index
   def index
   end
 
+  # GET /main_site/my_courses
   def my_courses
-    @user = Student.find(6).user
+    @user = Instructor.find(1).user
     @person = @user.person
     current_semester_args = { semester: 'Winter', year: 2024 }
     semester_sort_order = {'Winter' => 1, 'Summer' => 2, 'Fall' => 3}
 
-    @current_sections = @person.sections.where(current_semester_args).includes(:course)
+    @current_sections = @person.sections.where(current_semester_args).includes(:course) # person's current sections (instructor or student)
 
     if @user.instructor?
-      @current_sections = @current_sections.includes(sections_students: :student).all
+      @current_sections = @current_sections.includes(sections_students: :student).all # inlude section_students if they are an instructor
     end
 
-    @past_sections = @person.sections.where.not(current_semester_args).includes(:course)
-    @past_sections = @past_sections.sort_by { |s| [-s.year, semester_sort_order[s.semester]] }
-    @past_sections = @past_sections.group_by { |s| [s.year, s.semester] }
+    @past_sections = @person.sections.where.not(current_semester_args).includes(:course) # student's sections from the past
+    @past_sections = @past_sections.sort_by { |s| [-s.year, semester_sort_order[s.semester]] } # sort based on semester-year descending
+    @past_sections = @past_sections.group_by { |s| [s.year, s.semester] } # group by semester-year pairs
   end
 
+  # PATCH/PUT /main_site/unregister/:section_id
   def unregister
     @user = Student.find(6).user
     section_id = params[:section_id]
@@ -28,16 +31,17 @@ class MainSiteController < ApplicationController
     redirect_to main_site_my_courses_path, notice: "Successfully unregistered from #{course_name}."
   end
 
+  # PATCH/PUT /main_site/register/:section_id
   def register
     @user = Student.find(6).user
     student = @user.student
     section_id = params[:section_id]
     section = Section.find(section_id)
-    if SectionsStudent.where(section_id: section_id, student_id: @user.student.id).any?
+    if SectionsStudent.where(section_id: section_id, student_id: @user.student.id).any? # if already registered
       redirect_to sections_path, notice: 'Error: You are already registered for this section'
-    elsif student.sections.where(course: section.course).any?
+    elsif student.sections.where(course: section.course).any? # if already registered under different section
       redirect_to sections_path, notice: 'Error: You are already for this course under another section.'
-    elsif section.sections_students.count >= section.capacity
+    elsif section.sections_students.count >= section.capacity # if section full
       redirect_to sections_path, notice: 'Error: Cannot register for this section, already at full capacity'
     else
       @user.student.sections_students.create(section_id: section_id)
@@ -46,6 +50,7 @@ class MainSiteController < ApplicationController
     end
   end
 
+  # PATCH/PUT /main_site/change_grade/:section_id/:section_id
   def change_grade
     @user = Instructor.find(1).user
     section_id, student_id, grade = params[:section_id], params[:student_id],  params[:grade]

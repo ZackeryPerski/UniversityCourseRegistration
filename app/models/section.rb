@@ -4,5 +4,4 @@ class Section < ApplicationRecord
 
   has_many :sections_students
   has_many :students, through: :sections_students
-
 end
