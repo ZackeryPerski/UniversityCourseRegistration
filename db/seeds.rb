@@ -10,12 +10,11 @@
 
 #TO USE EFFECTIVELY
 #First, run: rails db:drop db:create db:migrate  db:seed
-#Second, run: 
 
 STUDENT_COUNT = 100
 FACULTY_COUNT = 30
 SECTIONS_PER_CLASS = 3
-SECTION_CAPACITY = 30
+SECTION_CAPACITY = 15 #This value will be subtracted by 5 when filling in the join table. This means 5 open seats per section for demo.
 
 
 names_file = File.read('jsonSeeds/names.json') #has 100 names.
@@ -67,7 +66,7 @@ for i in (0...departments["department_names"].size)
     result = Department.create(code: dcode, name: dname)
 end
 
-while count <= FACULTY_COUNT+STUDENT_COUNT
+while count <= (FACULTY_COUNT+STUDENT_COUNT)
     fname = names["first_names"].sample()
     lname = names["last_names"].sample()
     email = fname+"."+lname+emailEnders.sample()
@@ -129,7 +128,7 @@ count = 1
 for i in (0...Section.count())
     currentSection = Section.find(i+1)
     s_id = currentSection.id
-    for j in (0...SECTION_CAPACITY)
+    for j in (0...SECTION_CAPACITY-5)
         currentStudent = Student.find((count%STUDENT_COUNT)+1)
         st_id = currentStudent.id
         #funky looking, but statistically speaking, this allows for a bell curve distribution.
