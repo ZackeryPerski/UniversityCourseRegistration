@@ -1,60 +1,84 @@
-<h2>Sign up</h2>
+<!-- localhost:3000/users/sign_up -->
+<div class= "w-full d-flex flex-column justify-content-center align-items-center p-3 mb-2 bg-secondary text-white">
+  <h2>Sign up</h2>
+  <div class="card p-3 mb-2 bg-black text-white" style="width: 50rem;">
+    <div class="card-body flex-row justify-content-between"> 
+      <% if user_signed_in? %>
+        Youre not supposed to see this
+      <% end %>
 
-<% if user_signed_in? %>
-  Youre not supposed to see this
-<% end %>
+      <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+        <%= render "devise/shared/error_messages", resource: resource %>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item bg-dark w-100 p-2 text-light">
+              <div class="field"> 
+                <strong><%= f.label :email %><br /></strong>
+                <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+              </div>
+          </li>
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-  <%= render "devise/shared/error_messages", resource: resource %>
+          <li class="list-group-item bg-dark w-100 p-2 text-light">
+            <div class="field">
+              <strong><%= f.label :password %></strong>
+              <% if @minimum_password_length %>
+              <em>(<%= @minimum_password_length %> characters minimum)</em>
+              <% end %><br />
+              <%= f.password_field :password, autocomplete: "new-password" %>
+            </div>
+          </li>
 
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-  </div>
+          <li class="list-group-item bg-dark w-100 p-2 text-light">
+            <div class="field">
+              <strong><%= f.label :password_confirmation %><br /></strong>
+              <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
+            </div>
+          </li>
 
-  <div class="field">
-    <%= f.label :password %>
-    <% if @minimum_password_length %>
-    <em>(<%= @minimum_password_length %> characters minimum)</em>
-    <% end %><br />
-    <%= f.password_field :password, autocomplete: "new-password" %>
-  </div>
+          <li class="list-group-item bg-dark w-100 p-2 text-light">
+            <div class="field">
+              <strong><%= f.label :first_name %><br /></strong>
+              <%= f.text_field :first_name %>
+            </div>
+          </li>
 
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
-  </div>
+          <li class="list-group-item bg-dark w-100 p-2 text-light">
+            <div class="field">
+              <strong><%= f.label :last_name %><br /></strong>
+              <%= f.text_field :last_name %>
+            </div>
+          </li>
 
-  <div class="field">
-    <%= f.label :first_name %><br />
-    <%= f.text_field :first_name %>
-  </div>
+          <li class="list-group-item bg-dark w-100 p-2 text-light">
+            <div class="field">
+              <strong><%= f.label :university_id %><br /></strong>
+              <%= f.text_field :university_id %>
+            </div>
+          </li>
 
-  <div class="field">
-    <%= f.label :last_name %><br />
-    <%= f.text_field :last_name %>
-  </div>
+          <%= f.fields_for :student_attributes do |student_form| %>
+          <li class="list-group-item bg-dark w-100 p-2 text-light">
+            <div class="field">
+              <strong><%= student_form.label :major %><br /></strong>
+              <%= student_form.select :major, Student.majors.keys.map { |major| [major.titleize, major] }, { prompt: "Select a major"}, { class: "custom-select" } %>
+            </div>
+          </li>
 
-  <div class="field">
-    <%= f.label :university_id %><br />
-    <%= f.text_field :university_id %>
-  </div>
+          <li class="list-group-item bg-dark w-100 p-2 text-light">
+            <div class="field">
+              <strong><%= student_form.label :is_undergraduate %><br /></strong>
+              <%= student_form.check_box :is_undergraduate, checked: true %>
+            </div>
+          </li>
+          <% end %> 
 
-  <%= f.fields_for :student_attributes do |student_form| %>
-    <div class="field">
-      <%= student_form.label :major %><br />
-      <%= student_form.select :major, Student.majors.keys.map { |major| [major.titleize, major] }, { prompt: "Select a major"}, { class: "custom-select" } %>
+          <li class="list-group-item bg-dark w-100 p-2 text-light">
+            <div class="actions">
+              <%= f.submit "Sign up" %>
+            </div>
+          </li>
+        </ul>
+        <% end %>
+        <%= render "devise/shared/links" %>
     </div>
-
-    <div class="field">
-      <%= student_form.label :is_undergraduate %><br />
-      <%= student_form.check_box :is_undergraduate, checked: true %>
-    </div>
-  <% end %> 
-
-  <div class="actions">
-    <%= f.submit "Sign up" %>
   </div>
-<% end %>
-
-<%= render "devise/shared/links" %>
+</div>
