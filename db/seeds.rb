@@ -14,7 +14,7 @@
 STUDENT_COUNT = 100
 FACULTY_COUNT = 30
 SECTIONS_PER_CLASS = 3
-SECTION_CAPACITY = 15
+SECTION_CAPACITY = 15 #This value will be subtracted by 5 when filling in the join table. This means 5 open seats per section for demo.
 
 
 names_file = File.read('jsonSeeds/names.json') #has 100 names.
