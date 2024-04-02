@@ -1,0 +1,29 @@
+EXEC SQL BEGIN DECLARE SECTION;
+varchar title[100];
+varchar name[100]; 
+int SQLCODE;
+EXEC SQL END DECLARE SECTION;
+
+EXEC SQL DECLARE cursor1 CURSOR FOR
+  SELECT Title, Name
+  FROM BOOK_LOANS
+    LEFT JOIN BOOK ON BOOK_LOANS.Book_id = BOOK.Book_id
+    LEFT JOIN BORROWWER ON BOOK_LOANS.Card_no = BORROWWER.Card_no
+  WHERE Due_date BETWEEN NOW() - INTERVAL  24 HOUR AND NOW();
+
+EXEC SQL OPEN cursor1;
+while (1)
+{
+  EXEC SQL FETCH cursor1 INTO :title, :name;
+  if (SQLCODE == 100)
+  {
+    break;
+  }
+  else if (SQLCODE != 0)
+  {
+    printf("error!!!\n");
+    break;
+  }
+  printf(title, name, "\n")
+}
+EXEC SQL CLOSE cursor1;

@@ -1,0 +1,35 @@
+<%= form_with(model: section) do |form| %>
+  <% if section.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(section.errors.count, "error") %> prohibited this section from being saved:</h2>
+
+      <ul>
+        <% section.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="card p-3 mb-2 bg-black text-white" style="width: 50rem;">
+  <div class="card-body">
+    <h2 class="card-title"><strong>Creating a new section</strong></h2>
+  </div>
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item bg-dark bg-gradient w-100 p-2 text-light"><%= form.label :course_id, style: "display: block" %><%= form.collection_select :course_id, Course.all, :id, :full_course_title, { prompt: "Select a Course" } %></li>
+    <li class="list-group-item bg-dark bg-gradient w-100 p-2 text-light"><%= form.label :instructor_id, style: "display: block" %><%= form.collection_select :instructor_id, Instructor.all, :id, :full_name, { prompt: "Select an Instructor" } %></li>
+    <li class="list-group-item bg-dark bg-gradient w-100 p-2 text-light"><%= form.label :capacity, style: "display: block" %><%= form.number_field :capacity %></li>
+    <li class="list-group-item bg-dark bg-gradient w-100 p-2 text-light"><%= form.label :semester, style: "display: block" %><%= form.text_field :semester %></li>
+    <li class="list-group-item bg-dark bg-gradient w-100 p-2 text-light"><%= form.label :year, style: "display: block" %><%= form.number_field :year %></li>
+    <li class="list-group-item bg-dark bg-gradient w-100 p-2 text-light"><%= form.label :days, style: "display: block" %><%= form.text_field :days %></li>
+    <li class="list-group-item bg-dark bg-gradient w-100 p-2 text-light"><%= form.label :start_time, style: "display: block" %><%= form.time_field :start_time %></li>
+    <li class="list-group-item bg-dark bg-gradient w-100 p-2 text-light"><%= form.label :end_time, style: "display: block" %><%= form.time_field :end_time %></li>
+  </ul>
+  <div class="card-body">
+    <button type="button" class="btn btn-dark"><%= link_to "Show this section", section %></button>
+    <%= form.submit class: "btn btn-dark" %>
+  </div>
+</div>
+<% end %>
+
+

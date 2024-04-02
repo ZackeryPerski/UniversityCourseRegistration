@@ -11,47 +11,27 @@
     </div>
   <% end %>
 
-  <div>
-    <%= form.label :course_id, style: "display: block" %>
-    <%= form.collection_select :course_id, Course.all, :id, :full_course_title, { prompt: "Select a Course" } %>
+  <div class="card p-3 mb-2 bg-black text-white" style="width: 50rem;">
+  <div class="card-body">
+    <h2 class="card-title"><strong>Editing <%= section.course.full_course_title %></strong></h2>
+    <!--<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>-->
   </div>
-
-  <div>
-    <%= form.label :instructor_id, style: "display: block" %>
-    <%= form.collection_select :instructor_id, Instructor.all, :id, :full_name, { prompt: "Select an Instructor" } %>
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item bg-dark bg-gradient w-100 p-2 text-light"><%= form.label :course_id, style: "display: block" %><%= form.collection_select :course_id, Course.all, :id, :full_course_title, { prompt: "Select a Course" } %></li>
+    <li class="list-group-item bg-dark bg-gradient w-100 p-2 text-light"><%= form.label :instructor_id, style: "display: block" %><%= form.collection_select :instructor_id, Instructor.all, :id, :full_name, { prompt: "Select an Instructor" } %></li>
+    <li class="list-group-item bg-dark bg-gradient w-100 p-2 text-light"><%= form.label :capacity, style: "display: block" %><%= form.number_field :capacity %></li>
+    <li class="list-group-item bg-dark bg-gradient w-100 p-2 text-light"><%= form.label :semester, style: "display: block" %><%= form.select :semester, options_for_select(["Fall", "Winter", "Summer"]), { prompt: "Select a Semester" } %></li>
+    <li class="list-group-item bg-dark bg-gradient w-100 p-2 text-light"><%= form.label :year, style: "display: block" %><%= form.number_field :year %></li>
+    <li class="list-group-item bg-dark bg-gradient w-100 p-2 text-light"><%= form.label :days, style: "display: block" %><%= form.text_field :days %></li>
+    <li class="list-group-item bg-dark bg-gradient w-100 p-2 text-light"><%= form.label :start_time, style: "display: block" %><%= form.time_field :start_time %></li>
+    <li class="list-group-item bg-dark bg-gradient w-100 p-2 text-light"><%= form.label :end_time, style: "display: block" %><%= form.time_field :end_time %></li>
+  </ul>
+  <div class="card-body">
+    <button type="button" class="btn btn-dark"><%= link_to "Show this section", section %></button>
+    <button type="button" class="btn btn-dark"><%= link_to "Back to sections", sections_path %></button>
+    <%= form.submit class: "btn btn-dark" %>
   </div>
-
-  <div>
-    <%= form.label :capacity, style: "display: block" %>
-    <%= form.number_field :capacity %>
-  </div>
-
-  <div>
-    <%= form.label :semester, style: "display: block" %>
-    <%= form.text_field :semester %>
-  </div>
-
-  <div>
-    <%= form.label :year, style: "display: block" %>
-    <%= form.number_field :year %>
-  </div>
-
-  <div>
-    <%= form.label :days, style: "display: block" %>
-    <%= form.text_field :days %>
-  </div>
-
-  <div>
-    <%= form.label :start_time, style: "display: block" %>
-    <%= form.time_field :start_time %>
-  </div>
-
-  <div>
-    <%= form.label :end_time, style: "display: block" %>
-    <%= form.time_field :end_time %>
-  </div>
-
-  <div>
-    <%= form.submit %>
-  </div>
+</div>
 <% end %>
+
+
