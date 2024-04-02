@@ -14,7 +14,7 @@
 STUDENT_COUNT = 100
 FACULTY_COUNT = 30
 SECTIONS_PER_CLASS = 3
-SECTION_CAPACITY = 30
+SECTION_CAPACITY = 15
 
 
 names_file = File.read('jsonSeeds/names.json') #has 100 names.
@@ -128,7 +128,7 @@ count = 1
 for i in (0...Section.count())
     currentSection = Section.find(i+1)
     s_id = currentSection.id
-    for j in (0...SECTION_CAPACITY)
+    for j in (0...SECTION_CAPACITY-5)
         currentStudent = Student.find((count%STUDENT_COUNT)+1)
         st_id = currentStudent.id
         #funky looking, but statistically speaking, this allows for a bell curve distribution.
