@@ -5,7 +5,7 @@ class SectionsController < ApplicationController
 
   # GET /sections or /sections.json
   def index
-    @sections = Section.all
+    @sections = Section.where(semester: 'Winter', year: 2024).includes(:sections_students)
   end
 
   # GET /sections/1 or /sections/1.json
