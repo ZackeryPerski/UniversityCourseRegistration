@@ -1,0 +1,39 @@
+body {
+    min-height: 100vh;
+}
+
+header {
+    -webkit-box-shadow: 0 8px 6px -6px #999;
+    -moz-box-shadow: 0 8px 6px -6px #999;
+    box-shadow: 0 8px 6px -6px #999;
+}
+
+.welcome-content {
+    /* anyone wanna use their studying picture? */
+    background-image: url("https://group.mercedes-benz.com/bilder/karriere/studenten/situative-bildwelt/werkstudierende-w1680xh945-cutout.jpg"); /* The image used */
+    background-color: #2E2F30;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    /* center content */
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    width: 100%;
+
+    position: absolute;
+    top: 0;
+    z-index: -2000;
+}
+
+.header-icon{
+    position: absolute;
+    top: 0;
+    left: 60px;
+}
+
+.footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
