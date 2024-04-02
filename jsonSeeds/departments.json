@@ -1,5 +1,5 @@
 {
     "department_names":["Business","Computer Science","Computer Engineering","Data Science","Math","Cyber Security"]
     ,
-    "department_codes":[1,2,3,4,5,6]
+    "department_codes":["BSNS","COSC","COEN","DASC","MATH","CSEC"]
 }

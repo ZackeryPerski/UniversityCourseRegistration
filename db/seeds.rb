@@ -86,15 +86,18 @@ end
 for i in (0...Department.count())
     d_id = i+1
     d_name = departments["department_names"][i]
-    d_code = departments["department_codes"][i]
     option_count = courses["title_starters"].size
+    code = 110
     for title in courses["title_starters"]
+        code = code+1
         for j in (0...option_count)
             full_title = title + d_name + courses["title_enders"][j]
             desc = courses["descriptions"][j]+d_name
             credits = j>1? 3:4
-            Course.create(title: full_title, description: desc, department_id: d_id, code: d_code, credits: credits)
+            Course.create(title: full_title, description: desc, department_id: d_id, code: code, credits: credits)
+            code = code+100
         end
+        code = code - 100*(option_count)
     end
 end
 
