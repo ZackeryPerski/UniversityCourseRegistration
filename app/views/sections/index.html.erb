@@ -14,7 +14,9 @@
       <hr class="border border-primary border-3 opacity-30">
     <% end %>
   </div>
-  <div class = "mx-auto" style="width: 200px;">
-    <button type="button" class="btn btn-black btn-lg"><%= link_to "New section", new_section_path %></button>
-  </div>
+  <% if current_user.instructor? %>
+    <div class = "mx-auto" style="width: 200px;">
+      <button type="button" class="btn btn-black btn-lg"><%= link_to "New section", new_section_path %></button>
+    </div>
+  <% end %>
 </div>

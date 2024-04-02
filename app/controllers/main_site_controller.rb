@@ -65,7 +65,7 @@ class MainSiteController < ApplicationController
   end
 
   def require_student!
-    unless current_user.instructor?
+    unless current_user.student?
       flash[:alert] = "You must be an student to access this action."
       redirect_to root_path
     end
