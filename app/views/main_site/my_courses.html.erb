@@ -87,7 +87,7 @@
             <td colspan="2">
               <%= form_with url: change_grade_main_site_path(section_id: section.id, student_id: section_student.student.id), method: :post do |form| %>
                 <%= form.select :grade, 
-                  [['A', 'A'], ['B', 'B'], ['C', 'C'], ['D', 'D'], ['F', 'F']], 
+                  [['A', 'A'], ['B', 'B'], ['C', 'C'], ['D', 'D'], ['E', 'E']], 
                    {selected: section_student.grade} , {onchange: 'this.form.submit()'}
                 %>
               <% end %>
